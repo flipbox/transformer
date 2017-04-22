@@ -1,0 +1,46 @@
+{
+  "name": "flipboxdigital/transformer",
+  "description": "Transform complex data structures into arrays",
+  "version": "1.0.0",
+  "require": {
+    "flipboxdigital/transform": "^1.0"
+  },
+  "repositories": [{
+    "type": "composer",
+    "url": "https://asset-packagist.org"
+  }],
+  "autoload": {
+    "psr-4": {
+      "flipbox\\transformer\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Transformer",
+    "handle": "transformer",
+    "developer": "Flipbox Digital",
+    "developerUrl": "https://www.flipboxdigital.com",
+    "class": "flipbox\\transformer\\Plugin",
+    "schemaVersion": "1.0.0",
+    "components": {
+      "resources": "flipbox\\transformer\\services\\Resources"
+    },
+    "modules": {
+      "field": {
+        "basePath": "@flipbox/transformer/modules/field",
+        "class": "flipbox\\transformer\\modules\\field\\Module",
+        "components": {
+          "transform": "flipbox\\transformer\\modules\\field\\services\\Transform",
+          "transformer": "flipbox\\transformer\\modules\\field\\services\\Transformer",
+          "resource": "flipbox\\transformer\\modules\\field\\services\\Resource"
+        }
+      },
+      "element": {
+        "basePath": "@flipbox/transformer/modules/element",
+        "class": "flipbox\\transformer\\modules\\element\\Module",
+        "components": {
+          "transformer": "flipbox\\transformer\\modules\\element\\services\\Transformer"
+        }
+      }
+    }
+  }
+}
