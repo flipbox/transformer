@@ -30,8 +30,6 @@ class User extends AbstractTransformer
     protected function transformUser(UserElement $user): array
     {
 
-        var_dump($this->getStatus());
-
         return [
             'name' => [
                 'first' => $user->firstName,
@@ -39,22 +37,6 @@ class User extends AbstractTransformer
                 'full' => $user->getFullName()
             ]
         ];
-
-    }
-
-    /**
-     * @return string
-     */
-    private function getStatus()
-    {
-
-        if ($format = $this->getParams()->get('status')) {
-
-            return reset($format);
-
-        }
-
-        return 'default';
 
     }
 
