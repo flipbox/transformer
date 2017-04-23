@@ -5,15 +5,25 @@ namespace flipbox\transformer\modules\field\services;
 use craft\base\Component;
 use craft\base\Field;
 use craft\base\FieldInterface;
+use craft\fields\Assets;
+use craft\fields\Categories;
+use craft\fields\Entries;
+use craft\fields\Matrix;
+use craft\fields\PlainText;
+use craft\fields\Tags;
 use craft\fields\Users;
-use flipbox\spark\helpers\ArrayHelper;
+use craft\helpers\ArrayHelper;
 use flipbox\transform\resources\ResourceInterface;
-use flipbox\transformer\modules\field\events\RegisterResources;
-use flipbox\transformer\modules\field\events\RegisterTransformer;
-use flipbox\transformer\modules\field\events\RegisterTransforms;
-use flipbox\transformer\modules\field\resources\Collection;
-use flipbox\transformer\modules\field\resources\UserCollection;
+use flipbox\transform\transformers\TransformerInterface;
+use flipbox\transformer\modules\field\events\RegisterTransformers;
+use flipbox\transformer\modules\field\transformers\asset\CollectionResource as AssetCollectionResource;
+use flipbox\transformer\modules\field\transformers\category\CollectionResource as CategoryCollectionResource;
+use flipbox\transformer\modules\field\transformers\entry\CollectionResource as EntryCollectionResource;
+use flipbox\transformer\modules\field\transformers\matrix\CollectionResource as MatrixCollectionResource;
+use flipbox\transformer\modules\field\transformers\tag\CollectionResource as TagCollectionResource;
 use flipbox\transformer\modules\field\transformers\User as UserTransformer;
+use flipbox\transformer\modules\field\transformers\user\CollectionResource as UserCollectionResource;
+use flipbox\transformer\modules\field\transformers\PlainText as PlainTextTransformer;
 use yii\base\Exception;
 
 class Transformer extends Component
@@ -26,26 +36,23 @@ class Transformer extends Component
     public function getAll(FieldInterface $field)
     {
 
-        // This could be transformers loaded outside events
-        $transforms = $this->_firstPartyFieldTypes($field);
-
-        $event = new RegisterTransforms([
-            'transforms' => $transforms
+        $event = new RegisterTransformers([
+            'transformers' => $this->_firstParty($field)
         ]);
 
         $field->trigger(
-            RegisterTransforms::EVENT,
+            RegisterTransformers::EVENT,
             $event
         );
 
-        return $event->getTransforms();
+        return $event->getTransformers();
 
     }
 
     /**
      * @param string $identifier
      * @param FieldInterface $field
-     * @return ResourceInterface
+     * @return ResourceInterface|TransformerInterface|callable
      */
     public function find(string $identifier, FieldInterface $field)
     {
@@ -60,39 +67,76 @@ class Transformer extends Component
     /**
      * @param string $identifier
      * @param FieldInterface $field
-     * @return ResourceInterface
+     * @return ResourceInterface|TransformerInterface|callable
      * @throws Exception
      */
     public function get(string $identifier, FieldInterface $field)
     {
 
-        if(!$resource = $this->find($identifier, $field)) {
-            throw new Exception("Transform not found");
+        if (!$transform = $this->find($identifier, $field)) {
+            throw new Exception("Transformer not found");
         }
 
-        return $resource;
+        return $transform;
 
     }
 
-    private function _firstPartyFieldTypes(FieldInterface $field)
+    /**
+     * @param FieldInterface|Field $field
+     * @return TransformerInterface[]|callable[]
+     */
+    private function _firstParty(FieldInterface $field)
     {
 
-        $resources = [];
+        $transformers = [];
 
-        switch(get_class($field)) {
+        switch (get_class($field)) {
+
+            case Assets::class: {
+                $transformers['default'] = new AssetCollectionResource($field);
+                break;
+
+            }
+
+            case Categories::class: {
+                $transformers['default'] = new CategoryCollectionResource($field);
+                break;
+
+            }
+
+            case Entries::class: {
+                $transformers['default'] = new EntryCollectionResource($field);
+                break;
+
+            }
+
+            case Matrix::class: {
+                $transformers['default'] = new MatrixCollectionResource($field);
+                break;
+
+            }
+
+            case PlainText::class: {
+                $transformers['default'] = new PlainTextTransformer($field);
+                break;
+
+            }
+
+            case Tags::class: {
+                $transformers['default'] = new TagCollectionResource($field);
+                break;
+
+            }
 
             case Users::class: {
-                $resources['default'] = new UserCollection([
-                        'transformer' => new UserTransformer(),
-                        'identifier' => $field->handle
-                ]);
+                $transformers['default'] = new UserCollectionResource($field);
                 break;
 
             }
 
         }
 
-        return $resources;
+        return $transformers;
 
     }
 

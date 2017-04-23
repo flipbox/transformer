@@ -2,14 +2,9 @@
 
 namespace flipbox\transformer\modules\field\transformers\user;
 
-use craft\base\FieldInterface;
-use craft\elements\db\UserQuery;
-use craft\elements\User;
 use flipbox\transform\resources\Item;
 use flipbox\transform\resources\ResourceInterface;
 use flipbox\transform\Scope;
-use flipbox\transformer\modules\element\transformers\user\CollectionResource as ElementUserCollection;
-use flipbox\transformer\modules\field\transformers\FieldTrait;
 
 class ItemResource extends CollectionResource
 {

@@ -2,18 +2,17 @@
 
 namespace flipbox\transformer\modules\element\transformers;
 
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\FieldInterface;
-use craft\elements\Entry as EntryElement;
 use flipbox\transform\resources\ResourceInterface;
 use flipbox\transform\Scope;
-use flipbox\transform\transformers\AbstractResourceTransformer;
 use flipbox\transform\transformers\AbstractTransformer as BaseAbstractTransformer;
 use flipbox\transform\transformers\ResourceTransformerInterface;
 use flipbox\transform\transformers\TransformerInterface;
+use flipbox\transformer\modules\field\transformers\FieldTransformerInterface;
 use flipbox\transformer\Plugin;
-use flipbox\transformer\transformers\Dates;
 
 abstract class AbstractTransformer extends BaseAbstractTransformer
 {
@@ -33,7 +32,7 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
     }
 
     /**
-     * @param ElementInterface $element
+     * @param ElementInterface|Element $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array
@@ -87,20 +86,21 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
 
         // Look for field transform
         /** @var ResourceInterface|TransformerInterface|callable $resource */
-        if (!$transform = Plugin::getInstance()->getField()->getTransform()->find(
+        if (!$transform = Plugin::getInstance()->getField()->getTransformer()->find(
             'default',
             $field
         )
         ) {
 
-//            var_dump($field);
+            var_dump($field);
             var_dump("FIELD NOT FOUND");
             return null;
 
         }
 
-        // Set data on resource transformers
-        if ($transform instanceof ResourceTransformerInterface) {
+        // Set allow resource and field transformers to manipulate data (ie, get the field value)
+        if ($transform instanceof ResourceTransformerInterface ||
+            $transform instanceof FieldTransformerInterface) {
 
             // Resource transformers can modify the data at this point
             $transform->setData(
@@ -119,7 +119,7 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
     public function __invoke($data, Scope $scope, string $identifier = null)
     {
 
-        if(!$data instanceof ElementInterface) {
+        if (!$data instanceof ElementInterface) {
             return null;
         }
 

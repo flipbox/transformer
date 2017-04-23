@@ -1,27 +1,27 @@
 <?php
 
-namespace flipbox\transformer\modules\field\transformers\entry;
+namespace flipbox\transformer\modules\field\transformers\tag;
 
-use craft\elements\db\EntryQuery;
-use craft\fields\Entries as EntriesField;
-use flipbox\transformer\modules\element\transformers\user\CollectionResource as EntryCollectionResource;
+use craft\elements\db\TagQuery;
+use craft\fields\Categories as CategoriesField;
+use flipbox\transformer\modules\element\transformers\tag\CollectionResource as TagCollectionResource;
 use flipbox\transformer\modules\field\transformers\FieldTrait;
 
 /**
  * @package flipbox\transformer\modules\field\transformers\entry
  *
- * @property EntriesField $field
+ * @property CategoriesField $field
  */
-class CollectionResource extends EntryCollectionResource
+class CollectionResource extends TagCollectionResource
 {
 
     use FieldTrait;
 
     /**
-     * @param EntriesField $field
+     * @param CategoriesField $field
      * @param array $config
      */
-    public function __construct(EntriesField $field, array $config = [])
+    public function __construct(CategoriesField $field, array $config = [])
     {
         $this->field = $field;
         parent::__construct($config);
@@ -38,9 +38,9 @@ class CollectionResource extends EntryCollectionResource
 
     /**
      * @param $data
-     * @return EntryQuery
+     * @return TagQuery
      */
-    protected function prepareData($data): EntryQuery
+    protected function prepareData($data): TagQuery
     {
         return $this->fieldData($data);
     }

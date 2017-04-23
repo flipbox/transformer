@@ -5,12 +5,20 @@ namespace flipbox\transformer\modules\element\services;
 use craft\base\Component;
 use craft\base\Element;
 use craft\base\ElementInterface;
+use craft\elements\Asset;
+use craft\elements\Category;
 use craft\elements\Entry;
+use craft\elements\MatrixBlock;
+use craft\elements\Tag;
 use craft\elements\User;
-use flipbox\spark\helpers\ArrayHelper;
+use craft\helpers\ArrayHelper;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\modules\element\events\RegisterTransformers;
+use flipbox\transformer\modules\element\transformers\asset\Asset as AssetTransformer;
+use flipbox\transformer\modules\element\transformers\category\Category as CategoryTransformer;
 use flipbox\transformer\modules\element\transformers\entry\Entry as EntryTransformer;
+use flipbox\transformer\modules\element\transformers\matrix\Block as MatrixBlockTransformer;
+use flipbox\transformer\modules\element\transformers\tag\Tag as TagTransformer;
 use flipbox\transformer\modules\element\transformers\user\User as UserTransformer;
 use yii\base\Exception;
 
@@ -24,11 +32,8 @@ class Transformer extends Component
     public function getAll(ElementInterface $element)
     {
 
-        // This could be transformers loaded outside events
-        $transforms = $this->_firstParty($element);
-
         $event = new RegisterTransformers([
-            'transformers' => $transforms
+            'transformers' => $this->_firstParty($element)
         ]);
 
         $element->trigger(
@@ -83,14 +88,38 @@ class Transformer extends Component
 
         switch (get_class($element)) {
 
-            case User::class: {
-                $transformers['default'] = new UserTransformer();
+            case Asset::class: {
+                $transformers['default'] = new AssetTransformer();
+                break;
+
+            }
+
+            case Category::class: {
+                $transformers['default'] = new CategoryTransformer();
                 break;
 
             }
 
             case Entry::class: {
                 $transformers['default'] = new EntryTransformer();
+                break;
+
+            }
+
+            case MatrixBlock::class: {
+                $transformers['default'] = new MatrixBlockTransformer();
+                break;
+
+            }
+
+            case Tag::class: {
+                $transformers['default'] = new TagTransformer();
+                break;
+
+            }
+
+            case User::class: {
+                $transformers['default'] = new UserTransformer();
                 break;
 
             }

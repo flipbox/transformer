@@ -3,34 +3,13 @@
 namespace flipbox\transformer;
 
 use craft\base\Plugin as BasePlugin;
-use craft\elements\db\EntryQuery;
 use craft\elements\Entry;
-use flipbox\organization\fields\User as OrganizationUserField;
-use flipbox\organization\fields\Organization as OrganizationField;
 use flipbox\organization\elements\Organization as OrganizationElement;
+use flipbox\organization\fields\Organization as OrganizationField;
+use flipbox\organization\fields\User as OrganizationUserField;
 use flipbox\transform\Factory;
-use flipbox\transform\resources\Collection;
-use flipbox\transform\resources\ResourceInterface;
-use flipbox\transformer\modules\element\events\RegisterTransformers;
-use flipbox\transformer\modules\element\resources\EntryItem;
-use flipbox\transformer\modules\field\resources\OrganizationCollection;
-use flipbox\transformer\transformers\NestedItem;
-use flipbox\transformer\resources\Item;
-use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\events\RegisterResources;
-use flipbox\transformer\modules\field\events\RegisterTransforms as RegisterFieldTransforms;
-use flipbox\transformer\modules\field\events\RegisterResources as RegisterFieldResources;
-
 use flipbox\transformer\modules\element\events\RegisterTransformers as RegisterElementTransformers;
-use flipbox\transformer\resources\CallableProperty;
-use flipbox\transformer\resources\DynamicCollection;
-use flipbox\transformer\resources\DynamicItem;
-use flipbox\transformer\transformers\Dates;
-use flipbox\transformer\transformers\DynamicEntry;
-use flipbox\transformer\transformers\fields\Organization as OrganizationTransformer;
-use flipbox\transformer\transformers\NewTest;
-use flipbox\transformer\transformers\Property;
-use flipbox\transformer\transformers\Test;
+use flipbox\transformer\modules\field\events\RegisterTransformers as RegisterFieldTransformers;
 use flipbox\transformer\web\twig\variables\Transformer as TransformerVariable;
 
 class Plugin extends BasePlugin
@@ -44,67 +23,15 @@ class Plugin extends BasePlugin
         return TransformerVariable::class;
     }
 
-    public function testNEW()
-    {
-
-        $resource = Factory::collection([
-            'includes' => ['dates.created:format(Y/m/d)']
-        ]);
-
-        $data = $resource->transform(
-            new NewTest(),
-            Entry::find()
-        );
-
-        var_dump($data);
-        exit;
-
-    }
-
     public function test()
     {
 
-//        /** @var Organization $field */
-//        $field = \Craft::$app->getFields()->getFieldByHandle('organizations');
-//
-//        $organization = new \flipbox\organization\elements\Organization();
-//        $orgQuery = $organization::find();
-//
-//        RegisterResources::on(
-//            \flipbox\organization\elements\db\Organization::class,
-//            RegisterResources::eventName($orgQuery),
-//            function (RegisterResources $event) {
-//                $event->addResource(
-//                    'organizations',
-//                    [
-//                        'class' => DynamicCollection::class,
-//                        'transformer' => [
-//                            'class' => OrganizationTransformer::class
-//                        ]
-//                    ]
-//                );
-//            }
-//        );
-//
-////        $orgQuery->on(
-////            RegisterResources::eventName($orgQuery),
-////            function (RegisterResources $event) {
-////                $event->addResource(
-////                    'organizations',
-////                    [
-////                        'class' => OrganizationTransformer::class
-////                    ]
-////                );
-////            }
-////        );
-//////
-//
         // Register third party field transformer
-        RegisterFieldTransforms::on(
+        RegisterFieldTransformers::on(
             OrganizationField::class,
-            RegisterFieldTransforms::EVENT,
-            function(RegisterFieldTransforms $event) {
-                $event->addTransform(
+            RegisterFieldTransformers::EVENT,
+            function (RegisterFieldTransformers $event) {
+                $event->addTransformer(
                     'default',
                     new \flipbox\transformer\third\organization\field\transformers\organization\CollectionResource(
                         $event->sender
@@ -114,11 +41,11 @@ class Plugin extends BasePlugin
         );
 
         // Register third party field transformer
-        RegisterFieldTransforms::on(
+        RegisterFieldTransformers::on(
             OrganizationUserField::class,
-            RegisterFieldTransforms::EVENT,
-            function(RegisterFieldTransforms $event) {
-                $event->addTransform(
+            RegisterFieldTransformers::EVENT,
+            function (RegisterFieldTransformers $event) {
+                $event->addTransformer(
                     'default',
                     new \flipbox\transformer\third\organization\field\transformers\user\CollectionResource(
                         $event->sender
@@ -131,29 +58,13 @@ class Plugin extends BasePlugin
         RegisterElementTransformers::on(
             OrganizationElement::class,
             RegisterElementTransformers::EVENT,
-            function(RegisterElementTransformers $event) {
+            function (RegisterElementTransformers $event) {
                 $event->addTransformer(
                     'default',
                     new \flipbox\transformer\third\organization\element\transformers\organization\Organization()
                 );
             }
         );
-
-        $resourceConfig = [
-            'class' => DynamicItem::class, // Resource
-            'transformer' => [
-                'class' => DynamicEntry::class, // Transformer
-//                'resources' => [
-//                    'title' => Property::class,
-//                    'dates' => [
-//                        'class' => DynamicItem::class, // Resource
-//                        'transformer' => Dates::class
-//                    ]
-//                ]
-            ]
-        ];
-
-
 
         $entry = \Craft::$app->getEntries()->getEntryById(8);
 
@@ -166,73 +77,7 @@ class Plugin extends BasePlugin
             $entry
         );
 
-
-//
-//        $factory = new Factory([
-//            'includes' => ['dates.created:format(Y/m/d)']
-//        ]);
-//
-////        var_dump($resource);
-//
-//        $data = $factory->transform(
-//            $test
-//        );
-
         var_dump($data);
-
-        exit;
-
-//        $entry->getBehaviors()
-
-//        RegisterElementResources::on(
-//            Entry::class,
-//            RegisterElementResources::EVENT,
-//            function (RegisterElementResources $event) use ($resourceConfig) {
-//                $event->addResource(
-//                    'test',
-//                    $resourceConfig
-//                );
-//            }
-//        );
-
-        $resource = new EntryItem();
-
-        /** @var ResourceInterface $resource */
-//        $resource = $this->getElement()->getElement()->get('test', $entry);
-        $resource->setData($entry);
-
-        $factory = new Factory([
-            'includes' => ['users:status(null)'],
-//            'excludes' => ['users'],
-//            'fields' => ['dates' => 'created']
-        ]);
-
-//        var_dump($resource);
-
-        $data = $factory->transform(
-            $resource
-        );
-
-        var_dump($data);
-
-
-//        $field = new Matrix();
-//
-//        $transformers = $this->getField()->getField()->getAllTransformers($field);
-//
-//        var_dump($transformers);
-//
-//        $event = new RegisterTransformer();
-////
-////
-////
-//
-//
-//        $field->trigger(
-//            RegisterTransformer::eventName($field),
-//            $event
-//        );
-
 
         exit;
 
@@ -243,11 +88,11 @@ class Plugin extends BasePlugin
      *******************************************/
 
     /**
-     * @return services\Resources
+     * @return services\Transformer
      */
-    public function getResources()
+    public function getTransformer()
     {
-        return $this->get('resources');
+        return $this->get('transformer');
     }
 
     /*******************************************

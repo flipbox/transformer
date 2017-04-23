@@ -1,12 +1,12 @@
 <?php
 
-namespace flipbox\transformer\modules\element\transformers\entry;
+namespace flipbox\transformer\modules\element\transformers\tag;
 
 use craft\base\ElementInterface;
-use craft\elements\Entry as EntryElement;
+use craft\elements\Tag as TagElement;
 use flipbox\transformer\modules\element\transformers\AbstractTransformer;
 
-class Entry extends AbstractTransformer
+class Tag extends AbstractTransformer
 {
 
     /**
@@ -18,21 +18,22 @@ class Entry extends AbstractTransformer
 
         return array_merge(
             parent::transformElement($element),
-            $this->transformEntry($element)
+            $this->transformTag($element)
         );
 
     }
 
     /**
-     * @param EntryElement $entry
+     * @param TagElement $tag
      * @return array
      */
-    protected function transformEntry(EntryElement $entry): array
+    protected function transformTag(TagElement $tag): array
     {
+
         return [
-            'section' => 'SECTION',
-            'type' => 'TYPE'
+            'name' => $tag->title
         ];
+
     }
 
 }

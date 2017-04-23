@@ -1,9 +1,9 @@
 <?php
 
-namespace flipbox\transformer\modules\element\transformers\user;
+namespace flipbox\transformer\modules\element\transformers\category;
 
 use craft\base\ElementInterface;
-use craft\elements\User;
+use craft\elements\Category;
 use flipbox\transformer\modules\element\transformers\AbstractItemResource;
 
 class ItemResource extends AbstractItemResource
@@ -14,7 +14,7 @@ class ItemResource extends AbstractItemResource
      */
     protected function element(): ElementInterface
     {
-        return new User();
+        return new Category();
     }
 
 }

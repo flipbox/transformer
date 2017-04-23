@@ -1,12 +1,12 @@
 <?php
 
-namespace flipbox\transformer\modules\element\transformers\entry;
+namespace flipbox\transformer\modules\element\transformers\matrix;
 
 use craft\base\ElementInterface;
-use craft\elements\Entry as EntryElement;
+use craft\elements\MatrixBlock as MatrixBlockElement;
 use flipbox\transformer\modules\element\transformers\AbstractTransformer;
 
-class Entry extends AbstractTransformer
+class Block extends AbstractTransformer
 {
 
     /**
@@ -18,21 +18,22 @@ class Entry extends AbstractTransformer
 
         return array_merge(
             parent::transformElement($element),
-            $this->transformEntry($element)
+            $this->transformCategory($element)
         );
 
     }
 
     /**
-     * @param EntryElement $entry
+     * @param MatrixBlockElement $matrix
      * @return array
      */
-    protected function transformEntry(EntryElement $entry): array
+    protected function transformCategory(MatrixBlockElement $matrix): array
     {
+
         return [
-            'section' => 'SECTION',
-            'type' => 'TYPE'
+            'name' => $matrix->getType()->name
         ];
+
     }
 
 }

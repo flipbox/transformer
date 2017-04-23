@@ -5,14 +5,11 @@ namespace flipbox\transformer\modules\element\transformers;
 use craft\base\ElementInterface;
 use craft\elements\db\ElementQuery;
 use craft\helpers\ArrayHelper;
-use flipbox\spark\helpers\ObjectHelper;
 use flipbox\spark\helpers\QueryHelper;
 use flipbox\transform\Scope;
+use flipbox\transform\transformers\Item as ItemResource;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\Plugin;
-use flipbox\transformer\transformers\traits\ResolveTransformer;
-use Traversable;
-use flipbox\transform\transformers\Item as ItemResource;
 use yii\base\Exception;
 
 abstract class AbstractItemResource extends ItemResource
@@ -47,7 +44,7 @@ abstract class AbstractItemResource extends ItemResource
         /** @var ElementQuery $query */
         $query = parent::getData($scope);
 
-        if($queryParams = $this->getQueryParams($scope)) {
+        if ($queryParams = $this->getQueryParams($scope)) {
             QueryHelper::configure(
                 $query,
                 $queryParams
@@ -69,9 +66,9 @@ abstract class AbstractItemResource extends ItemResource
 
         $paramBag = $scope->getParams();
 
-        foreach($this->queryParams() as $param) {
+        foreach ($this->queryParams() as $param) {
 
-            if($value = $paramBag->get($param)) {
+            if ($value = $paramBag->get($param)) {
 
                 $params[$param] = $value;
 
@@ -99,7 +96,7 @@ abstract class AbstractItemResource extends ItemResource
     protected function resolveTransformer($transformer)
     {
 
-        if(is_callable($transformer) || $transformer instanceof TransformerInterface) {
+        if (is_callable($transformer) || $transformer instanceof TransformerInterface) {
 
             return $transformer;
 
@@ -119,7 +116,7 @@ abstract class AbstractItemResource extends ItemResource
 
         // todo log this
 
-        return function(){
+        return function () {
 
             // empty callable
 
@@ -149,12 +146,12 @@ abstract class AbstractItemResource extends ItemResource
             $this->element()
         );
 
-        if(null === $transformer) {
+        if (null === $transformer) {
 
             throw new Exception(sprintf(
                 "Transformer '%s' does not exist on resource '%s'.",
-                (string) $handle,
-                (string) get_called_class()
+                (string)$handle,
+                (string)get_called_class()
             ));
 
         }

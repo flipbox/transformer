@@ -4,8 +4,7 @@ namespace flipbox\transformer\modules\field\transformers\user;
 
 use craft\elements\db\UserQuery;
 use craft\fields\Users as UsersField;
-use flipbox\transform\Scope;
-use flipbox\transformer\modules\element\transformers\user\CollectionResource as ElementUserCollection;
+use flipbox\transformer\modules\element\transformers\user\CollectionResource as UserCollectionResource;
 use flipbox\transformer\modules\field\transformers\FieldTrait;
 
 /**
@@ -14,7 +13,7 @@ use flipbox\transformer\modules\field\transformers\FieldTrait;
  * @property UsersField $field
  * @property UserQuery $data
  */
-class CollectionResource extends ElementUserCollection
+class CollectionResource extends UserCollectionResource
 {
 
     use FieldTrait;

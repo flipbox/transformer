@@ -1,6 +1,6 @@
 <?php
 
-namespace flipbox\transformer\modules\field\transformers\entry;
+namespace flipbox\transformer\modules\field\transformers\category;
 
 use flipbox\transform\resources\Item;
 use flipbox\transform\resources\ResourceInterface;
