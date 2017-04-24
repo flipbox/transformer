@@ -10,7 +10,7 @@ class User extends AbstractTransformer
 {
 
     /**
-     * @param ElementInterface $element
+     * @param ElementInterface|UserElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array

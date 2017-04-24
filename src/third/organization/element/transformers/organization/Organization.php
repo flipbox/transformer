@@ -10,7 +10,7 @@ class Organization extends AbstractTransformer
 {
 
     /**
-     * @param ElementInterface $element
+     * @param ElementInterface|OrganizationElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array

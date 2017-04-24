@@ -2,8 +2,8 @@
 
 namespace flipbox\transformer\web\twig\variables;
 
-use yii\di\ServiceLocator;
 use flipbox\transformer\Plugin;
+use yii\di\ServiceLocator;
 
 class Transformer extends ServiceLocator
 {

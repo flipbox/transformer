@@ -10,7 +10,7 @@ class Category extends AbstractTransformer
 {
 
     /**
-     * @param ElementInterface $element
+     * @param ElementInterface|CategoryElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array

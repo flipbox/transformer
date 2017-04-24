@@ -10,12 +10,11 @@ class Asset extends AbstractTransformer
 {
 
     /**
-     * @param ElementInterface $element
+     * @param ElementInterface|AssetElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array
     {
-
         return array_merge(
             parent::transformElement($element),
             $this->transformAsset($element)

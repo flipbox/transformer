@@ -13,6 +13,10 @@ use flipbox\transform\transformers\ResourceTransformerInterface;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\modules\field\transformers\FieldTransformerInterface;
 use flipbox\transformer\Plugin;
+use flipbox\transformer\transformers\Collection;
+use flipbox\transform\transformers\Collection as BaseCollection;
+use flipbox\transformer\transformers\Item;
+use flipbox\transform\transformers\Item as BaseItem;
 
 abstract class AbstractTransformer extends BaseAbstractTransformer
 {
@@ -100,7 +104,8 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
 
         // Set allow resource and field transformers to manipulate data (ie, get the field value)
         if ($transform instanceof ResourceTransformerInterface ||
-            $transform instanceof FieldTransformerInterface) {
+            $transform instanceof FieldTransformerInterface
+        ) {
 
             // Resource transformers can modify the data at this point
             $transform->setData(
@@ -111,6 +116,26 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
 
         return $transform;
 
+    }
+
+    /**
+     * @param mixed $data
+     * @param TransformerInterface|callable $transformer
+     * @return BaseItem
+     */
+    protected function item($data, $transformer): BaseItem
+    {
+        return new Item(['data' => $data, 'transformer' => $transformer]);
+    }
+
+    /**
+     * @param mixed $data
+     * @param TransformerInterface|callable $transformer
+     * @return BaseCollection
+     */
+    protected function collection($data, $transformer): BaseCollection
+    {
+        return new Collection(['data' => $data, 'transformer' => $transformer]);
     }
 
     /**

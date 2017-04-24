@@ -3,7 +3,6 @@
 namespace flipbox\transformer;
 
 use craft\base\Plugin as BasePlugin;
-use craft\elements\Entry;
 use flipbox\organization\elements\Organization as OrganizationElement;
 use flipbox\organization\fields\Organization as OrganizationField;
 use flipbox\organization\fields\User as OrganizationUserField;
@@ -114,6 +113,14 @@ class Plugin extends BasePlugin
     public function getElement()
     {
         return $this->getModule('element');
+    }
+
+    /**
+     * @return modules\model\Module
+     */
+    public function getModel()
+    {
+        return $this->getModule('model');
     }
 
 }

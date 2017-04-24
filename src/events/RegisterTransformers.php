@@ -5,7 +5,6 @@ namespace flipbox\transformer\events;
 use craft\helpers\ArrayHelper;
 use flipbox\spark\helpers\ObjectHelper;
 use flipbox\transform\transformers\TransformerInterface;
-//use flipbox\transformer\helpers\Object as ObjectHelper;
 use yii\base\Event;
 
 class RegisterTransformers extends Event

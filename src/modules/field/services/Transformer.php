@@ -20,10 +20,10 @@ use flipbox\transformer\modules\field\transformers\asset\CollectionResource as A
 use flipbox\transformer\modules\field\transformers\category\CollectionResource as CategoryCollectionResource;
 use flipbox\transformer\modules\field\transformers\entry\CollectionResource as EntryCollectionResource;
 use flipbox\transformer\modules\field\transformers\matrix\CollectionResource as MatrixCollectionResource;
+use flipbox\transformer\modules\field\transformers\PlainText as PlainTextTransformer;
 use flipbox\transformer\modules\field\transformers\tag\CollectionResource as TagCollectionResource;
 use flipbox\transformer\modules\field\transformers\User as UserTransformer;
 use flipbox\transformer\modules\field\transformers\user\CollectionResource as UserCollectionResource;
-use flipbox\transformer\modules\field\transformers\PlainText as PlainTextTransformer;
 use flipbox\transformer\Plugin;
 use yii\base\Exception;
 
@@ -99,42 +99,49 @@ class Transformer extends Component
         switch (get_class($field)) {
 
             case Assets::class: {
+                /** @var Assets $field **/
                 $transformers['default'] = new AssetCollectionResource($field);
                 break;
 
             }
 
             case Categories::class: {
+                /** @var Categories $field **/
                 $transformers['default'] = new CategoryCollectionResource($field);
                 break;
 
             }
 
             case Entries::class: {
+                /** @var Entries $field **/
                 $transformers['default'] = new EntryCollectionResource($field);
                 break;
 
             }
 
             case Matrix::class: {
+                /** @var Matrix $field **/
                 $transformers['default'] = new MatrixCollectionResource($field);
                 break;
 
             }
 
             case PlainText::class: {
+                /** @var PlainText $field **/
                 $transformers['default'] = new PlainTextTransformer($field);
                 break;
 
             }
 
             case Tags::class: {
+                /** @var Tags $field **/
                 $transformers['default'] = new TagCollectionResource($field);
                 break;
 
             }
 
             case Users::class: {
+                /** @var Users $field **/
                 $transformers['default'] = new UserCollectionResource($field);
                 break;
 

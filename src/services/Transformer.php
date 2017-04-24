@@ -2,16 +2,13 @@
 
 namespace flipbox\transformer\services;
 
+use craft\db\Query;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Json;
-use flipbox\spark\helpers\QueryHelper;
-use flipbox\spark\helpers\RecordHelper;
-use flipbox\spark\records\Record;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\records\Transformer as TransformerRecord;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
-use yii\db\ActiveQuery;
 
 class Transformer extends Component
 {
@@ -51,131 +48,15 @@ class Transformer extends Component
         // Find record in db
         if ($records = $this->findAllRecordsByTypeAndScope($type, $scope, $siteId)) {
 
-            foreach ($records as $record) {
+            foreach ($records as $handle => $record) {
 
-                $transformers[$record->handle] = $this->create(
-                    $record->toArray()
-                );
+                $transformers[$handle] = $this->create($record);
 
             }
 
         }
 
         return $transformers;
-
-    }
-
-    /**
-     * @param array $config
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRecordQuery($config = []): ActiveQuery
-    {
-
-        /** @var Record $recordClass */
-        $recordClass = static::recordClass();
-
-        $query = $recordClass::find();
-
-        if ($config) {
-
-            QueryHelper::configure(
-                $query,
-                $config
-            );
-
-        }
-
-        return $query;
-
-    }
-
-    /**
-     * @param $condition
-     * @param string $toScenario
-     * @return TransformerRecord|null
-     */
-    public function findRecordByCondition($condition, string $toScenario = null)
-    {
-
-        if (empty($condition)) {
-            return null;
-        }
-
-        return $this->findRecordByCriteria(
-            RecordHelper::conditionToCriteria($condition),
-            $toScenario
-        );
-
-    }
-
-    /**
-     * @param $criteria
-     * @param string $toScenario
-     * @return TransformerRecord|null
-     */
-    public function findRecordByCriteria($criteria, string $toScenario = null)
-    {
-
-        $query = $this->getRecordQuery($criteria);
-
-        /** @var TransformerRecord $record */
-        if ($record = $query->one()) {
-
-            // Set scenario
-            if ($toScenario) {
-                $record->setScenario($toScenario);
-            }
-
-        }
-
-        return $record;
-
-    }
-
-
-    /**
-     * @param array $condition
-     * @param string $toScenario
-     * @return TransformerRecord[]
-     */
-    public function findAllRecordsByCondition($condition = [], string $toScenario = null)
-    {
-
-        return $this->findAllRecordsByCriteria(
-            RecordHelper::conditionToCriteria($condition),
-            $toScenario
-        );
-
-    }
-
-    /**
-     * @param array $criteria
-     * @param string $toScenario
-     * @return TransformerRecord[]
-     */
-    public function findAllRecordsByCriteria($criteria = [], string $toScenario = null)
-    {
-
-        $query = $this->getRecordQuery($criteria);
-
-        /** @var Record[] $record s */
-        $records = $query->all();
-
-        // Set scenario
-        if ($toScenario) {
-
-            /** @var Record $record */
-            foreach ($records as $record) {
-
-                // Set scenario
-                $record->setScenario($toScenario);
-
-            }
-
-        }
-
-        return $records;
 
     }
 
@@ -228,6 +109,9 @@ class Transformer extends Component
 
             $this->_cacheAllByScope[$key] = [];
 
+            /** @var TransformerRecord $recordClass */
+            $recordClass = static::recordClass();
+
             $condition = [
                 'type' => $type,
                 'scope' => $scope
@@ -237,13 +121,25 @@ class Transformer extends Component
                 $condition['siteId'] = $siteId;
             }
 
-            $records = $this->findAllRecordsByCondition($condition);
+            // Find all of the installed plugins
+            $records = (new Query())
+                ->select([
+                    'handle',
+                    'class',
+                    'config'
+                ])
+                ->from([$recordClass::tableName()])
+                ->andWhere($condition)
+                ->indexBy('handle')
+                ->all();
 
-            foreach ($records as $record) {
-                $record->config = Json::decodeIfJson($record->config);
+            foreach ($records as $lcHandle => &$row) {
+                $records[$lcHandle]['config'] = Json::decode($row['config']);
             }
 
             $this->_cacheAllByScope[$key] = $records;
+
+            unset($records);
 
         }
 

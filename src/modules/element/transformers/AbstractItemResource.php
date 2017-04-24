@@ -7,33 +7,18 @@ use craft\elements\db\ElementQuery;
 use craft\helpers\ArrayHelper;
 use flipbox\spark\helpers\QueryHelper;
 use flipbox\transform\Scope;
-use flipbox\transform\transformers\Item as ItemResource;
+use flipbox\transformer\transformers\AbstractItemResource as BaseAbstractItemResource;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\Plugin;
 use yii\base\Exception;
 
-abstract class AbstractItemResource extends ItemResource
+abstract class AbstractItemResource extends BaseAbstractItemResource
 {
 
     /**
      * @return ElementInterface
      */
     protected abstract function element(): ElementInterface;
-
-    /**
-     * @inheritdoc
-     */
-    public function __construct(array $config = [])
-    {
-
-        // Ensure we have a valid transformer
-        if ($transformer = ArrayHelper::remove($config, 'transformer', 'default')) {
-            $config['transformer'] = $this->resolveTransformer($transformer);
-        }
-
-        parent::__construct($config);
-
-    }
 
     /**
      * @inheritdoc
@@ -86,51 +71,6 @@ abstract class AbstractItemResource extends ItemResource
     protected function queryParams(): array
     {
         return ['status', 'limit'];
-    }
-
-
-    /**
-     * @param $transformer
-     * @return TransformerInterface|callable
-     */
-    protected function resolveTransformer($transformer)
-    {
-
-        if (is_callable($transformer) || $transformer instanceof TransformerInterface) {
-
-            return $transformer;
-
-        }
-
-        if (is_string($transformer)) {
-
-            if (is_subclass_of($transformer, TransformerInterface::class)) {
-
-                return $this->resolveTransformerByClass($transformer);
-
-            }
-
-            return $this->resolveTransformerByHandle($transformer);
-
-        }
-
-        // todo log this
-
-        return function () {
-
-            // empty callable
-
-        };
-
-    }
-
-    /**
-     * @param $class
-     * @return TransformerInterface
-     */
-    protected function resolveTransformerByClass($class): TransformerInterface
-    {
-        return new $class();
     }
 
     /**
