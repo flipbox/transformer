@@ -69,7 +69,8 @@ class Plugin extends BasePlugin
         $entry = \Craft::$app->getEntries()->getEntryById(8);
 
         $resource = Factory::item([
-            'includes' => ['users:id(1|3)']
+            'includes' => ['users:id(1|3)'],
+            'excludes' => ['users.name']
         ]);
 
         $data = $resource->transform(

@@ -20,6 +20,7 @@ use flipbox\transformer\modules\element\transformers\entry\Entry as EntryTransfo
 use flipbox\transformer\modules\element\transformers\matrix\Block as MatrixBlockTransformer;
 use flipbox\transformer\modules\element\transformers\tag\Tag as TagTransformer;
 use flipbox\transformer\modules\element\transformers\user\User as UserTransformer;
+use flipbox\transformer\Plugin;
 use yii\base\Exception;
 
 class Transformer extends Component
@@ -32,8 +33,13 @@ class Transformer extends Component
     public function getAll(ElementInterface $element)
     {
 
+        $transformers = array_merge(
+            $this->_firstParty($element),
+            $this->_database($element)
+        );
+
         $event = new RegisterTransformers([
-            'transformers' => $this->_firstParty($element)
+            'transformers' => $transformers
         ]);
 
         $element->trigger(
@@ -128,6 +134,18 @@ class Transformer extends Component
 
         return $transformers;
 
+    }
+
+    /**
+     * @param ElementInterface $element
+     * @return TransformerInterface[]
+     */
+    private function _database(ElementInterface $element)
+    {
+        return Plugin::getInstance()->getTransformer()->findAllByTypeAndScope(
+            get_class($element),
+            RegisterTransformers::class
+        );
     }
 
 }

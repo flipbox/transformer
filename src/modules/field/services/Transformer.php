@@ -24,6 +24,7 @@ use flipbox\transformer\modules\field\transformers\tag\CollectionResource as Tag
 use flipbox\transformer\modules\field\transformers\User as UserTransformer;
 use flipbox\transformer\modules\field\transformers\user\CollectionResource as UserCollectionResource;
 use flipbox\transformer\modules\field\transformers\PlainText as PlainTextTransformer;
+use flipbox\transformer\Plugin;
 use yii\base\Exception;
 
 class Transformer extends Component
@@ -36,8 +37,13 @@ class Transformer extends Component
     public function getAll(FieldInterface $field)
     {
 
+        $transformers = array_merge(
+            $this->_firstParty($field),
+            $this->_database($field)
+        );
+
         $event = new RegisterTransformers([
-            'transformers' => $this->_firstParty($field)
+            'transformers' => $transformers
         ]);
 
         $field->trigger(
@@ -138,6 +144,18 @@ class Transformer extends Component
 
         return $transformers;
 
+    }
+
+    /**
+     * @param FieldInterface $field
+     * @return TransformerInterface[]
+     */
+    private function _database(FieldInterface $field)
+    {
+        return Plugin::getInstance()->getTransformer()->findAllByTypeAndScope(
+            get_class($field),
+            RegisterTransformers::class
+        );
     }
 
 }
