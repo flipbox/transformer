@@ -1,16 +1,21 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\modules\model\transformers;
 
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\Plugin;
 use flipbox\transformer\transformers\AbstractItemResource;
-use yii\base\Exception;
 use yii\base\Model;
 
 /**
- * Class ItemResource
- * @package flipbox\transformer\modules\model\transformers
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
  *
  * @property Model $data
  */
@@ -28,9 +33,7 @@ class ItemResource extends AbstractItemResource
     }
 
     /**
-     * @param string $handle
-     * @return TransformerInterface
-     * @throws Exception
+     * @inheritdoc
      */
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
@@ -42,11 +45,7 @@ class ItemResource extends AbstractItemResource
 
         if (null === $transformer) {
 
-            throw new Exception(sprintf(
-                "Transformer '%s' does not exist on resource '%s'.",
-                (string)$handle,
-                (string)get_called_class()
-            ));
+            return parent::resolveTransformerByHandle($handle);
 
         }
 

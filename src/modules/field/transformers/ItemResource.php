@@ -9,17 +9,18 @@
 namespace flipbox\transformer\modules\field\transformers;
 
 use craft\base\FieldInterface;
-use flipbox\transform\Scope;
-use flipbox\transform\transformers\AbstractTransformer as BaseAbstractTransformer;
+use flipbox\transform\transformers\TransformerInterface;
+use flipbox\transformer\Plugin;
+use flipbox\transformer\transformers\AbstractItemResource;
+use yii\base\Model;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  *
- * @property FieldInterface $field
- * @property string $data
+ * @property Model $data
  */
-abstract class AbstractTransformer extends BaseAbstractTransformer implements FieldTransformerInterface
+class ItemResource extends AbstractItemResource
 {
 
     use FieldTrait;
@@ -55,9 +56,22 @@ abstract class AbstractTransformer extends BaseAbstractTransformer implements Fi
     /**
      * @inheritdoc
      */
-    public function __invoke($data, Scope $scope, string $identifier = null)
+    protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
-        return $this->transform($scope, $identifier);
+
+        $transformer = Plugin::getInstance()->getField()->getTransformer()->find(
+            $handle,
+            $this->field
+        );
+
+        if (null === $transformer) {
+
+            return parent::resolveTransformerByHandle($handle);
+
+        }
+
+        return $transformer;
+
     }
 
 }

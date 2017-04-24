@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\modules\element\services;
 
 use craft\base\Component;
@@ -17,18 +23,44 @@ use flipbox\transformer\modules\element\events\RegisterTransformers;
 use flipbox\transformer\modules\element\transformers\asset\Asset as AssetTransformer;
 use flipbox\transformer\modules\element\transformers\category\Category as CategoryTransformer;
 use flipbox\transformer\modules\element\transformers\entry\Entry as EntryTransformer;
+use flipbox\transformer\modules\element\transformers\ItemResource;
 use flipbox\transformer\modules\element\transformers\matrix\Block as MatrixBlockTransformer;
 use flipbox\transformer\modules\element\transformers\tag\Tag as TagTransformer;
+use flipbox\transformer\modules\element\transformers\user\CollectionResource;
 use flipbox\transformer\modules\element\transformers\user\User as UserTransformer;
 use flipbox\transformer\Plugin;
 use yii\base\Exception;
 
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
 class Transformer extends Component
 {
 
     /**
+     * @param ElementInterface $element
+     * @param string $transformer
+     * @return CollectionResource
+     */
+    public function collection(ElementInterface $element, $transformer = 'default'): CollectionResource
+    {
+        return new CollectionResource($element, ['transformer' => $transformer]);
+    }
+
+    /**
+     * @param ElementInterface $element
+     * @param string $transformer
+     * @return ItemResource
+     */
+    public function item(ElementInterface $element, $transformer = 'default'): ItemResource
+    {
+        return new ItemResource($element, ['transformer' => $transformer]);
+    }
+
+    /**
      * @param ElementInterface|Element $element
-     * @return mixed
+     * @return TransformerInterface[]
      */
     public function getAll(ElementInterface $element)
     {
@@ -54,7 +86,7 @@ class Transformer extends Component
     /**
      * @param string $identifier
      * @param ElementInterface $element
-     * @return TransformerInterface
+     * @return TransformerInterface|null
      */
     public function find(string $identifier, ElementInterface $element)
     {

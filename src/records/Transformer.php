@@ -14,7 +14,6 @@ use flipbox\spark\records\RecordWithHandle;
 use yii\db\ActiveQueryInterface;
 
 /**
- * @package flipbox\transformer\records
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  *

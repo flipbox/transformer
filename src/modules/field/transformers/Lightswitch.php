@@ -8,33 +8,33 @@
 
 namespace flipbox\transformer\modules\field\transformers;
 
-use craft\fields\PlainText as PlainTextField;
+use craft\fields\Lightswitch as LightswitchField;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  *
- * @property PlainTextField $field
- * @property string $data
+ * @property LightswitchField $field
+ * @property int $data
  */
-class PlainText extends AbstractTransformer
+class Lightswitch extends AbstractTransformer
 {
 
     /**
-     * @param PlainTextField $field
+     * @param LightswitchField $field
      * @param array $config
      */
-    public function __construct(PlainTextField $field, array $config = [])
+    public function __construct(LightswitchField $field, array $config = [])
     {
         parent::__construct($field, $config);
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function transform()
     {
-        return (string)$this->data;
+        return (bool)$this->data;
     }
 
 }

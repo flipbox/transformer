@@ -8,23 +8,22 @@
 
 namespace flipbox\transformer\modules\field\transformers;
 
-use craft\fields\PlainText as PlainTextField;
+use craft\fields\Color as ColorField;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  *
- * @property PlainTextField $field
  * @property string $data
  */
-class PlainText extends AbstractTransformer
+class Color extends AbstractTransformer
 {
 
     /**
-     * @param PlainTextField $field
+     * @param ColorField $field
      * @param array $config
      */
-    public function __construct(PlainTextField $field, array $config = [])
+    public function __construct(ColorField $field, array $config = [])
     {
         parent::__construct($field, $config);
     }
@@ -34,7 +33,13 @@ class PlainText extends AbstractTransformer
      */
     public function transform()
     {
+
+        if (null === $this->data) {
+            return null;
+        }
+
         return (string)$this->data;
+
     }
 
 }

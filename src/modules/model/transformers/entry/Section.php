@@ -1,12 +1,19 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\modules\model\transformers\entry;
 
 use craft\models\Section as EntrySection;
 use flipbox\transform\transformers\AbstractTransformer;
 
 /**
- * @package flipbox\transformer\modules\field\transformers\entry
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
  *
  * @property EntrySection $model
  */

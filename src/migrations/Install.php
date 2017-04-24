@@ -2,8 +2,8 @@
 
 /**
  * @copyright  Copyright (c) Flipbox Digital Limited
- * @license    https://flipboxfactory.com/software/organization/license
- * @link       https://www.flipboxfactory.com/software/organization/
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
  */
 
 namespace flipbox\transformer\migrations;
@@ -13,7 +13,6 @@ use craft\records\Site as SiteRecord;
 use flipbox\transformer\records\Transformer as TransformerRecord;
 
 /**
- * @package flipbox\transformer\migrations
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

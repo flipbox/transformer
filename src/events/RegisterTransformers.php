@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\events;
 
 use craft\helpers\ArrayHelper;
@@ -7,6 +13,10 @@ use flipbox\spark\helpers\ObjectHelper;
 use flipbox\transform\transformers\TransformerInterface;
 use yii\base\Event;
 
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
 class RegisterTransformers extends Event
 {
 

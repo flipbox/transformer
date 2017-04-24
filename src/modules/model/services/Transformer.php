@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\modules\model\services;
 
 use craft\base\Component;
@@ -16,6 +22,10 @@ use flipbox\transformer\Plugin;
 use yii\base\Exception;
 use yii\base\Model;
 
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
 class Transformer extends Component
 {
 

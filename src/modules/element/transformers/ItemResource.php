@@ -1,24 +1,35 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\modules\element\transformers;
 
 use craft\base\ElementInterface;
 use craft\elements\db\ElementQuery;
-use craft\helpers\ArrayHelper;
 use flipbox\spark\helpers\QueryHelper;
 use flipbox\transform\Scope;
-use flipbox\transformer\transformers\AbstractItemResource as BaseAbstractItemResource;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\Plugin;
-use yii\base\Exception;
+use flipbox\transformer\transformers\AbstractItemResource as BaseAbstractItemResource;
 
-abstract class AbstractItemResource extends BaseAbstractItemResource
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
+class ItemResource extends BaseAbstractItemResource
 {
 
     /**
      * @return ElementInterface
      */
-    protected abstract function element(): ElementInterface;
+    protected function element(): ElementInterface
+    {
+        return ElementInterface::class;
+    }
 
     /**
      * @inheritdoc
@@ -74,9 +85,7 @@ abstract class AbstractItemResource extends BaseAbstractItemResource
     }
 
     /**
-     * @param string $handle
-     * @return TransformerInterface
-     * @throws Exception
+     * @inheritdoc
      */
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
@@ -88,11 +97,7 @@ abstract class AbstractItemResource extends BaseAbstractItemResource
 
         if (null === $transformer) {
 
-            throw new Exception(sprintf(
-                "Transformer '%s' does not exist on resource '%s'.",
-                (string)$handle,
-                (string)get_called_class()
-            ));
+            return parent::resolveTransformerByHandle($handle);
 
         }
 

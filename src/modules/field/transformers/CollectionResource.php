@@ -6,9 +6,9 @@
  * @link       https://www.flipboxfactory.com/software/transformer/
  */
 
-namespace flipbox\transformer\modules\field\transformers\entry;
+namespace flipbox\transformer\modules\field\transformers;
 
-use flipbox\transform\resources\Item;
+use flipbox\transform\resources\Collection;
 use flipbox\transform\resources\ResourceInterface;
 use flipbox\transform\Scope;
 
@@ -16,16 +16,8 @@ use flipbox\transform\Scope;
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
-class ItemResource extends CollectionResource
+class CollectionResource extends ItemResource
 {
-
-    /**
-     * @inheritdoc
-     */
-    public function getData(Scope $scope)
-    {
-        return parent::getData($scope)->one();
-    }
 
     /**
      * @param Scope $scope
@@ -33,7 +25,7 @@ class ItemResource extends CollectionResource
      */
     protected function createResource(Scope $scope): ResourceInterface
     {
-        return new Item($scope);
+        return new Collection($scope);
     }
 
 }

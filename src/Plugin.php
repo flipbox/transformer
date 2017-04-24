@@ -1,87 +1,21 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer;
 
 use craft\base\Plugin as BasePlugin;
-use flipbox\organization\elements\Organization as OrganizationElement;
-use flipbox\organization\fields\Organization as OrganizationField;
-use flipbox\organization\fields\User as OrganizationUserField;
-use flipbox\transform\Factory;
-use flipbox\transformer\modules\element\events\RegisterTransformers as RegisterElementTransformers;
-use flipbox\transformer\modules\field\events\RegisterTransformers as RegisterFieldTransformers;
-use flipbox\transformer\web\twig\variables\Transformer as TransformerVariable;
 
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
 class Plugin extends BasePlugin
 {
-
-    /**
-     * @inheritdoc
-     */
-    public function defineTemplateComponent()
-    {
-        return TransformerVariable::class;
-    }
-
-    public function test()
-    {
-
-        // Register third party field transformer
-        RegisterFieldTransformers::on(
-            OrganizationField::class,
-            RegisterFieldTransformers::EVENT,
-            function (RegisterFieldTransformers $event) {
-                $event->addTransformer(
-                    'default',
-                    new \flipbox\transformer\third\organization\field\transformers\organization\CollectionResource(
-                        $event->sender
-                    )
-                );
-            }
-        );
-
-        // Register third party field transformer
-        RegisterFieldTransformers::on(
-            OrganizationUserField::class,
-            RegisterFieldTransformers::EVENT,
-            function (RegisterFieldTransformers $event) {
-                $event->addTransformer(
-                    'default',
-                    new \flipbox\transformer\third\organization\field\transformers\user\CollectionResource(
-                        $event->sender
-                    )
-                );
-            }
-        );
-//
-        // Register organization element
-        RegisterElementTransformers::on(
-            OrganizationElement::class,
-            RegisterElementTransformers::EVENT,
-            function (RegisterElementTransformers $event) {
-                $event->addTransformer(
-                    'default',
-                    new \flipbox\transformer\third\organization\element\transformers\organization\Organization()
-                );
-            }
-        );
-
-        $entry = \Craft::$app->getEntries()->getEntryById(8);
-
-        $resource = Factory::item([
-            'includes' => ['users:id(1|3)'],
-            'excludes' => ['users.name']
-        ]);
-
-        $data = $resource->transform(
-            new \flipbox\transformer\modules\element\transformers\entry\Entry(),
-            $entry
-        );
-
-        var_dump($data);
-
-        exit;
-
-    }
 
     /*******************************************
      * SERVICES

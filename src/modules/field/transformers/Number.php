@@ -8,38 +8,33 @@
 
 namespace flipbox\transformer\modules\field\transformers;
 
-use craft\base\ElementInterface;
-use craft\base\Field;
-use craft\base\FieldInterface;
+use craft\fields\Number as NumberField;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
+ *
+ * @property NumberField $field
+ * @property string $data
  */
-trait FieldTrait
+class Number extends AbstractTransformer
 {
 
     /**
-     * @var FieldInterface|Field
+     * @param NumberField $field
+     * @param array $config
      */
-    protected $field;
+    public function __construct(NumberField $field, array $config = [])
+    {
+        parent::__construct($field, $config);
+    }
 
     /**
      * @inheritdoc
      */
-    public function fieldData($data)
+    public function transform()
     {
-
-        if ($data instanceof ElementInterface) {
-
-            $data = $data->getFieldValue(
-                $this->field->handle
-            );
-
-        }
-
-        return $data;
-
+        return (string)$this->data;
     }
 
 }

@@ -1,12 +1,17 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
 
 namespace flipbox\transformer\transformers;
 
 use flipbox\spark\helpers\ArrayHelper;
 use flipbox\transform\transformers\Item as BaseItemResource;
 use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\helpers\Transformer;
 use yii\base\Exception;
 
 abstract class AbstractItemResource extends BaseItemResource
@@ -17,7 +22,14 @@ abstract class AbstractItemResource extends BaseItemResource
      * @return TransformerInterface
      * @throws Exception
      */
-    protected abstract function resolveTransformerByHandle(string $handle): TransformerInterface;
+    protected function resolveTransformerByHandle(string $handle): TransformerInterface
+    {
+        throw new Exception(sprintf(
+            "Transformer '%s' does not exist on resource '%s'.",
+            (string)$handle,
+            (string)get_called_class()
+        ));
+    }
 
     /**
      * @inheritdoc
@@ -41,41 +53,31 @@ abstract class AbstractItemResource extends BaseItemResource
     protected function resolveTransformer($transformer)
     {
 
-        if (is_callable($transformer) || $transformer instanceof TransformerInterface) {
+        if (Transformer::isTransformer($transformer)) {
 
             return $transformer;
 
         }
 
+        if (Transformer::isTransformerClass($transformer)) {
+
+            return new $transformer();
+
+        }
+
         if (is_string($transformer)) {
-
-            if (is_subclass_of($transformer, TransformerInterface::class)) {
-
-                return $this->resolveTransformerByClass($transformer);
-
-            }
 
             return $this->resolveTransformerByHandle($transformer);
 
         }
 
         // todo log this
-
         return function () {
 
             // empty callable
 
         };
 
-    }
-
-    /**
-     * @param $class
-     * @return TransformerInterface
-     */
-    protected function resolveTransformerByClass($class): TransformerInterface
-    {
-        return new $class();
     }
 
 }

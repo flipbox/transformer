@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\modules\field\transformers\tag;
 
 use craft\elements\db\TagQuery;
@@ -8,7 +14,8 @@ use flipbox\transformer\modules\element\transformers\tag\CollectionResource as T
 use flipbox\transformer\modules\field\transformers\FieldTrait;
 
 /**
- * @package flipbox\transformer\modules\field\transformers\entry
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
  *
  * @property TagsField $field
  */

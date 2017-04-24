@@ -8,29 +8,29 @@
 
 namespace flipbox\transformer\modules\field\transformers;
 
-use craft\fields\PlainText as PlainTextField;
+use craft\fields\PositionSelect as PositionSelectField;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  *
- * @property PlainTextField $field
+ * @property PositionSelectField $field
  * @property string $data
  */
-class PlainText extends AbstractTransformer
+class PositionSelect extends AbstractTransformer
 {
 
     /**
-     * @param PlainTextField $field
+     * @param PositionSelectField $field
      * @param array $config
      */
-    public function __construct(PlainTextField $field, array $config = [])
+    public function __construct(PositionSelectField $field, array $config = [])
     {
         parent::__construct($field, $config);
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function transform()
     {

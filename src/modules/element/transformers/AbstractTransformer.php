@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @copyright  Copyright (c) Flipbox Digital Limited
+ * @license    https://flipboxfactory.com/software/transformer/license
+ * @link       https://www.flipboxfactory.com/software/transformer/
+ */
+
 namespace flipbox\transformer\modules\element\transformers;
 
 use craft\base\Element;
@@ -9,15 +15,17 @@ use craft\base\FieldInterface;
 use flipbox\transform\resources\ResourceInterface;
 use flipbox\transform\Scope;
 use flipbox\transform\transformers\AbstractTransformer as BaseAbstractTransformer;
+use flipbox\transform\transformers\Collection as BaseCollection;
+use flipbox\transform\transformers\Item as BaseItem;
 use flipbox\transform\transformers\ResourceTransformerInterface;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\modules\field\transformers\FieldTransformerInterface;
 use flipbox\transformer\Plugin;
-use flipbox\transformer\transformers\Collection;
-use flipbox\transform\transformers\Collection as BaseCollection;
-use flipbox\transformer\transformers\Item;
-use flipbox\transform\transformers\Item as BaseItem;
 
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
 abstract class AbstractTransformer extends BaseAbstractTransformer
 {
 
@@ -121,21 +129,21 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
     /**
      * @param mixed $data
      * @param TransformerInterface|callable $transformer
-     * @return BaseItem
+     * @return ItemResource|BaseItem
      */
     protected function item($data, $transformer): BaseItem
     {
-        return new Item(['data' => $data, 'transformer' => $transformer]);
+        return new ItemResource(['data' => $data, 'transformer' => $transformer]);
     }
 
     /**
      * @param mixed $data
      * @param TransformerInterface|callable $transformer
-     * @return BaseCollection
+     * @return CollectionResource|BaseCollection
      */
     protected function collection($data, $transformer): BaseCollection
     {
-        return new Collection(['data' => $data, 'transformer' => $transformer]);
+        return new CollectionResource(['data' => $data, 'transformer' => $transformer]);
     }
 
     /**
