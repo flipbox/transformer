@@ -20,7 +20,7 @@ use flipbox\transform\transformers\Item as BaseItem;
 use flipbox\transform\transformers\ResourceTransformerInterface;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\modules\field\transformers\FieldTransformerInterface;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -98,7 +98,7 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
 
         // Look for field transform
         /** @var ResourceInterface|TransformerInterface|callable $resource */
-        if (!$transform = Plugin::getInstance()->getField()->getTransformer()->find(
+        if (!$transform = TransformerPlugin::getInstance()->getField()->getTransformer()->find(
             'default',
             $field
         )

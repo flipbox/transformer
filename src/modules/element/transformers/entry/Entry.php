@@ -11,7 +11,7 @@ namespace flipbox\transformer\modules\element\transformers\entry;
 use craft\base\ElementInterface;
 use craft\elements\Entry as EntryElement;
 use flipbox\transformer\modules\element\transformers\AbstractTransformer;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -42,10 +42,10 @@ class Entry extends AbstractTransformer
     {
         return [
             'title' => $entry->title,
-            'section' => Plugin::getInstance()->getModel()->getTransformer()->item(
+            'section' => TransformerPlugin::getInstance()->getModel()->getTransformer()->item(
                 $entry->getSection()
             ),
-            'type' => Plugin::getInstance()->getModel()->getTransformer()->item(
+            'type' => TransformerPlugin::getInstance()->getModel()->getTransformer()->item(
                 $entry->getType()
             )
         ];

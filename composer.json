@@ -1,7 +1,7 @@
 {
   "name": "flipboxdigital/transformer",
-  "description": "Transform complex data structures into arrays",
-  "version": "1.0.0",
+  "description": "Manipulate complex data structures",
+  "version": "1.0.0-beta",
   "require": {
     "flipboxdigital/transform": "^1.0"
   },
@@ -19,19 +19,17 @@
     "handle": "transformer",
     "developer": "Flipbox Digital",
     "developerUrl": "https://www.flipboxdigital.com",
-    "class": "flipbox\\transformer\\Plugin",
+    "class": "flipbox\\transformer\\Transformer",
     "schemaVersion": "1.0.0",
     "components": {
-      "resources": "flipbox\\transformer\\services\\Resources"
+      "transformer": "flipbox\\transformer\\services\\Transformer"
     },
     "modules": {
       "field": {
         "basePath": "@flipbox/transformer/modules/field",
         "class": "flipbox\\transformer\\modules\\field\\Module",
         "components": {
-          "transform": "flipbox\\transformer\\modules\\field\\services\\Transform",
-          "transformer": "flipbox\\transformer\\modules\\field\\services\\Transformer",
-          "resource": "flipbox\\transformer\\modules\\field\\services\\Resource"
+          "transformer": "flipbox\\transformer\\modules\\field\\services\\Transformer"
         }
       },
       "element": {
@@ -39,6 +37,13 @@
         "class": "flipbox\\transformer\\modules\\element\\Module",
         "components": {
           "transformer": "flipbox\\transformer\\modules\\element\\services\\Transformer"
+        }
+      },
+      "model": {
+        "basePath": "@flipbox/transformer/modules/model",
+        "class": "flipbox\\transformer\\modules\\model\\Module",
+        "components": {
+          "transformer": "flipbox\\transformer\\modules\\model\\services\\Transformer"
         }
       }
     }

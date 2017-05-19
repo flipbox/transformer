@@ -12,14 +12,14 @@ use craft\base\ElementInterface;
 use flipbox\transform\Factory;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\helpers\Transformer;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use yii\base\Module as BaseModule;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  *
- * @property Plugin $module
+ * @property Transformer $module
  */
 class Module extends BaseModule
 {

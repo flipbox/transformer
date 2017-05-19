@@ -10,7 +10,7 @@ namespace flipbox\transformer\modules\field\transformers;
 
 use craft\base\FieldInterface;
 use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\AbstractItemResource;
 use yii\base\Model;
 
@@ -59,7 +59,7 @@ class ItemResource extends AbstractItemResource
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
 
-        $transformer = Plugin::getInstance()->getField()->getTransformer()->find(
+        $transformer = TransformerPlugin::getInstance()->getField()->getTransformer()->find(
             $handle,
             $this->field
         );

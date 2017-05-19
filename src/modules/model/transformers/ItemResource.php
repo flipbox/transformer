@@ -9,7 +9,7 @@
 namespace flipbox\transformer\modules\model\transformers;
 
 use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\AbstractItemResource;
 use yii\base\Model;
 
@@ -38,7 +38,7 @@ class ItemResource extends AbstractItemResource
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
 
-        $transformer = Plugin::getInstance()->getModel()->getTransformer()->find(
+        $transformer = TransformerPlugin::getInstance()->getModel()->getTransformer()->find(
             $handle,
             $this->data
         );

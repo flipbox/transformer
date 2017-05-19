@@ -13,12 +13,12 @@ use craft\helpers\ArrayHelper;
 use craft\models\EntryType;
 use craft\models\Section;
 use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\modules\model\events\RegisterTransformers;
+use flipbox\transformer\events\RegisterTransformers;
 use flipbox\transformer\modules\model\transformers\CollectionResource;
 use flipbox\transformer\modules\model\transformers\entry\Section as EntrySectionTransformer;
 use flipbox\transformer\modules\model\transformers\entry\Type as EntryTypeTransformer;
 use flipbox\transformer\modules\model\transformers\ItemResource;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use yii\base\Exception;
 use yii\base\Model;
 
@@ -28,6 +28,11 @@ use yii\base\Model;
  */
 class Transformer extends Component
 {
+
+    /**
+     * The event that gets called on the element when registering a transformer
+     */
+    const EVENT_REGISTER_TRANSFORMERS = 'registerModelTransformers';
 
     /**
      * @param Model $data
@@ -66,7 +71,7 @@ class Transformer extends Component
         ]);
 
         $model->trigger(
-            RegisterTransformers::EVENT,
+            self::EVENT_REGISTER_TRANSFORMERS,
             $event
         );
 
@@ -137,9 +142,9 @@ class Transformer extends Component
      */
     private function _database(Model $model)
     {
-        return Plugin::getInstance()->getTransformer()->findAllByTypeAndScope(
+        return TransformerPlugin::getInstance()->getTransformer()->findAllByTypeAndScope(
             get_class($model),
-            RegisterTransformers::class
+            self::EVENT_REGISTER_TRANSFORMERS
         );
     }
 

@@ -32,7 +32,7 @@ use craft\fields\Users;
 use craft\helpers\ArrayHelper;
 use flipbox\transform\resources\ResourceInterface;
 use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\modules\field\events\RegisterTransformers;
+use flipbox\transformer\events\RegisterTransformers;
 use flipbox\transformer\modules\field\transformers\asset\CollectionResource as AssetCollectionResource;
 use flipbox\transformer\modules\field\transformers\category\CollectionResource as CategoryCollectionResource;
 use flipbox\transformer\modules\field\transformers\Checkboxes as CheckboxesTransformer;
@@ -54,7 +54,7 @@ use flipbox\transformer\modules\field\transformers\Table as TableTransformer;
 use flipbox\transformer\modules\field\transformers\tag\CollectionResource as TagCollectionResource;
 use flipbox\transformer\modules\field\transformers\User as UserTransformer;
 use flipbox\transformer\modules\field\transformers\user\CollectionResource as UserCollectionResource;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use yii\base\Exception;
 
 /**
@@ -63,6 +63,11 @@ use yii\base\Exception;
  */
 class Transformer extends Component
 {
+
+    /**
+     * The event that gets called on the element when registering a transformer
+     */
+    const EVENT_REGISTER_TRANSFORMERS = 'registerFieldTransformers';
 
     /**
      * @param FieldInterface $field
@@ -101,7 +106,7 @@ class Transformer extends Component
         ]);
 
         $field->trigger(
-            RegisterTransformers::EVENT,
+            self::EVENT_REGISTER_TRANSFORMERS,
             $event
         );
 
@@ -272,9 +277,9 @@ class Transformer extends Component
      */
     private function _database(FieldInterface $field)
     {
-        return Plugin::getInstance()->getTransformer()->findAllByTypeAndScope(
+        return TransformerPlugin::getInstance()->getTransformer()->findAllByTypeAndScope(
             get_class($field),
-            RegisterTransformers::class
+            self::EVENT_REGISTER_TRANSFORMERS
         );
     }
 

@@ -13,7 +13,7 @@ use craft\elements\db\ElementQuery;
 use flipbox\spark\helpers\QueryHelper;
 use flipbox\transform\Scope;
 use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\AbstractItemResource as BaseAbstractItemResource;
 
 /**
@@ -90,7 +90,7 @@ class ItemResource extends BaseAbstractItemResource
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
 
-        $transformer = Plugin::getInstance()->getElement()->getTransformer()->find(
+        $transformer = TransformerPlugin::getInstance()->getElement()->getTransformer()->find(
             $handle,
             $this->element()
         );

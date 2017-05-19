@@ -19,7 +19,7 @@ use craft\elements\Tag;
 use craft\elements\User;
 use craft\helpers\ArrayHelper;
 use flipbox\transform\transformers\TransformerInterface;
-use flipbox\transformer\modules\element\events\RegisterTransformers;
+use flipbox\transformer\events\RegisterTransformers;
 use flipbox\transformer\modules\element\transformers\asset\Asset as AssetTransformer;
 use flipbox\transformer\modules\element\transformers\category\Category as CategoryTransformer;
 use flipbox\transformer\modules\element\transformers\entry\Entry as EntryTransformer;
@@ -28,7 +28,7 @@ use flipbox\transformer\modules\element\transformers\matrix\Block as MatrixBlock
 use flipbox\transformer\modules\element\transformers\tag\Tag as TagTransformer;
 use flipbox\transformer\modules\element\transformers\user\CollectionResource;
 use flipbox\transformer\modules\element\transformers\user\User as UserTransformer;
-use flipbox\transformer\Plugin;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use yii\base\Exception;
 
 /**
@@ -37,6 +37,11 @@ use yii\base\Exception;
  */
 class Transformer extends Component
 {
+
+    /**
+     * The event that gets called on the element when registering a transformer
+     */
+    const EVENT_REGISTER_TRANSFORMERS = 'registerElementTransformers';
 
     /**
      * @param ElementInterface $element
@@ -75,7 +80,7 @@ class Transformer extends Component
         ]);
 
         $element->trigger(
-            RegisterTransformers::EVENT,
+            self::EVENT_REGISTER_TRANSFORMERS,
             $event
         );
 
@@ -174,9 +179,9 @@ class Transformer extends Component
      */
     private function _database(ElementInterface $element)
     {
-        return Plugin::getInstance()->getTransformer()->findAllByTypeAndScope(
+        return TransformerPlugin::getInstance()->getTransformer()->findAllByTypeAndScope(
             get_class($element),
-            RegisterTransformers::class
+            self::EVENT_REGISTER_TRANSFORMERS
         );
     }
 

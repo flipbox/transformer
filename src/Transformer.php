@@ -14,7 +14,7 @@ use craft\base\Plugin as BasePlugin;
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
-class Plugin extends BasePlugin
+class Transformer extends BasePlugin
 {
 
     /*******************************************
