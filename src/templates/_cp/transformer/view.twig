@@ -1,0 +1,42 @@
+{% extends "_layouts/cp" %}
+
+{#{% set extraPageHeaderHtml %}#}
+    {#<a href="{{ cpUrl(baseCpConfigurationPath ~ '/' ~ handle) }}"#}
+       {#class="btn submit">{{ 'Edit'|t('app') }}</a>#}
+{#{% endset %}#}
+
+{% block content %}
+
+    <h2>{{ className(transformer) }}</h2>
+
+    <hr/>
+
+    {% if data|length %}
+        {% from _self import traverseArray %}
+        {{ traverseArray(craft.transformer.element.item(data|first, transformer)) }}
+    {% else %}
+        Register data for '{{ className(component) }}' to get started
+    {% endif %}
+
+{% endblock %}
+
+{% macro traverseArray(array) -%}
+    {% if array|length %}
+        {% from _self import traverseArray %}
+        <ul class="tree">
+            {% for key, value in array %}
+                <li>
+                    {% if value is iterable %}
+                        <span class="toggle"></span>
+                        <span class="label">{{ key }}</span>
+                        {{ traverseArray(value) }}
+                    {% else %}
+                        <span class="no-toggle"></span>
+                        <span class="label">{{ key }}</span>
+                        <span class="value">{{ value }}</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{%- endmacro %}

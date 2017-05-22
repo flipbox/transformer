@@ -1,0 +1,50 @@
+{% extends "_layouts/cp" %}
+
+{#{% set extraPageHeaderHtml %}#}
+    {#<div class="buttons right">#}
+        {#<a href="{{ url(baseCpConfigurationPath ~ '/new') }}"#}
+           {#class="btn submit add icon">{{ "New element transformer"|t('transformer') }}</a>#}
+    {#</div>#}
+{#{% endset %}#}
+
+{% block content %}
+
+    <p id="noelements"{% if transformers|length %} class="hidden"{% endif %}>
+        {{ "No elements exist yet."|t('transformer') }}
+    </p>
+
+    <table id="elements" class="data fullwidth collapsible{% if transformers|length == 0 %} hidden{% endif %}">
+        <thead>
+        <th scope="col">{{ "Handle"|t('transformer') }}</th>
+        <th scope="col">{{ "Element"|t('transformer') }}</th>
+        <th scope="col">{{ "Element"|t('transformer') }}</th>
+        <th scope="col">{{ "Scope"|t('transformer') }}</th>
+        </thead>
+        <tbody>
+        {% for scope, elements in transformers %}
+            {% for class, transformers in elements %}
+                {% for handle, transformer in transformers %}
+                    <tr data-id="{{ handle }}" data-name="{{ handle|t('transformer') }}">
+                        <th scope="row" data-title="{{ 'Handle'|t('transformer') }}">
+                            <a href="{{ url(baseCpPath ~ '/' ~ handle, {component: class, scope: scope}) }}">{{ handle|t('transformer') }}</a>
+                        </th>
+                        <td data-title="{{ 'Element'|t('transformer') }}"><code>{{ class }}</code></td>
+                        <td data-title="{{ 'Transformer'|t('transformer') }}"><code>{{ className(transformer) }}</code>
+                        </td>
+                        <td data-title="{{ 'Scope'|t('transformer') }}"><code>{{ scope }}</code></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% js %}
+new Craft.AdminTable({
+tableSelector: '#elements',
+noItemsSelector: '#noelements',
+sortable: false,
+deleteAction: '{{ baseActionPath }}/delete',
+});
+{% endjs %}

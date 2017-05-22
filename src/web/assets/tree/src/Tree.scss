@@ -1,0 +1,36 @@
+@charset "UTF-8";
+@import "../../../../../../../vendor/craftcms/cms/src/web/assets/shared";
+
+/* ----------------------------------------
+/* Transformer Tree
+/* ----------------------------------------*/
+
+ul.tree {
+
+  li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 1px dotted #e3e5e8;
+
+    &:first-child {
+      border-top: none;
+
+    }
+
+    > ul.tree {
+      margin-bottom: 10px;
+
+    }
+
+  }
+
+  .label {
+    font-weight: 700;
+    display: inline-block;
+    min-width: 100px;
+
+  }
+
+}
+
+

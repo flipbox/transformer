@@ -1,9 +1,12 @@
 {
   "name": "flipboxdigital/transformer",
   "description": "Manipulate complex data structures",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta.1",
+  "minimum-stability": "beta",
+  "prefer-stable": true,
   "require": {
-    "flipboxdigital/transform": "^1.0"
+    "flipboxdigital/transform": "^1.0",
+    "flipboxdigital/spark": "~1.0.0-beta.2"
   },
   "repositories": [{
     "type": "composer",
@@ -20,30 +23,19 @@
     "developer": "Flipbox Digital",
     "developerUrl": "https://www.flipboxdigital.com",
     "class": "flipbox\\transformer\\Transformer",
+    "hasCpSection": true,
     "schemaVersion": "1.0.0",
     "components": {
       "transformer": "flipbox\\transformer\\services\\Transformer"
     },
     "modules": {
-      "field": {
-        "basePath": "@flipbox/transformer/modules/field",
-        "class": "flipbox\\transformer\\modules\\field\\Module",
+      "configuration": {
+        "basePath": "@flipbox/transformer/modules/configuration",
+        "class": "flipbox\\transformer\\modules\\configuration\\Module",
         "components": {
-          "transformer": "flipbox\\transformer\\modules\\field\\services\\Transformer"
-        }
-      },
-      "element": {
-        "basePath": "@flipbox/transformer/modules/element",
-        "class": "flipbox\\transformer\\modules\\element\\Module",
-        "components": {
-          "transformer": "flipbox\\transformer\\modules\\element\\services\\Transformer"
-        }
-      },
-      "model": {
-        "basePath": "@flipbox/transformer/modules/model",
-        "class": "flipbox\\transformer\\modules\\model\\Module",
-        "components": {
-          "transformer": "flipbox\\transformer\\modules\\model\\services\\Transformer"
+          "data": "flipbox\\transformer\\modules\\configuration\\services\\Data",
+          "scope": "flipbox\\transformer\\modules\\configuration\\services\\Scope",
+          "source": "flipbox\\transformer\\modules\\configuration\\services\\Source"
         }
       }
     }

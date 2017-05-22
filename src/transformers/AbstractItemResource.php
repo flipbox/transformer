@@ -12,8 +12,13 @@ use flipbox\spark\helpers\ArrayHelper;
 use flipbox\transform\transformers\Item as BaseItemResource;
 use flipbox\transform\transformers\TransformerInterface;
 use flipbox\transformer\helpers\Transformer;
+use flipbox\transformer\Transformer as TransformerPlugin;
 use yii\base\Exception;
 
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
 abstract class AbstractItemResource extends BaseItemResource
 {
 
@@ -71,12 +76,12 @@ abstract class AbstractItemResource extends BaseItemResource
 
         }
 
-        // todo log this
-        return function () {
+        TransformerPlugin::warning([
+            "Unknown transformer:",
+            $transformer
+        ]);
 
-            // empty callable
-
-        };
+        return null;
 
     }
 

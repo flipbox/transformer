@@ -1,0 +1,27 @@
+/* Flexbox stuff */
+/* Other */
+/* RTL stuff */
+/* ----------------------------------------
+/* Transformer Tree
+/* ----------------------------------------*/
+ul.tree li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 1px dotted #e3e5e8;
+}
+
+ul.tree li:first-child {
+    border-top: none;
+}
+
+ul.tree li > ul.tree {
+    margin-bottom: 10px;
+}
+
+ul.tree .label {
+    font-weight: 700;
+    display: inline-block;
+    min-width: 100px;
+}
+
+/*# sourceMappingURL=Tree.css.map */
