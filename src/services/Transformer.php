@@ -90,7 +90,7 @@ class Transformer extends Component
         string $context = TransformerPlugin::CONTEXT_ARRAY,
         int $siteId = null
     ) {
-        if(!is_subclass_of($class, Component::class)) {
+        if (!is_subclass_of($class, Component::class)) {
             throw new \yii\base\Exception("Invalid component");
         }
 
@@ -149,8 +149,12 @@ class Transformer extends Component
      * @param int|null $siteId
      * @return TransformerInterface[]
      */
-    private function storage(string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
-    {
+    private function storage(
+        string $class,
+        string $scope = 'global',
+        string $context = TransformerPlugin::CONTEXT_ARRAY,
+        int $siteId = null
+    ) {
         $condition = [
             'type' => $class,
             'scope' => $scope,

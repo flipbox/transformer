@@ -48,18 +48,19 @@ class Install extends Migration
     protected function createTables()
     {
         $this->createTable(
-            TransformerRecord::tableName(), [
-            'id' => $this->primaryKey(),
-            'handle' => $this->string()->notNull(),
-            'class' => $this->string()->notNull(),
-            'type' => $this->string()->notNull(),
-            'scope' => $this->string()->notNull(),
-            'context' => $this->string()->notNull(),
-            'config' => $this->text(),
-            'siteId' => $this->integer(),
-            'dateCreated' => $this->dateTime()->notNull(),
-            'dateUpdated' => $this->dateTime()->notNull(),
-            'uid' => $this->uid()
+            TransformerRecord::tableName(),
+            [
+                'id' => $this->primaryKey(),
+                'handle' => $this->string()->notNull(),
+                'class' => $this->string()->notNull(),
+                'type' => $this->string()->notNull(),
+                'scope' => $this->string()->notNull(),
+                'context' => $this->string()->notNull(),
+                'config' => $this->text(),
+                'siteId' => $this->integer(),
+                'dateCreated' => $this->dateTime()->notNull(),
+                'dateUpdated' => $this->dateTime()->notNull(),
+                'uid' => $this->uid()
             ]
         );
     }
@@ -128,7 +129,8 @@ class Install extends Migration
                 'siteId'
             ),
             TransformerRecord::tableName(),
-            'siteId', SiteRecord::tableName(),
+            'siteId',
+            SiteRecord::tableName(),
             'id',
             'CASCADE',
             'CASCADE'
