@@ -1,4 +1,4 @@
-# Link Field Type for Craft CMS
+# Transformer Plugin for Craft CMS
 [![Latest Version](https://img.shields.io/github/release/flipbox/transformer.svg?style=flat-square)](https://github.com/flipbox/transformer/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/flipbox/transformer/master.svg?style=flat-square)](https://travis-ci.org/flipbox/transformer)
