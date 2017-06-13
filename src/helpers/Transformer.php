@@ -10,6 +10,10 @@ namespace flipbox\transformer\helpers;
 
 use Flipbox\Transform\Transformers\TransformerInterface;
 
+/**
+ * @author Flipbox Factory <hello@flipboxfactory.com>
+ * @since 1.0.0
+ */
 class Transformer
 {
     /**
