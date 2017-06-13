@@ -10,7 +10,7 @@ use flipbox\transformer\Transformer;
 /**
  * @property Transformer $module
  */
-abstract class AbstractViewController extends Controller
+abstract class AbstractController extends Controller
 {
 
     /**
@@ -43,7 +43,6 @@ abstract class AbstractViewController extends Controller
      */
     protected function baseVariables(array &$variables = [])
     {
-
         $module = Transformer::getInstance();
 
         // Guardian settings
@@ -69,6 +68,5 @@ abstract class AbstractViewController extends Controller
             'label' => $variables['title'],
             'url' => UrlHelper::url($variables['baseCpPath'])
         ];
-
     }
 }

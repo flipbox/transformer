@@ -16,13 +16,11 @@ use yii\di\ServiceLocator;
  */
 class Transformer extends ServiceLocator
 {
-
     /**
      * @inheritdoc
      */
     public function __construct($config = [])
     {
-
         parent::__construct(
             array_merge(
                 $config,
@@ -33,7 +31,6 @@ class Transformer extends ServiceLocator
                 ]
             )
         );
-
     }
 
     /**
@@ -45,5 +42,4 @@ class Transformer extends ServiceLocator
     {
         return $this->get('element');
     }
-
 }

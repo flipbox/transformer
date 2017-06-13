@@ -30,7 +30,7 @@ class Data extends Component
     /**
      * @var string[]
      */
-    protected $_cacheAll;
+    protected $cacheAll;
 
     /**
      * @param Component $component
@@ -39,10 +39,10 @@ class Data extends Component
      */
     public function findAll(Component $component, string $scope = 'global')
     {
-        if (null === $this->_cacheAll) {
+        if (null === $this->cacheAll) {
             $event = new RegisterData(
                 [
-                'data' => $this->_firstParty($component)
+                'data' => $this->firstParty($component)
                 ]
             );
 
@@ -53,28 +53,28 @@ class Data extends Component
                 $event
             );
 
-            $this->_cacheAll = $event->data;
+            $this->cacheAll = $event->data;
         }
 
-        return $this->_cacheAll;
+        return $this->cacheAll;
     }
 
     /**
      * @param Component $component
      * @return Component[]
      */
-    private function _firstParty(Component $component)
+    private function firstParty(Component $component)
     {
         if ($component instanceof ElementInterface) {
-            return $this->_firstPartyElements($component);
+            return $this->firstPartyElements($component);
         }
 
         if ($component instanceof Model) {
-            return $this->_firstPartyModels($component);
+            return $this->firstPartyModels($component);
         }
 
         if ($component instanceof FieldInterface) {
-            return $this->_firstPartyFields($component);
+            return $this->firstPartyFields($component);
         }
 
         return [];
@@ -84,7 +84,7 @@ class Data extends Component
      * @param ElementInterface $element
      * @return Component[]
      */
-    private function _firstPartyElements(ElementInterface $element)
+    private function firstPartyElements(ElementInterface $element)
     {
         if ($element = $element::findOne()) {
             return ['default' => $element::findOne()];
@@ -97,7 +97,7 @@ class Data extends Component
      * @param FieldInterface $field
      * @return Component[]
      */
-    private function _firstPartyFields(FieldInterface $field)
+    private function firstPartyFields(FieldInterface $field)
     {
         return ['default' => $field->normalizeValue(null)];
     }
@@ -106,26 +106,23 @@ class Data extends Component
      * @param Model $model
      * @return Component[]
      */
-    private function _firstPartyModels(Model $model)
+    private function firstPartyModels(Model $model)
     {
         $transformers = [];
 
         switch (get_class($model)) {
-
-        case SectionModel::class:
-            $sections = Craft::$app->getSections()->getAllSections();
-            $transformers['default'] = reset($sections);
-            break;
-
-        case EntryTypeModel::class:
-            if ($entry = Entry::findOne()) {
-                /**
- * @var Entry $entry 
-*/
-                $transformers['default'] = $entry->getType();
-            }
-            break;
-
+            case SectionModel::class:
+                $sections = Craft::$app->getSections()->getAllSections();
+                $transformers['default'] = reset($sections);
+                break;
+            case EntryTypeModel::class:
+                if ($entry = Entry::findOne()) {
+                    /**
+                    * @var Entry $entry
+                    */
+                    $transformers['default'] = $entry->getType();
+                }
+                break;
         }
 
         return $transformers;

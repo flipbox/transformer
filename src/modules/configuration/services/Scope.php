@@ -21,15 +21,14 @@ class Scope extends Component
     /**
      * @var string[]
      */
-    protected $_cacheAll;
+    protected $cacheAll;
 
     /**
      * @return string[]
      */
     public function findAll()
     {
-
-        if (null === $this->_cacheAll) {
+        if (null === $this->cacheAll) {
             $event = new RegisterScopes();
 
             $configuration = Transformer::getInstance()->configuration();
@@ -39,9 +38,9 @@ class Scope extends Component
                 $event
             );
 
-            $this->_cacheAll = $event->scopes;
+            $this->cacheAll = $event->scopes;
         }
 
-        return $this->_cacheAll;
+        return $this->cacheAll;
     }
 }

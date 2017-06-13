@@ -26,7 +26,7 @@ abstract class AbstractItemResource extends BaseAbstractItemResource
     /**
      * @return ElementInterface
      */
-    protected abstract function element(): ElementInterface;
+    abstract protected function element(): ElementInterface;
 
     /**
      * @inheritdoc

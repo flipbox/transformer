@@ -17,7 +17,6 @@ use flipbox\transformer\Transformer;
  */
 class Element
 {
-
     /**
      * @param ElementInterface $element
      * @param $transformer
@@ -40,5 +39,4 @@ class Element
     {
         return Transformer::getInstance()->collection($element, $transformer, $scope, $config);
     }
-
 }

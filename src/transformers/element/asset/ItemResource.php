@@ -26,4 +26,3 @@ class ItemResource extends BaseItemResource
         return new Asset();
     }
 }
-

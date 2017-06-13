@@ -60,147 +60,125 @@ trait FieldTransformer
      */
     protected function firstPartyFields(string $field)
     {
-
         $transformers = [];
 
         switch ($field) {
-
-        case AssetsField::class:
-            /**
-             * @var AssetsField $field
-             */
-            $transformers['default'] = new AssetCollectionResource($field);
-            break;
-
-        case CategoriesField::class:
-            /**
-            * @var CategoriesField $field *
-            */
-            $transformers['default'] = new CategoryCollectionResource($field);
-            break;
-
-        case CheckboxesField::class:
-            /**
-            * @var CheckboxesField $field *
-            */
-            $transformers['default'] = new CheckboxesTransformer($field);
-            break;
-
-        case ColorField::class:
-            /**
-            * @var ColorField $field *
-            */
-            $transformers['default'] = new ColorTransformer($field);
-            break;
-
-        case DateField::class:
-            /**
-            * @var DateField $field *
-            */
-            $transformers['default'] = new DateTransformer($field);
-            break;
-
-        case DropdownField::class:
-            /**
-            * @var DropdownField $field *
-            */
-            $transformers['default'] = new DropdownTransformer($field);
-            break;
-
-        case EntriesField::class:
-            /**
-            * @var EntriesField $field *
-            */
-            $transformers['default'] = new EntryCollectionResource($field);
-            break;
-
-        case LightswitchField::class:
-            /**
-            * @var LightswitchField $field *
-            */
-            $transformers['default'] = new LightswitchTransformer($field);
-            break;
-
-        case MatrixField::class:
-            /**
-            * @var MatrixField $field *
-            */
-            $transformers['default'] = new MatrixCollectionResource($field);
-            break;
-
-        case MultiSelectField::class:
-            /**
-            * @var MultiSelectField $field *
-            */
-            $transformers['default'] = new MultiSelectTransformer($field);
-            break;
-
-        case NumberField::class:
-            /**
-            * @var NumberField $field *
-            */
-            $transformers['default'] = new NumberTransformer($field);
-            break;
-
-        case PlainTextField::class:
-            /**
-            * @var PlainTextField $field *
-            */
-            $transformers['default'] = new PlainTextTransformer($field);
-            break;
-
-        case PositionSelectField::class:
-            /**
-            * @var PositionSelectField $field *
-            */
-            $transformers['default'] = new PositionSelectTransformer($field);
-            break;
-
-        case RadioButtonsField::class:
-            /**
-            * @var RadioButtonsField $field *
-            */
-            $transformers['default'] = new RadioButtonsTransformer($field);
-            break;
-
-        case RichTextField::class:
-            /**
-            * @var RichTextField $field *
-            */
-            $transformers['default'] = new RichTextTransformer($field);
-            break;
-
-        case TableField::class:
-            /**
-            * @var TableField $field *
-            */
-            $transformers['default'] = new TableTransformer($field);
-            break;
-
-        case TagsField::class:
-            /**
-            * @var TagsField $field *
-            */
-            $transformers['default'] = new TagCollectionResource($field);
-            break;
-
-        case UsersField::class:
-            /**
-            * @var UsersField $field *
-            */
-            $transformers['default'] = new UserCollectionResource($field);
-            break;
-
-        default:
-            TransformerPlugin::warning(
-                sprintf(
-                    "First party transformer not found for field '%s'",
-                    get_class($field)
-                )
-            );
-
+            case AssetsField::class:
+                /**
+                 * @var AssetsField $field
+                 */
+                $transformers['default'] = new AssetCollectionResource($field);
+                break;
+            case CategoriesField::class:
+                /**
+                * @var CategoriesField $field *
+                */
+                $transformers['default'] = new CategoryCollectionResource($field);
+                break;
+            case CheckboxesField::class:
+                /**
+                * @var CheckboxesField $field *
+                */
+                $transformers['default'] = new CheckboxesTransformer($field);
+                break;
+            case ColorField::class:
+                /**
+                * @var ColorField $field *
+                */
+                $transformers['default'] = new ColorTransformer($field);
+                break;
+            case DateField::class:
+                /**
+                * @var DateField $field *
+                */
+                $transformers['default'] = new DateTransformer($field);
+                break;
+            case DropdownField::class:
+                /**
+                * @var DropdownField $field *
+                */
+                $transformers['default'] = new DropdownTransformer($field);
+                break;
+            case EntriesField::class:
+                /**
+                * @var EntriesField $field *
+                */
+                $transformers['default'] = new EntryCollectionResource($field);
+                break;
+            case LightswitchField::class:
+                /**
+                * @var LightswitchField $field *
+                */
+                $transformers['default'] = new LightswitchTransformer($field);
+                break;
+            case MatrixField::class:
+                /**
+                * @var MatrixField $field *
+                */
+                $transformers['default'] = new MatrixCollectionResource($field);
+                break;
+            case MultiSelectField::class:
+                /**
+                * @var MultiSelectField $field *
+                */
+                $transformers['default'] = new MultiSelectTransformer($field);
+                break;
+            case NumberField::class:
+                /**
+                * @var NumberField $field *
+                */
+                $transformers['default'] = new NumberTransformer($field);
+                break;
+            case PlainTextField::class:
+                /**
+                * @var PlainTextField $field *
+                */
+                $transformers['default'] = new PlainTextTransformer($field);
+                break;
+            case PositionSelectField::class:
+                /**
+                * @var PositionSelectField $field *
+                */
+                $transformers['default'] = new PositionSelectTransformer($field);
+                break;
+            case RadioButtonsField::class:
+                /**
+                * @var RadioButtonsField $field *
+                */
+                $transformers['default'] = new RadioButtonsTransformer($field);
+                break;
+            case RichTextField::class:
+                /**
+                * @var RichTextField $field *
+                */
+                $transformers['default'] = new RichTextTransformer($field);
+                break;
+            case TableField::class:
+                /**
+                * @var TableField $field *
+                */
+                $transformers['default'] = new TableTransformer($field);
+                break;
+            case TagsField::class:
+                /**
+                * @var TagsField $field *
+                */
+                $transformers['default'] = new TagCollectionResource($field);
+                break;
+            case UsersField::class:
+                /**
+                * @var UsersField $field *
+                */
+                $transformers['default'] = new UserCollectionResource($field);
+                break;
+            default:
+                TransformerPlugin::warning(
+                    sprintf(
+                        "First party transformer not found for field '%s'",
+                        get_class($field)
+                    )
+                );
         }
-
         return $transformers;
     }
 }

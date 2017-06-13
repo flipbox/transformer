@@ -68,9 +68,7 @@ class RegisterTransformers extends Event
         }
 
         foreach ($transformers as $identifier => $transformer) {
-
             $this->addTransformer($identifier, $transformer);
-
         }
 
         return $this;

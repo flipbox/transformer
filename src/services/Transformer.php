@@ -41,8 +41,13 @@ class Transformer extends Component
      * @return callable|TransformerInterface
      * @throws Exception
      */
-    public function get(string $identifier, string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
-    {
+    public function get(
+        string $identifier,
+        string $class,
+        string $scope = 'global',
+        string $context = TransformerPlugin::CONTEXT_ARRAY,
+        int $siteId = null
+    ) {
         if (!$transformer = $this->find($identifier, $class, $scope, $context, $siteId)) {
             throw new Exception("Transformer not found");
         }
@@ -58,8 +63,13 @@ class Transformer extends Component
      * @param int|null $siteId
      * @return callable|TransformerInterface|null
      */
-    public function find(string $identifier, string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
-    {
+    public function find(
+        string $identifier,
+        string $class,
+        string $scope = 'global',
+        string $context = TransformerPlugin::CONTEXT_ARRAY,
+        int $siteId = null
+    ) {
         return ArrayHelper::getValue(
             $this->findAll($class, $scope, $context, $siteId),
             $identifier
@@ -74,8 +84,12 @@ class Transformer extends Component
      * @return \callable[]|TransformerInterface[]
      * @throws \yii\base\Exception
      */
-    public function findAll(string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
-    {
+    public function findAll(
+        string $class,
+            string $scope = 'global',
+            string $context = TransformerPlugin::CONTEXT_ARRAY,
+            int $siteId = null
+    ) {
         if(!is_subclass_of($class, Component::class)) {
             throw new \yii\base\Exception("Invalid component");
         }

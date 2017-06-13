@@ -42,8 +42,7 @@ trait ModelTransformer
                         get_class($model)
                     )
                 );
-
-            }
+        }
         return $transformers;
     }
 }

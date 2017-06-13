@@ -6,10 +6,10 @@ use Craft;
 use craft\helpers\UrlHelper;
 use flipbox\transformer\web\assets\tree\Tree;
 
-class TransformerController extends AbstractViewController
+class TransformerController extends AbstractController
 {
 
-    const TEMPLATE_BASE = AbstractViewController::TEMPLATE_BASE . DIRECTORY_SEPARATOR . 'transformer';
+    const TEMPLATE_BASE = AbstractController::TEMPLATE_BASE . DIRECTORY_SEPARATOR . 'transformer';
 
     /**
      * The index view template path

@@ -17,19 +17,15 @@ use craft\web\assets\cp\CpAsset;
  */
 class Tree extends AssetBundle
 {
-
     /**
      * @inheritdoc
      */
     public function init()
     {
-
         $this->css = [
             'Tree.css'
         ];
-
         parent::init();
-
     }
 
     /**
@@ -43,5 +39,4 @@ class Tree extends AssetBundle
     public $depends = [
         CpAsset::class,
     ];
-
 }

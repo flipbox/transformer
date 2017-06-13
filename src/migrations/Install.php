@@ -72,20 +72,46 @@ class Install extends Migration
     protected function createIndexes()
     {
         $this->createIndex(
-            $this->db->getIndexName(TransformerRecord::tableName(), 'handle', false, true),
-            TransformerRecord::tableName(), 'handle', false
+            $this->db->getIndexName(
+                TransformerRecord::tableName(),
+                'handle',
+                false,
+                true
+            ),
+            TransformerRecord::tableName(),
+            'handle',
+            false
         );
         $this->createIndex(
-            $this->db->getIndexName(TransformerRecord::tableName(), 'handle', false),
-            TransformerRecord::tableName(), 'handle', false
+            $this->db->getIndexName(
+                TransformerRecord::tableName(),
+                'handle',
+                false
+            ),
+            TransformerRecord::tableName(),
+                'handle',
+                false
         );
         $this->createIndex(
-            $this->db->getIndexName(TransformerRecord::tableName(), 'handle,type,scope,context,siteId', true),
-            TransformerRecord::tableName(), 'handle,type,scope,context,siteId', true
+            $this->db->getIndexName(
+                TransformerRecord::tableName(),
+                'handle,type,scope,context,siteId',
+                true
+            ),
+            TransformerRecord::tableName(),
+            'handle,type,scope,context,siteId',
+            true
         );
         $this->createIndex(
-            $this->db->getIndexName(TransformerRecord::tableName(), 'siteId', false, true),
-            TransformerRecord::tableName(), 'siteId', false
+            $this->db->getIndexName(
+                TransformerRecord::tableName(),
+                'siteId',
+                false,
+                true
+            ),
+            TransformerRecord::tableName(),
+            'siteId',
+            false
         );
     }
 
@@ -97,8 +123,15 @@ class Install extends Migration
     protected function addForeignKeys()
     {
         $this->addForeignKey(
-            $this->db->getForeignKeyName(TransformerRecord::tableName(), 'siteId'),
-            TransformerRecord::tableName(), 'siteId', SiteRecord::tableName(), 'id', 'CASCADE', 'CASCADE'
+            $this->db->getForeignKeyName(
+                TransformerRecord::tableName(),
+                'siteId'
+            ),
+            TransformerRecord::tableName(),
+            'siteId', SiteRecord::tableName(),
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
     }
 }

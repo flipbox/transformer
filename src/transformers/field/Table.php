@@ -47,20 +47,15 @@ class Table extends AbstractTransformer
 
         return $resource->transform(
             function ($data) use ($columns) {
-
                 $value = [];
-
                 foreach ($columns as $column => $attributes) {
                     $value[$column] = [
                         'heading' => $attributes['heading'],
                         'handle' => $attributes['handle'],
                         'value' => $data[$column] ?? null
                     ];
-
                 }
-
                 return $value;
-
             },
             $this->data
         );

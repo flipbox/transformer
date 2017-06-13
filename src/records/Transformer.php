@@ -37,7 +37,6 @@ class Transformer extends RecordWithHandle
      */
     public function rules()
     {
-
         return array_merge(
             parent::rules(),
             [
@@ -58,7 +57,6 @@ class Transformer extends RecordWithHandle
                 ]
             ]
         );
-
     }
 
     /**

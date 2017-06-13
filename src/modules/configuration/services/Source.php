@@ -24,17 +24,17 @@ class Source extends Component
     /**
      * @var string[]
      */
-    protected $_cacheAll;
+    protected $cacheAll;
 
     /**
      * @return string[]
      */
     public function findAll()
     {
-        if (null === $this->_cacheAll) {
+        if (null === $this->cacheAll) {
             $event = new RegisterSources(
                 [
-                'sources' => $this->_firstParty()
+                'sources' => $this->firstParty()
                 ]
             );
 
@@ -45,28 +45,28 @@ class Source extends Component
                 $event
             );
 
-            $this->_cacheAll = $event->sources;
+            $this->cacheAll = $event->sources;
         }
 
-        return $this->_cacheAll;
+        return $this->cacheAll;
     }
 
     /**
      * @return string[]
      */
-    private function _firstParty()
+    private function firstParty()
     {
         return array_merge(
-            $this->_firstPartyElements(),
-            $this->_firstPartyFields(),
-            $this->_firstPartyModels()
+            $this->firstPartyElements(),
+            $this->firstPartyFields(),
+            $this->firstPartyModels()
         );
     }
 
     /**
      * @return string[]
      */
-    private function _firstPartyElements()
+    private function firstPartyElements()
     {
         return Craft::$app->getElements()->getAllElementTypes();
     }
@@ -74,7 +74,7 @@ class Source extends Component
     /**
      * @return string[]
      */
-    private function _firstPartyFields()
+    private function firstPartyFields()
     {
         return Craft::$app->getFields()->getAllFieldTypes();
     }
@@ -82,7 +82,7 @@ class Source extends Component
     /**
      * @return string[]
      */
-    private function _firstPartyModels()
+    private function firstPartyModels()
     {
         return [
             Section::class,
