@@ -8,7 +8,7 @@
 
 namespace flipbox\transformer\transformers\field;
 
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

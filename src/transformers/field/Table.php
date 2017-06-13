@@ -10,8 +10,8 @@ namespace flipbox\transformer\transformers\field;
 
 use craft\fields\data\MultiOptionsFieldData;
 use craft\fields\Table as TableField;
-use flipbox\transform\resources\Collection;
-use flipbox\transform\Scope;
+use Flipbox\Transform\Resources\Collection;
+use Flipbox\Transform\Scope;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

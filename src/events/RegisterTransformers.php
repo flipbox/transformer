@@ -10,7 +10,7 @@ namespace flipbox\transformer\events;
 
 use craft\helpers\ArrayHelper;
 use flipbox\spark\helpers\ObjectHelper;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use yii\base\Event;
 
 /**

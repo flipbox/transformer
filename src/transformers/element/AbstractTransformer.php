@@ -12,17 +12,17 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\FieldInterface;
-use flipbox\transform\resources\ResourceInterface;
-use flipbox\transform\Scope;
-use flipbox\transform\transformers\AbstractTransformer as BaseAbstractTransformer;
-use flipbox\transform\transformers\Collection as BaseCollection;
-use flipbox\transform\transformers\Item as BaseItem;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Resources\ResourceInterface;
+use Flipbox\Transform\Scope;
+use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransformer;
+use Flipbox\Transform\Transformers\Collection as BaseCollection;
+use Flipbox\Transform\Transformers\Item as BaseItem;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\field\FieldTransformerInterface;
 use yii\base\Exception;
 
-//use flipbox\transform\transformers\ResourceTransformerInterface;
+//use Flipbox\Transform\Transformers\ResourceTransformerInterface;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

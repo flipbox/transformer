@@ -56,6 +56,7 @@ class Install extends Migration
             'class' => $this->string()->notNull(),
             'type' => $this->string()->notNull(),
             'scope' => $this->string()->notNull(),
+            'context' => $this->string()->notNull(),
             'config' => $this->text(),
             'siteId' => $this->integer(),
             'dateCreated' => $this->dateTime()->notNull(),
@@ -82,8 +83,8 @@ class Install extends Migration
             TransformerRecord::tableName(), 'handle', false
         );
         $this->createIndex(
-            $this->db->getIndexName(TransformerRecord::tableName(), 'handle,type,scope,siteId', true),
-            TransformerRecord::tableName(), 'handle,type,scope,siteId', true
+            $this->db->getIndexName(TransformerRecord::tableName(), 'handle,type,scope,context,siteId', true),
+            TransformerRecord::tableName(), 'handle,type,scope,context,siteId', true
         );
         $this->createIndex(
             $this->db->getIndexName(TransformerRecord::tableName(), 'siteId', false, true),

@@ -10,8 +10,8 @@ namespace flipbox\transformer\transformers\field;
 
 use craft\fields\data\RichTextData;
 use craft\fields\RichText as RichTextField;
-use flipbox\transform\resources\Item;
-use flipbox\transform\Scope;
+use Flipbox\Transform\Resources\Item;
+use Flipbox\Transform\Scope;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

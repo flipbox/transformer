@@ -9,8 +9,8 @@
 namespace flipbox\transformer\transformers;
 
 use flipbox\spark\helpers\ArrayHelper;
-use flipbox\transform\transformers\Item as BaseItemResource;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\Item as BaseItemResource;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\helpers\Transformer;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use yii\base\Exception;

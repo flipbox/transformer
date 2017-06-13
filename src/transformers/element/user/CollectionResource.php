@@ -8,9 +8,9 @@
 
 namespace flipbox\transformer\transformers\element\user;
 
-use flipbox\transform\resources\Collection;
-use flipbox\transform\resources\ResourceInterface;
-use flipbox\transform\Scope;
+use Flipbox\Transform\Resources\Collection;
+use Flipbox\Transform\Resources\ResourceInterface;
+use Flipbox\Transform\Scope;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

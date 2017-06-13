@@ -9,13 +9,23 @@
 namespace flipbox\transformer;
 
 use Craft;
+use craft\base\ElementInterface;
+use craft\base\FieldInterface;
 use craft\base\Plugin;
+use craft\db\Query;
 use craft\events\RegisterUrlRulesEvent;
+use craft\helpers\ArrayHelper;
+use craft\helpers\Json;
 use craft\helpers\UrlHelper;
 use craft\web\UrlManager;
-use flipbox\transform\Factory;
-use flipbox\transform\transformers\TransformerInterface;
+use flipbox\spark\models\Model;
+use Flipbox\Transform\Factory;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\helpers\Transformer as TransformerHelper;
+use flipbox\transformer\services\traits\ElementTransformer;
+use flipbox\transformer\services\traits\FieldTransformer;
+use flipbox\transformer\records\Transformer as TransformerRecord;
+use flipbox\transformer\services\traits\ModelTransformer;
 use flipbox\transformer\web\twig\variables\Transformer as TransformerVariable;
 use yii\base\Component;
 use yii\base\Event;
@@ -26,6 +36,35 @@ use yii\base\Event;
  */
 class Transformer extends Plugin
 {
+
+    use ElementTransformer, ModelTransformer, FieldTransformer;
+
+    /**
+     * The array context transformer.  This context identifies all transformers that should
+     * transform and output an array.
+     */
+    const CONTEXT_ARRAY = 'array';
+
+    /**
+     * The object context transformer.  This context identifies all transformers that should
+     * transform and output an object.
+     */
+    const CONTEXT_OBJECT = 'object';
+
+    /**
+     * The event that gets called on the element when registering a transformer
+     */
+    const EVENT_REGISTER_TRANSFORMERS = 'registerTransformers';
+
+    /**
+     * @param string $scope
+     * @param string $context
+     * @return string
+     */
+    public static function eventName(string $scope, string $context = self::CONTEXT_ARRAY): string
+    {
+        return self::EVENT_REGISTER_TRANSFORMERS.':'.$scope.':'.$context;
+    }
 
     /**
      * @inheritdoc
@@ -42,6 +81,44 @@ class Transformer extends Plugin
             [self::class, 'onRegisterCpUrlRules']
         );
 
+    }
+
+    /**
+     * @param string $identifier
+     * @param string $class
+     * @param string $scope
+     * @param string $context
+     * @param int|null $siteId
+     * @return callable|TransformerInterface
+     */
+    public function getTransformer(string $identifier, string $class, string $scope = 'global', string $context = self::CONTEXT_ARRAY, int $siteId = null)
+    {
+        return $this->transformer()->get($identifier, $class, $scope, $context, $siteId);
+    }
+
+    /**
+     * @param string $identifier
+     * @param string $class
+     * @param string $scope
+     * @param string $context
+     * @param int|null $siteId
+     * @return callable|TransformerInterface|null
+     */
+    public function findTransformer(string $identifier, string $class, string $scope = 'global', string $context = self::CONTEXT_ARRAY, int $siteId = null)
+    {
+        return $this->transformer()->find($identifier, $class, $scope, $context, $siteId);
+    }
+
+    /**
+     * @param string $class
+     * @param string $scope
+     * @param string $context
+     * @param int|null $siteId
+     * @return \callable[]|TransformerInterface[]
+     */
+    public function findAll(string $class, string $scope = 'global', string $context = self::CONTEXT_ARRAY, int $siteId = null)
+    {
+        return $this->transformer()->findAll($class, $scope, $context, $siteId);
     }
 
     /**
@@ -70,19 +147,21 @@ class Transformer extends Plugin
      * @param $data
      * @param string $transformer
      * @param string $scope
+     * @param string $context
      * @param array $config
      * @return array|null
      */
-    public function item($data, $transformer = 'default', string $scope = 'global', array $config = [])
+    public function item($data, $transformer = 'default', string $scope = 'global', string $context = self::CONTEXT_ARRAY, array $config = [])
     {
 
-        if (!$transformer = $this->resolveTransformer($transformer, $data, $scope)) {
+        if (!$transformer = $this->resolveTransformer($transformer, $data, $scope, $context)) {
             return null;
         }
 
-        return Factory::item($config)->transform(
+        return Factory::item(
             $transformer,
-            $data
+            $data,
+            $config
         );
 
     }
@@ -91,17 +170,21 @@ class Transformer extends Plugin
      * @param $data
      * @param string $transformer
      * @param string $scope
+     * @param string $context
      * @param array $config
      * @return array|null
      */
-    public function collection($data, $transformer = 'default', string $scope = 'global', array $config = [])
+    public function collection($data, $transformer = 'default', string $scope = 'global', string $context = self::CONTEXT_ARRAY, array $config = [])
     {
 
-        $transformer = $this->resolveTransformer($transformer, $data, $scope);
+        if (!$transformer = $this->resolveTransformer($transformer, $data, $scope, $context)) {
+            return [];
+        }
 
-        return Factory::collection($config)->transform(
+        return Factory::collection(
             $transformer,
-            $data
+            $data,
+            $config
         );
 
     }
@@ -136,7 +219,7 @@ class Transformer extends Plugin
     /**
      * @return services\Transformer
      */
-    public function getTransformer()
+    public function transformer()
     {
         return $this->get('transformer');
     }
@@ -190,33 +273,25 @@ class Transformer extends Plugin
 
     /**
      * @param $transformer
-     * @param Component $component
+     * @param string $component
      * @param string $scope
+     * @param string $context
      * @return TransformerInterface|callable|null
      */
-    private function resolveTransformer($transformer, Component $component, string $scope = 'global')
+    private function resolveTransformer($transformer, string $component, string $scope = 'global', string $context = self::CONTEXT_ARRAY)
     {
-
         if (TransformerHelper::isTransformer($transformer)) {
-
             return $transformer;
-
         }
 
         if (TransformerHelper::isTransformerClass($transformer)) {
-
             return new $transformer();
-
         }
 
         if (is_string($transformer)) {
-
-            return $this->getTransformer()->find($transformer, $component, $scope);
-
+            return $this->findTransformer($transformer, $component, $scope, $context);
         }
 
         return null;
-
     }
-
 }

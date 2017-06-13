@@ -10,11 +10,10 @@ namespace flipbox\transformer\services\traits;
 
 use craft\models\EntryType as EntryTypeModel;
 use craft\models\Section as SectionModel;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\model\entry\Section as EntrySectionTransformer;
 use flipbox\transformer\transformers\model\entry\Type as EntryTypeTransformer;
-use yii\base\Model;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -24,15 +23,15 @@ trait ModelTransformer
 {
 
     /**
-     * @param Model $model
+     * @param string $model
      * @return TransformerInterface[]|callable[]
      */
-    protected function firstPartyModel(Model $model)
+    protected function firstPartyModel(string $model)
     {
 
         $transformers = [];
 
-        switch (get_class($model)) {
+        switch ($model) {
 
             case SectionModel::class:
                 $transformers['default'] = new EntrySectionTransformer();

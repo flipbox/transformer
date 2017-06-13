@@ -8,14 +8,13 @@
 
 namespace flipbox\transformer\services\traits;
 
-use craft\base\ElementInterface;
 use craft\elements\Asset as AssetElement;
 use craft\elements\Category as CategoryElement;
 use craft\elements\Entry as EntryElement;
 use craft\elements\MatrixBlock as MatrixBlockElement;
 use craft\elements\Tag as TagElement;
 use craft\elements\User as UserElement;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\element\asset\Asset as AssetTransformer;
 use flipbox\transformer\transformers\element\category\Category as CategoryTransformer;
@@ -32,15 +31,15 @@ trait ElementTransformer
 {
 
     /**
-     * @param ElementInterface $element
+     * @param string $element
      * @return TransformerInterface[]|callable[]
      */
-    protected function firstPartyElements(ElementInterface $element)
+    protected function firstPartyElements(string $element)
     {
 
         $transformers = [];
 
-        switch (get_class($element)) {
+        switch ($element) {
 
             case AssetElement::class:
                 $transformers['default'] = new AssetTransformer();

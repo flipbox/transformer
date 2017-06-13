@@ -8,9 +8,9 @@
 
 namespace flipbox\transformer\transformers\field\tag;
 
-use flipbox\transform\resources\Item;
-use flipbox\transform\resources\ResourceInterface;
-use flipbox\transform\Scope;
+use Flipbox\Transform\Resources\Item;
+use Flipbox\Transform\Resources\ResourceInterface;
+use Flipbox\Transform\Scope;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

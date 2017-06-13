@@ -10,7 +10,7 @@ namespace flipbox\transformer\transformers\field;
 
 use craft\base\Field;
 use craft\base\FieldInterface;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\AbstractItemResource;
 use yii\base\Model;

@@ -8,7 +8,7 @@
 
 namespace flipbox\transformer\helpers;
 
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 
 class Transformer
 {

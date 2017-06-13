@@ -11,8 +11,8 @@ namespace flipbox\transformer\transformers\element;
 use craft\base\Element;
 use craft\elements\db\ElementQuery;
 use flipbox\spark\helpers\QueryHelper;
-use flipbox\transform\Scope;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Scope;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\AbstractItemResource as BaseAbstractItemResource;
 

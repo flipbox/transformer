@@ -20,6 +20,7 @@ use yii\db\ActiveQueryInterface;
  * @property string $class
  * @property string $type
  * @property string $scope
+ * @property string $context
  * @property string $config
  * @property int $siteId
  * @property Site $site
@@ -45,7 +46,8 @@ class Transformer extends RecordWithHandle
                     [
                         'class',
                         'type',
-                        'scope'
+                        'scope',
+                        'context'
                     ],
                     'required'
                 ],

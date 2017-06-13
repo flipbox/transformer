@@ -11,8 +11,8 @@ namespace flipbox\transformer\transformers\field;
 use craft\fields\data\OptionData;
 use craft\fields\data\SingleOptionFieldData;
 use craft\fields\Dropdown as DropdownField;
-use flipbox\transform\resources\Item;
-use flipbox\transform\Scope;
+use Flipbox\Transform\Resources\Item;
+use Flipbox\Transform\Scope;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

@@ -13,7 +13,7 @@ use craft\base\FieldInterface;
 use craft\db\Query;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Json;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\events\RegisterTransformers;
 use flipbox\transformer\records\Transformer as TransformerRecord;
 use flipbox\transformer\Transformer as TransformerPlugin;
@@ -21,6 +21,7 @@ use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\db\Exception;
+use flipbox\transformer\helpers\Transformer as TransformerHelper;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -32,113 +33,93 @@ class Transformer extends Component
     use traits\ElementTransformer, traits\ModelTransformer, traits\FieldTransformer;
 
     /**
-     * The event that gets called on the element when registering a transformer
-     */
-    const EVENT_REGISTER_TRANSFORMERS = 'registerTransformers';
-
-    /**
-     * @return string
-     */
-    public static function objectClassInstance(): string
-    {
-        return TransformerInterface::class;
-    }
-
-    /**
-     * @return string
-     */
-    public static function recordClass(): string
-    {
-        return TransformerRecord::class;
-    }
-
-    /**
      * @param string $identifier
-     * @param Component $component
+     * @param string $class
      * @param string $scope
+     * @param string $context
      * @param int|null $siteId
-     * @return TransformerInterface
+     * @return callable|TransformerInterface
      * @throws Exception
      */
-    public function get(string $identifier, Component $component, string $scope = 'global', int $siteId = null)
+    public function get(string $identifier, string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
     {
-
-        if (!$transformer = $this->find($identifier, $component, $scope, $siteId)) {
+        if (!$transformer = $this->find($identifier, $class, $scope, $context, $siteId)) {
             throw new Exception("Transformer not found");
         }
 
         return $transformer;
-
     }
 
     /**
      * @param string $identifier
-     * @param Component $component
+     * @param string $class
      * @param string $scope
+     * @param string $context
      * @param int|null $siteId
-     * @return TransformerInterface|null
+     * @return callable|TransformerInterface|null
      */
-    public function find(string $identifier, Component $component, string $scope = 'global', int $siteId = null)
+    public function find(string $identifier, string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
     {
-
         return ArrayHelper::getValue(
-            $this->findAll($component, $scope, $siteId),
+            $this->findAll($class, $scope, $context, $siteId),
             $identifier
         );
-
     }
 
     /**
-     * @param Component $component
+     * @param string $class
      * @param string $scope
+     * @param string $context
      * @param int|null $siteId
      * @return \callable[]|TransformerInterface[]
+     * @throws \yii\base\Exception
      */
-    public function findAll(Component $component, string $scope = 'global', int $siteId = null)
+    public function findAll(string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
     {
-
-        /** @var Model $model * */
+        if(!is_subclass_of($class, Component::class)) {
+            throw new \yii\base\Exception("Invalid component");
+        }
 
         $transformers = array_merge(
-            $this->_firstParty($component),
-            $this->_storage($component, $scope, $siteId)
+            $this->firstParty($class),
+            $this->storage($class, $scope, $context, $siteId)
         );
 
         $event = new RegisterTransformers([
             'transformers' => $transformers
         ]);
 
-        $component->trigger(
-            self::EVENT_REGISTER_TRANSFORMERS . ':' . $scope,
+        $event->trigger(
+            $class,
+            TransformerPlugin::eventName($scope, $context),
             $event
         );
 
         return $event->getTransformers();
-
     }
 
     /**
-     * @param Component $component
+     * @param string $class
      * @return TransformerInterface[]|callable[]
      */
-    private function _firstParty(Component $component)
+    private function firstParty(string $class)
     {
 
-        if ($component instanceof ElementInterface) {
-            return $this->firstPartyElements($component);
+        if (is_subclass_of($class, ElementInterface::class)) {
+            return $this->firstPartyElements($class);
         }
 
-        if ($component instanceof FieldInterface) {
-            return $this->firstPartyFields($component);
+        if (is_subclass_of($class, FieldInterface::class)) {
+            return $this->firstPartyFields($class);
         }
 
-        if ($component instanceof Model) {
-            return $this->firstPartyModel($component);
+        if (is_subclass_of($class , Model::class)) {
+            return $this->firstPartyModel($class);
         }
 
         TransformerPlugin::warning(sprintf(
             "First party transformer not found for '%s'",
-            get_class($component)
+            get_class($class)
         ));
 
         return [];
@@ -146,24 +127,26 @@ class Transformer extends Component
     }
 
     /**
-     * @param Component $component
+     * @param string $class
      * @param string $scope
+     * @param string $context
      * @param int|null $siteId
      * @return TransformerInterface[]
      */
-    private function _storage(Component $component, string $scope = 'global', int $siteId = null)
+    private function storage(string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
     {
 
         $condition = [
-            'type' => get_class($component),
+            'type' => $class,
             'scope' => $scope,
+            'context' => $context,
         ];
 
         if (null !== $siteId) {
             $condition['siteId'] = $siteId;
         }
 
-        return $this->_storageByCondition($condition);
+        return $this->storageByCondition($condition);
 
     }
 
@@ -171,12 +154,8 @@ class Transformer extends Component
      * @param array $condition
      * @return TransformerInterface[]
      */
-    private function _storageByCondition(array $condition = [])
+    private function storageByCondition(array $condition = [])
     {
-
-        /** @var TransformerRecord $recordClass */
-        $recordClass = static::recordClass();
-
         // Find all of the installed plugins
         $records = (new Query())
             ->select([
@@ -184,7 +163,7 @@ class Transformer extends Component
                 'class',
                 'config'
             ])
-            ->from([$recordClass::tableName()])
+            ->from([TransformerRecord::tableName()])
             ->where($condition)
             ->all();
 
@@ -196,38 +175,30 @@ class Transformer extends Component
         }
 
         return $transformers;
-
     }
 
     /**
-     * @inheritdoc
+     * @param array $config
+     * @return TransformerInterface
+     * @throws InvalidConfigException
      */
-    public function create($config = []): TransformerInterface
+    public function create(array $config = []): TransformerInterface
     {
-
-        // Force Array
-        if (!is_array($config)) {
-            $config = ArrayHelper::toArray($config, [], false);
-        }
-
         $class = ArrayHelper::remove($config, 'class');
 
-        if (null === $class || !is_subclass_of($class, static::objectClassInstance())) {
-
+        if (null === $class || !TransformerHelper::isTransformerClass($class)) {
             throw new InvalidConfigException(
                 sprintf(
                     "The class '%s' must be an instance of '%s'",
                     (string)$class,
-                    (string)static::objectClassInstance()
+                    (string)TransformerInterface::class
                 )
             );
-
         }
 
         return new $class(
             ArrayHelper::remove($config, 'config')
         );
-
     }
 
 }

@@ -9,7 +9,7 @@
 namespace flipbox\transformer\transformers\model\entry;
 
 use craft\models\Section as EntrySection;
-use flipbox\transform\transformers\AbstractTransformer;
+use Flipbox\Transform\Transformers\AbstractTransformer;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

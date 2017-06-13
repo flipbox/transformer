@@ -8,7 +8,7 @@
 
 namespace flipbox\transformer\transformers\model;
 
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\AbstractItemResource;
 use yii\base\Model;

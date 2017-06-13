@@ -8,8 +8,6 @@
 
 namespace flipbox\transformer\services\traits;
 
-use craft\base\Field;
-use craft\base\FieldInterface;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Categories as CategoriesField;
 use craft\fields\Checkboxes as CheckboxesField;
@@ -28,7 +26,7 @@ use craft\fields\RichText as RichTextField;
 use craft\fields\Table as TableField;
 use craft\fields\Tags as TagsField;
 use craft\fields\Users as UsersField;
-use flipbox\transform\transformers\TransformerInterface;
+use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\field\asset\CollectionResource as AssetCollectionResource;
 use flipbox\transformer\transformers\field\category\CollectionResource as CategoryCollectionResource;
@@ -57,15 +55,15 @@ trait FieldTransformer
 {
 
     /**
-     * @param FieldInterface|Field $field
+     * @param string $field
      * @return TransformerInterface[]|callable[]
      */
-    protected function firstPartyFields(FieldInterface $field)
+    protected function firstPartyFields(string $field)
     {
 
         $transformers = [];
 
-        switch (get_class($field)) {
+        switch ($field) {
 
             case AssetsField::class:
                 /** @var AssetsField $field * */

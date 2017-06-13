@@ -9,7 +9,7 @@
 namespace flipbox\transformer\transformers\field;
 
 use craft\fields\Date as DateField;
-use flipbox\transform\Scope;
+use Flipbox\Transform\Scope;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

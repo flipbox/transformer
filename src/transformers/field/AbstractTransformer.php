@@ -9,8 +9,8 @@
 namespace flipbox\transformer\transformers\field;
 
 use craft\base\FieldInterface;
-use flipbox\transform\Scope;
-use flipbox\transform\transformers\AbstractTransformer as BaseAbstractTransformer;
+use Flipbox\Transform\Scope;
+use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransformer;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
