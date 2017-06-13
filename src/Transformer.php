@@ -84,10 +84,10 @@ class Transformer extends Plugin
     }
 
     /**
-     * @param string $identifier
-     * @param string $class
-     * @param string $scope
-     * @param string $context
+     * @param string   $identifier
+     * @param string   $class
+     * @param string   $scope
+     * @param string   $context
      * @param int|null $siteId
      * @return callable|TransformerInterface
      */
@@ -97,10 +97,10 @@ class Transformer extends Plugin
     }
 
     /**
-     * @param string $identifier
-     * @param string $class
-     * @param string $scope
-     * @param string $context
+     * @param string   $identifier
+     * @param string   $class
+     * @param string   $scope
+     * @param string   $context
      * @param int|null $siteId
      * @return callable|TransformerInterface|null
      */
@@ -110,9 +110,9 @@ class Transformer extends Plugin
     }
 
     /**
-     * @param string $class
-     * @param string $scope
-     * @param string $context
+     * @param string   $class
+     * @param string   $scope
+     * @param string   $context
      * @param int|null $siteId
      * @return \callable[]|TransformerInterface[]
      */
@@ -148,7 +148,7 @@ class Transformer extends Plugin
      * @param string $transformer
      * @param string $scope
      * @param string $context
-     * @param array $config
+     * @param array  $config
      * @return array|null
      */
     public function item($data, $transformer = 'default', string $scope = 'global', string $context = self::CONTEXT_ARRAY, array $config = [])
@@ -171,7 +171,7 @@ class Transformer extends Plugin
      * @param string $transformer
      * @param string $scope
      * @param string $context
-     * @param array $config
+     * @param array  $config
      * @return array|null
      */
     public function collection($data, $transformer = 'default', string $scope = 'global', string $context = self::CONTEXT_ARRAY, array $config = [])
@@ -241,7 +241,7 @@ class Transformer extends Plugin
      * Logs an informative message.
      *
      * @param $message
-     * @param string $category
+     * @param string  $category
      */
     public static function info($message, $category = 'transformer')
     {
@@ -252,7 +252,7 @@ class Transformer extends Plugin
      * Logs a warning message.
      *
      * @param $message
-     * @param string $category
+     * @param string  $category
      */
     public static function warning($message, $category = 'transformer')
     {
@@ -263,7 +263,7 @@ class Transformer extends Plugin
      * Logs an error message.
      *
      * @param $message
-     * @param string $category
+     * @param string  $category
      */
     public static function error($message, $category = 'transformer')
     {
@@ -273,9 +273,9 @@ class Transformer extends Plugin
 
     /**
      * @param $transformer
-     * @param string $component
-     * @param string $scope
-     * @param string $context
+     * @param string      $component
+     * @param string      $scope
+     * @param string      $context
      * @return TransformerInterface|callable|null
      */
     private function resolveTransformer($transformer, string $component, string $scope = 'global', string $context = self::CONTEXT_ARRAY)

@@ -27,7 +27,7 @@ class CollectionResource extends CategoryCollectionResource implements FieldTran
 
     /**
      * @param CategoriesField $field
-     * @param array $config
+     * @param array           $config
      */
     public function __construct(CategoriesField $field, array $config = [])
     {

@@ -26,7 +26,7 @@ class Dropdown extends AbstractTransformer
 
     /**
      * @param DropdownField $field
-     * @param array $config
+     * @param array         $config
      */
     public function __construct(DropdownField $field, array $config = [])
     {

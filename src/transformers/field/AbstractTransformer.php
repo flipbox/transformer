@@ -26,7 +26,7 @@ abstract class AbstractTransformer extends BaseAbstractTransformer implements Fi
 
     /**
      * @param FieldInterface $field
-     * @param array $config
+     * @param array          $config
      */
     public function __construct(FieldInterface $field, array $config = [])
     {

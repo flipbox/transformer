@@ -27,7 +27,7 @@ class CollectionResource extends AssetCollectionResource implements FieldTransfo
 
     /**
      * @param AssetsField $field
-     * @param array $config
+     * @param array       $config
      */
     public function __construct(AssetsField $field, array $config = [])
     {

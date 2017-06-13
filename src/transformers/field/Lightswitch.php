@@ -22,7 +22,7 @@ class Lightswitch extends AbstractTransformer
 
     /**
      * @param LightswitchField $field
-     * @param array $config
+     * @param array            $config
      */
     public function __construct(LightswitchField $field, array $config = [])
     {

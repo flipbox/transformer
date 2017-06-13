@@ -26,7 +26,7 @@ class RadioButtons extends AbstractTransformer
 
     /**
      * @param RadioButtonsField $field
-     * @param array $config
+     * @param array             $config
      */
     public function __construct(RadioButtonsField $field, array $config = [])
     {

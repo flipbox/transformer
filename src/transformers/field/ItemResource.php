@@ -29,7 +29,7 @@ class ItemResource extends AbstractItemResource
 
     /**
      * @param FieldInterface $field
-     * @param array $config
+     * @param array          $config
      */
     public function __construct(FieldInterface $field, array $config = [])
     {

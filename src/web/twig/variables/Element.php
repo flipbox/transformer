@@ -21,7 +21,7 @@ class Element
     /**
      * @param ElementInterface $element
      * @param $transformer
-     * @param string $scope
+     * @param string           $scope
      * @return array|null
      */
     public function item(ElementInterface $element, $transformer, string $scope = 'global', array $config = [])
@@ -32,8 +32,8 @@ class Element
     /**
      * @param ElementInterface $element
      * @param $transformer
-     * @param string $scope
-     * @param array $config
+     * @param string           $scope
+     * @param array            $config
      * @return array|null
      */
     public function collection(ElementInterface $element, $transformer, string $scope = 'global', array $config = [])

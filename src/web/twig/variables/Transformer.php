@@ -23,14 +23,16 @@ class Transformer extends ServiceLocator
     public function __construct($config = [])
     {
 
-        parent::__construct(array_merge(
-            $config,
-            [
+        parent::__construct(
+            array_merge(
+                $config,
+                [
                 'components' => [
                     'element' => Element::class
                 ]
-            ]
-        ));
+                ]
+            )
+        );
 
     }
 

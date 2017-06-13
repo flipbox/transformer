@@ -25,7 +25,7 @@ class RichText extends AbstractTransformer
 
     /**
      * @param RichTextField $field
-     * @param array $config
+     * @param array         $config
      */
     public function __construct(RichTextField $field, array $config = [])
     {

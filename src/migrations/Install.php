@@ -50,7 +50,8 @@ class Install extends Migration
     protected function createTables()
     {
 
-        $this->createTable(TransformerRecord::tableName(), [
+        $this->createTable(
+            TransformerRecord::tableName(), [
             'id' => $this->primaryKey(),
             'handle' => $this->string()->notNull(),
             'class' => $this->string()->notNull(),
@@ -62,7 +63,8 @@ class Install extends Migration
             'dateCreated' => $this->dateTime()->notNull(),
             'dateUpdated' => $this->dateTime()->notNull(),
             'uid' => $this->uid()
-        ]);
+            ]
+        );
 
     }
 

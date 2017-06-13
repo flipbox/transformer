@@ -35,7 +35,7 @@ class Data extends Component
 
     /**
      * @param Component $component
-     * @param string $scope
+     * @param string    $scope
      * @return Component[]
      */
     public function findAll(Component $component, string $scope = 'global')
@@ -43,9 +43,11 @@ class Data extends Component
 
         if (null === $this->_cacheAll) {
 
-            $event = new RegisterData([
+            $event = new RegisterData(
+                [
                 'data' => $this->_firstParty($component)
-            ]);
+                ]
+            );
 
             $configuration = Transformer::getInstance()->getConfiguration();
 
@@ -118,17 +120,19 @@ class Data extends Component
 
         switch (get_class($model)) {
 
-            case SectionModel::class:
-                $sections = Craft::$app->getSections()->getAllSections();
-                $transformers['default'] = reset($sections);
-                break;
+        case SectionModel::class:
+            $sections = Craft::$app->getSections()->getAllSections();
+            $transformers['default'] = reset($sections);
+            break;
 
-            case EntryTypeModel::class:
-                if ($entry = Entry::findOne()) {
-                    /** @var Entry $entry */
-                    $transformers['default'] = $entry->getType();
-                }
-                break;
+        case EntryTypeModel::class:
+            if ($entry = Entry::findOne()) {
+                /**
+ * @var Entry $entry 
+*/
+                $transformers['default'] = $entry->getType();
+            }
+            break;
 
         }
 

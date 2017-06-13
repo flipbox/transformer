@@ -27,7 +27,7 @@ class CollectionResource extends TagCollectionResource implements FieldTransform
 
     /**
      * @param TagsField $field
-     * @param array $config
+     * @param array     $config
      */
     public function __construct(TagsField $field, array $config = [])
     {

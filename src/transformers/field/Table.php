@@ -25,7 +25,7 @@ class Table extends AbstractTransformer
 
     /**
      * @param TableField $field
-     * @param array $config
+     * @param array      $config
      */
     public function __construct(TableField $field, array $config = [])
     {
@@ -42,7 +42,9 @@ class Table extends AbstractTransformer
             $scope->childScope($identifier)
         );
 
-        /** @var TableField $field */
+        /**
+ * @var TableField $field 
+*/
         $columns = $this->field->columns;
 
         return $resource->transform(

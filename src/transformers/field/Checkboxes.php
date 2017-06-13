@@ -26,7 +26,7 @@ class Checkboxes extends AbstractTransformer
 
     /**
      * @param CheckboxesField $field
-     * @param array $config
+     * @param array           $config
      */
     public function __construct(CheckboxesField $field, array $config = [])
     {

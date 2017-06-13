@@ -21,7 +21,7 @@ class Color extends AbstractTransformer
 
     /**
      * @param ColorField $field
-     * @param array $config
+     * @param array      $config
      */
     public function __construct(ColorField $field, array $config = [])
     {

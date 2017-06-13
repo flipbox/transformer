@@ -33,19 +33,21 @@ trait ModelTransformer
 
         switch ($model) {
 
-            case SectionModel::class:
-                $transformers['default'] = new EntrySectionTransformer();
-                break;
+        case SectionModel::class:
+            $transformers['default'] = new EntrySectionTransformer();
+            break;
 
-            case EntryTypeModel::class:
-                $transformers['default'] = new EntryTypeTransformer();
-                break;
+        case EntryTypeModel::class:
+            $transformers['default'] = new EntryTypeTransformer();
+            break;
 
-            default:
-                TransformerPlugin::warning(sprintf(
+        default:
+            TransformerPlugin::warning(
+                sprintf(
                     "First party transformer not found for model '%s'",
                     get_class($model)
-                ));
+                )
+            );
 
         }
 

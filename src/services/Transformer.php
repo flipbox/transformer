@@ -33,10 +33,10 @@ class Transformer extends Component
     use traits\ElementTransformer, traits\ModelTransformer, traits\FieldTransformer;
 
     /**
-     * @param string $identifier
-     * @param string $class
-     * @param string $scope
-     * @param string $context
+     * @param string   $identifier
+     * @param string   $class
+     * @param string   $scope
+     * @param string   $context
      * @param int|null $siteId
      * @return callable|TransformerInterface
      * @throws Exception
@@ -51,10 +51,10 @@ class Transformer extends Component
     }
 
     /**
-     * @param string $identifier
-     * @param string $class
-     * @param string $scope
-     * @param string $context
+     * @param string   $identifier
+     * @param string   $class
+     * @param string   $scope
+     * @param string   $context
      * @param int|null $siteId
      * @return callable|TransformerInterface|null
      */
@@ -67,9 +67,9 @@ class Transformer extends Component
     }
 
     /**
-     * @param string $class
-     * @param string $scope
-     * @param string $context
+     * @param string   $class
+     * @param string   $scope
+     * @param string   $context
      * @param int|null $siteId
      * @return \callable[]|TransformerInterface[]
      * @throws \yii\base\Exception
@@ -85,9 +85,11 @@ class Transformer extends Component
             $this->storage($class, $scope, $context, $siteId)
         );
 
-        $event = new RegisterTransformers([
+        $event = new RegisterTransformers(
+            [
             'transformers' => $transformers
-        ]);
+            ]
+        );
 
         $event->trigger(
             $class,
@@ -113,23 +115,25 @@ class Transformer extends Component
             return $this->firstPartyFields($class);
         }
 
-        if (is_subclass_of($class , Model::class)) {
+        if (is_subclass_of($class, Model::class)) {
             return $this->firstPartyModel($class);
         }
 
-        TransformerPlugin::warning(sprintf(
-            "First party transformer not found for '%s'",
-            get_class($class)
-        ));
+        TransformerPlugin::warning(
+            sprintf(
+                "First party transformer not found for '%s'",
+                get_class($class)
+            )
+        );
 
         return [];
 
     }
 
     /**
-     * @param string $class
-     * @param string $scope
-     * @param string $context
+     * @param string   $class
+     * @param string   $scope
+     * @param string   $context
      * @param int|null $siteId
      * @return TransformerInterface[]
      */
@@ -158,11 +162,13 @@ class Transformer extends Component
     {
         // Find all of the installed plugins
         $records = (new Query())
-            ->select([
+            ->select(
+                [
                 'handle',
                 'class',
                 'config'
-            ])
+                ]
+            )
             ->from([TransformerRecord::tableName()])
             ->where($condition)
             ->all();

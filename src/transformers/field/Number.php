@@ -22,7 +22,7 @@ class Number extends AbstractTransformer
 
     /**
      * @param NumberField $field
-     * @param array $config
+     * @param array       $config
      */
     public function __construct(NumberField $field, array $config = [])
     {

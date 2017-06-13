@@ -28,7 +28,7 @@ class CollectionResource extends UserCollectionResource implements FieldTransfor
 
     /**
      * @param UsersField $field
-     * @param array $config
+     * @param array      $config
      */
     public function __construct(UsersField $field, array $config = [])
     {

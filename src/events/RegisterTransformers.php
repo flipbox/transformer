@@ -28,7 +28,7 @@ class RegisterTransformers extends Event
     protected $transformers = [];
 
     /**
-     * @param string $identifier
+     * @param string                        $identifier
      * @param TransformerInterface|callable $transformer
      * @return $this
      */

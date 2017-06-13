@@ -9,7 +9,9 @@ use flipbox\transformer\web\assets\tree\Tree;
 class TransformerController extends AbstractViewController
 {
 
-    /** The template base path */
+    /**
+ * The template base path 
+*/
     const TEMPLATE_BASE = AbstractViewController::TEMPLATE_BASE . DIRECTORY_SEPARATOR . 'transformer';
 
     /**

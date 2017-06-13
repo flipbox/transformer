@@ -26,7 +26,7 @@ class MultiSelect extends AbstractTransformer
 
     /**
      * @param MultiSelectField $field
-     * @param array $config
+     * @param array            $config
      */
     public function __construct(MultiSelectField $field, array $config = [])
     {

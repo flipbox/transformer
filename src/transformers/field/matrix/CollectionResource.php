@@ -27,7 +27,7 @@ class CollectionResource extends MatrixCollectionResource implements FieldTransf
 
     /**
      * @param MatrixField $field
-     * @param array $config
+     * @param array       $config
      */
     public function __construct(MatrixField $field, array $config = [])
     {

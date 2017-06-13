@@ -22,7 +22,7 @@ class PlainText extends AbstractTransformer
 
     /**
      * @param PlainTextField $field
-     * @param array $config
+     * @param array          $config
      */
     public function __construct(PlainTextField $field, array $config = [])
     {

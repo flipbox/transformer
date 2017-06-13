@@ -22,7 +22,7 @@ class PositionSelect extends AbstractTransformer
 
     /**
      * @param PositionSelectField $field
-     * @param array $config
+     * @param array               $config
      */
     public function __construct(PositionSelectField $field, array $config = [])
     {

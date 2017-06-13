@@ -29,11 +29,13 @@ abstract class AbstractItemResource extends BaseItemResource
      */
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
-        throw new Exception(sprintf(
-            "Transformer '%s' does not exist on resource '%s'.",
-            (string)$handle,
-            (string)get_called_class()
-        ));
+        throw new Exception(
+            sprintf(
+                "Transformer '%s' does not exist on resource '%s'.",
+                (string)$handle,
+                (string)get_called_class()
+            )
+        );
     }
 
     /**
@@ -76,10 +78,12 @@ abstract class AbstractItemResource extends BaseItemResource
 
         }
 
-        TransformerPlugin::warning([
+        TransformerPlugin::warning(
+            [
             "Unknown transformer:",
             $transformer
-        ]);
+            ]
+        );
 
         return null;
 

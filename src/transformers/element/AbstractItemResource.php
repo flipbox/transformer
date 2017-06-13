@@ -34,7 +34,9 @@ abstract class AbstractItemResource extends BaseAbstractItemResource
     protected function getData(Scope $scope)
     {
 
-        /** @var ElementQuery $query */
+        /**
+ * @var ElementQuery $query 
+*/
         $query = $this->data;
 
         if ($queryParams = $this->getQueryParams($scope)) {

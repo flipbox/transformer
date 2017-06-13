@@ -24,7 +24,7 @@ class Date extends AbstractTransformer
 
     /**
      * @param DateField $field
-     * @param array $config
+     * @param array     $config
      */
     public function __construct(DateField $field, array $config = [])
     {
@@ -48,7 +48,7 @@ class Date extends AbstractTransformer
     }
 
     /**
-     * @param Scope $scope
+     * @param Scope  $scope
      * @param string $identifier
      * @return string
      */

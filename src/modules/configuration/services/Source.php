@@ -35,9 +35,11 @@ class Source extends Component
 
         if (null === $this->_cacheAll) {
 
-            $event = new RegisterSources([
+            $event = new RegisterSources(
+                [
                 'sources' => $this->_firstParty()
-            ]);
+                ]
+            );
 
             $configuration = Transformer::getInstance()->getConfiguration();
 

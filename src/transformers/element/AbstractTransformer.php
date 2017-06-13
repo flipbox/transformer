@@ -67,10 +67,14 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
 
         $transforms = [];
 
-        /** @var FieldInterface[] $fields */
+        /**
+ * @var FieldInterface[] $fields 
+*/
         $fields = $element->getFieldLayout()->getFields();
 
-        /** @var Field $field */
+        /**
+ * @var Field $field 
+*/
         foreach ($fields as $field) {
 
             $transform = $this->transformField(
@@ -92,26 +96,32 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
 
     /**
      * @param FieldInterface|Field $field
-     * @param ElementInterface $element
+     * @param ElementInterface     $element
      * @return ResourceInterface|TransformerInterface|callable
      */
     protected function transformField(FieldInterface $field, ElementInterface $element)
     {
 
-        /** @var Field $field */
+        /**
+ * @var Field $field 
+*/
 
         // Look for field transform
-        /** @var ResourceInterface|TransformerInterface|callable $resource */
+        /**
+ * @var ResourceInterface|TransformerInterface|callable $resource 
+*/
         if (!$transform = TransformerPlugin::getInstance()->getTransformer()->find(
             'default',
             $field
         )
         ) {
 
-            TransformerPlugin::warning(sprintf(
-                "Transform not found for field: '%s'",
-                $field->handle
-            ));
+            TransformerPlugin::warning(
+                sprintf(
+                    "Transform not found for field: '%s'",
+                    $field->handle
+                )
+            );
 
             return null;
 
@@ -132,7 +142,7 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
     }
 
     /**
-     * @param mixed $data
+     * @param mixed                         $data
      * @param callable|TransformerInterface $transformer
      * @return BaseItem
      * @throws Exception
@@ -143,7 +153,7 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
     }
 
     /**
-     * @param mixed $data
+     * @param mixed                         $data
      * @param callable|TransformerInterface $transformer
      * @return BaseCollection
      * @throws Exception
