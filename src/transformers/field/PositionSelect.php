@@ -19,7 +19,6 @@ use craft\fields\PositionSelect as PositionSelectField;
  */
 class PositionSelect extends AbstractTransformer
 {
-
     /**
      * @param PositionSelectField $field
      * @param array               $config
@@ -36,5 +35,4 @@ class PositionSelect extends AbstractTransformer
     {
         return (string)$this->data;
     }
-
 }

@@ -18,19 +18,16 @@ use flipbox\transformer\transformers\element\AbstractTransformer;
  */
 class User extends AbstractTransformer
 {
-
     /**
      * @param ElementInterface|UserElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array
     {
-
         return array_merge(
             parent::transformElement($element),
             $this->transformUser($element)
         );
-
     }
 
     /**
@@ -39,7 +36,6 @@ class User extends AbstractTransformer
      */
     protected function transformUser(UserElement $user): array
     {
-
         return [
             'name' => [
                 'first' => $user->firstName,
@@ -47,7 +43,5 @@ class User extends AbstractTransformer
                 'full' => $user->getFullName()
             ]
         ];
-
     }
-
 }

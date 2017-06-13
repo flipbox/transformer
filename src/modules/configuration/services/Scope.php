@@ -18,7 +18,6 @@ use yii\base\Component;
  */
 class Scope extends Component
 {
-
     /**
      * @var string[]
      */
@@ -31,10 +30,9 @@ class Scope extends Component
     {
 
         if (null === $this->_cacheAll) {
-
             $event = new RegisterScopes();
 
-            $configuration = Transformer::getInstance()->getConfiguration();
+            $configuration = Transformer::getInstance()->configuration();
 
             $configuration->trigger(
                 $configuration::EVENT_REGISTER_SCOPES,
@@ -42,11 +40,8 @@ class Scope extends Component
             );
 
             $this->_cacheAll = $event->scopes;
-
         }
 
         return $this->_cacheAll;
-
     }
-
 }

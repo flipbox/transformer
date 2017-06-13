@@ -22,8 +22,6 @@ use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\field\FieldTransformerInterface;
 use yii\base\Exception;
 
-//use Flipbox\Transform\Transformers\ResourceTransformerInterface;
-
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
@@ -37,12 +35,10 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
      */
     public function transform(ElementInterface $element): array
     {
-
         return array_merge(
             $this->transformElement($element),
             $this->transformFields($element)
         );
-
     }
 
     /**
@@ -51,11 +47,9 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
      */
     protected function transformElement(ElementInterface $element): array
     {
-
         return [
             'id' => $element->id
         ];
-
     }
 
     /**
@@ -64,34 +58,28 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
      */
     protected function transformFields(ElementInterface $element): array
     {
-
         $transforms = [];
 
         /**
- * @var FieldInterface[] $fields 
-*/
+        * @var FieldInterface[] $fields
+        */
         $fields = $element->getFieldLayout()->getFields();
 
         /**
- * @var Field $field 
-*/
+        * @var Field $field
+        */
         foreach ($fields as $field) {
-
             $transform = $this->transformField(
                 $field,
                 $element
             );
 
             if (null !== $transform) {
-
                 $transforms[$field->handle] = $transform;
-
             }
-
         }
 
         return $transforms;
-
     }
 
     /**
@@ -101,21 +89,18 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
      */
     protected function transformField(FieldInterface $field, ElementInterface $element)
     {
-
         /**
- * @var Field $field 
-*/
+        * @var Field $field
+        */
 
         // Look for field transform
         /**
- * @var ResourceInterface|TransformerInterface|callable $resource 
-*/
-        if (!$transform = TransformerPlugin::getInstance()->getTransformer()->find(
+        * @var ResourceInterface|TransformerInterface|callable $resource
+        */
+        if (!$transform = TransformerPlugin::getInstance()->transformer()->find(
             'default',
             $field
-        )
-        ) {
-
+        )) {
             TransformerPlugin::warning(
                 sprintf(
                     "Transform not found for field: '%s'",
@@ -124,21 +109,17 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
             );
 
             return null;
-
         }
 
         // Set allow resource and field transformers to manipulate data (ie, get the field value)
         if ($transform instanceof FieldTransformerInterface) {
-
             // Resource transformers can modify the data at this point
             $transform->setData(
                 $element
             );
-
         }
 
         return $transform;
-
     }
 
     /**
@@ -168,13 +149,10 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
      */
     public function __invoke($data, Scope $scope, string $identifier = null)
     {
-
         if (!$data instanceof ElementInterface) {
             return null;
         }
 
         return parent::__invoke($data, $scope, $identifier);
-
     }
-
 }

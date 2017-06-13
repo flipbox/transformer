@@ -23,7 +23,6 @@ use Flipbox\Transform\Scope;
  */
 class Dropdown extends AbstractTransformer
 {
-
     /**
      * @param DropdownField $field
      * @param array         $config
@@ -38,7 +37,6 @@ class Dropdown extends AbstractTransformer
      */
     public function transform(Scope $scope, string $identifier = null)
     {
-
         $resource = new Item(
             $scope->childScope($identifier)
         );
@@ -52,7 +50,5 @@ class Dropdown extends AbstractTransformer
             },
             $this->data
         );
-
     }
-
 }

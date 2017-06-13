@@ -52,5 +52,4 @@ class CollectionResource extends CategoryCollectionResource implements FieldTran
     {
         return $this->fieldData($data);
     }
-
 }

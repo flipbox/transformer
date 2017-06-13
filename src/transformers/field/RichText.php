@@ -22,7 +22,6 @@ use Flipbox\Transform\Scope;
  */
 class RichText extends AbstractTransformer
 {
-
     /**
      * @param RichTextField $field
      * @param array         $config
@@ -37,7 +36,6 @@ class RichText extends AbstractTransformer
      */
     public function transform(Scope $scope, string $identifier = null)
     {
-
         $resource = new Item(
             $scope->childScope($identifier)
         );
@@ -51,7 +49,5 @@ class RichText extends AbstractTransformer
             },
             $this->data
         );
-
     }
-
 }

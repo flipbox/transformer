@@ -21,7 +21,6 @@ use yii\base\Exception;
  */
 abstract class AbstractItemResource extends BaseItemResource
 {
-
     /**
      * @param string $handle
      * @return TransformerInterface
@@ -43,14 +42,12 @@ abstract class AbstractItemResource extends BaseItemResource
      */
     public function __construct(array $config = [])
     {
-
         // Ensure we have a valid transformer
         if ($transformer = ArrayHelper::remove($config, 'transformer', 'default')) {
             $config['transformer'] = $this->resolveTransformer($transformer);
         }
 
         parent::__construct($config);
-
     }
 
     /**
@@ -61,32 +58,22 @@ abstract class AbstractItemResource extends BaseItemResource
     {
 
         if (Transformer::isTransformer($transformer)) {
-
             return $transformer;
-
         }
 
         if (Transformer::isTransformerClass($transformer)) {
-
             return new $transformer();
-
         }
 
         if (is_string($transformer)) {
-
             return $this->resolveTransformerByHandle($transformer);
-
         }
 
-        TransformerPlugin::warning(
-            [
+        TransformerPlugin::warning([
             "Unknown transformer:",
             $transformer
-            ]
-        );
+        ]);
 
         return null;
-
     }
-
 }

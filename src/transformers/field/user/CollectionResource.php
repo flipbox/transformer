@@ -64,5 +64,4 @@ class CollectionResource extends UserCollectionResource implements FieldTransfor
             ['id']
         );
     }
-
 }

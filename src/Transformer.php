@@ -71,7 +71,6 @@ class Transformer extends Plugin
      */
     public function init()
     {
-
         parent::init();
 
         // Register our CP routes
@@ -80,7 +79,6 @@ class Transformer extends Plugin
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             [self::class, 'onRegisterCpUrlRules']
         );
-
     }
 
     /**
@@ -91,8 +89,13 @@ class Transformer extends Plugin
      * @param int|null $siteId
      * @return callable|TransformerInterface
      */
-    public function getTransformer(string $identifier, string $class, string $scope = 'global', string $context = self::CONTEXT_ARRAY, int $siteId = null)
-    {
+    public function getTransformer(
+        string $identifier,
+        string $class,
+        string $scope = 'global',
+        string $context = self::CONTEXT_ARRAY,
+        int $siteId = null
+    ) {
         return $this->transformer()->get($identifier, $class, $scope, $context, $siteId);
     }
 
@@ -104,8 +107,13 @@ class Transformer extends Plugin
      * @param int|null $siteId
      * @return callable|TransformerInterface|null
      */
-    public function findTransformer(string $identifier, string $class, string $scope = 'global', string $context = self::CONTEXT_ARRAY, int $siteId = null)
-    {
+    public function findTransformer(
+        string $identifier,
+        string $class,
+        string $scope = 'global',
+        string $context = self::CONTEXT_ARRAY,
+        int $siteId = null
+    ) {
         return $this->transformer()->find($identifier, $class, $scope, $context, $siteId);
     }
 
@@ -116,8 +124,12 @@ class Transformer extends Plugin
      * @param int|null $siteId
      * @return \callable[]|TransformerInterface[]
      */
-    public function findAll(string $class, string $scope = 'global', string $context = self::CONTEXT_ARRAY, int $siteId = null)
-    {
+    public function findAll(
+        string $class,
+        string $scope = 'global',
+        string $context = self::CONTEXT_ARRAY,
+        int $siteId = null
+    ) {
         return $this->transformer()->findAll($class, $scope, $context, $siteId);
     }
 
@@ -134,13 +146,11 @@ class Transformer extends Plugin
      */
     public function getSettingsResponse()
     {
-
         Craft::$app->getResponse()->redirect(
             UrlHelper::cpUrl('transformer/configuration')
         );
 
         Craft::$app->end();
-
     }
 
     /**
@@ -151,9 +161,13 @@ class Transformer extends Plugin
      * @param array  $config
      * @return array|null
      */
-    public function item($data, $transformer = 'default', string $scope = 'global', string $context = self::CONTEXT_ARRAY, array $config = [])
-    {
-
+    public function item(
+        $data,
+        $transformer = 'default',
+        string $scope = 'global',
+        string $context = self::CONTEXT_ARRAY,
+        array $config = []
+    ) {
         if (!$transformer = $this->resolveTransformer($transformer, $data, $scope, $context)) {
             return null;
         }
@@ -163,7 +177,6 @@ class Transformer extends Plugin
             $data,
             $config
         );
-
     }
 
     /**
@@ -174,9 +187,13 @@ class Transformer extends Plugin
      * @param array  $config
      * @return array|null
      */
-    public function collection($data, $transformer = 'default', string $scope = 'global', string $context = self::CONTEXT_ARRAY, array $config = [])
-    {
-
+    public function collection(
+        $data,
+        $transformer = 'default',
+        string $scope = 'global',
+        string $context = self::CONTEXT_ARRAY,
+        array $config = []
+    ) {
         if (!$transformer = $this->resolveTransformer($transformer, $data, $scope, $context)) {
             return [];
         }
@@ -186,7 +203,6 @@ class Transformer extends Plugin
             $data,
             $config
         );
-
     }
 
     /*******************************************
@@ -198,7 +214,6 @@ class Transformer extends Plugin
      */
     public static function onRegisterCpUrlRules(RegisterUrlRulesEvent $event)
     {
-
         $event->rules = array_merge(
             $event->rules,
             [
@@ -209,7 +224,6 @@ class Transformer extends Plugin
 
             ]
         );
-
     }
 
     /*******************************************
@@ -231,11 +245,10 @@ class Transformer extends Plugin
     /**
      * @return modules\configuration\Module
      */
-    public function getConfiguration()
+    public function configuration()
     {
         return $this->getModule('configuration');
     }
-
 
     /**
      * Logs an informative message.
@@ -270,7 +283,6 @@ class Transformer extends Plugin
         Craft::error($message, $category);
     }
 
-
     /**
      * @param $transformer
      * @param string      $component
@@ -278,8 +290,12 @@ class Transformer extends Plugin
      * @param string      $context
      * @return TransformerInterface|callable|null
      */
-    private function resolveTransformer($transformer, string $component, string $scope = 'global', string $context = self::CONTEXT_ARRAY)
-    {
+    private function resolveTransformer(
+        $transformer,
+        string $component,
+        string $scope = 'global',
+        string $context = self::CONTEXT_ARRAY
+    ) {
         if (TransformerHelper::isTransformer($transformer)) {
             return $transformer;
         }

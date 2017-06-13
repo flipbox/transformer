@@ -23,7 +23,6 @@ use Flipbox\Transform\Scope;
  */
 class Checkboxes extends AbstractTransformer
 {
-
     /**
      * @param CheckboxesField $field
      * @param array           $config
@@ -38,7 +37,6 @@ class Checkboxes extends AbstractTransformer
      */
     public function transform(Scope $scope, string $identifier = null)
     {
-
         $resource = new Collection(
             $scope->childScope($identifier)
         );
@@ -52,7 +50,5 @@ class Checkboxes extends AbstractTransformer
             },
             $this->data
         );
-
     }
-
 }

@@ -18,7 +18,6 @@ use flipbox\transformer\transformers\element\AbstractTransformer;
  */
 class Asset extends AbstractTransformer
 {
-
     /**
      * @param ElementInterface|AssetElement $element
      * @return array
@@ -29,7 +28,6 @@ class Asset extends AbstractTransformer
             parent::transformElement($element),
             $this->transformAsset($element)
         );
-
     }
 
     /**
@@ -38,11 +36,8 @@ class Asset extends AbstractTransformer
      */
     protected function transformAsset(AssetElement $asset): array
     {
-
         return [
             'name' => $asset->title
         ];
-
     }
-
 }

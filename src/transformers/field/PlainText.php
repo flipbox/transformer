@@ -19,7 +19,6 @@ use craft\fields\PlainText as PlainTextField;
  */
 class PlainText extends AbstractTransformer
 {
-
     /**
      * @param PlainTextField $field
      * @param array          $config
@@ -36,5 +35,4 @@ class PlainText extends AbstractTransformer
     {
         return (string)$this->data;
     }
-
 }

@@ -106,7 +106,6 @@ class Transformer extends Component
      */
     private function firstParty(string $class)
     {
-
         if (is_subclass_of($class, ElementInterface::class)) {
             return $this->firstPartyElements($class);
         }
@@ -127,7 +126,6 @@ class Transformer extends Component
         );
 
         return [];
-
     }
 
     /**
@@ -139,7 +137,6 @@ class Transformer extends Component
      */
     private function storage(string $class, string $scope = 'global', string $context = TransformerPlugin::CONTEXT_ARRAY, int $siteId = null)
     {
-
         $condition = [
             'type' => $class,
             'scope' => $scope,
@@ -151,7 +148,6 @@ class Transformer extends Component
         }
 
         return $this->storageByCondition($condition);
-
     }
 
     /**
@@ -206,5 +202,4 @@ class Transformer extends Component
             ArrayHelper::remove($config, 'config')
         );
     }
-
 }

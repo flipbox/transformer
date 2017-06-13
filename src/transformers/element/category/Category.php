@@ -18,19 +18,16 @@ use flipbox\transformer\transformers\element\AbstractTransformer;
  */
 class Category extends AbstractTransformer
 {
-
     /**
      * @param ElementInterface|CategoryElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array
     {
-
         return array_merge(
             parent::transformElement($element),
             $this->transformCategory($element)
         );
-
     }
 
     /**
@@ -39,11 +36,8 @@ class Category extends AbstractTransformer
      */
     protected function transformCategory(CategoryElement $category): array
     {
-
         return [
             'name' => $category->title
         ];
-
     }
-
 }

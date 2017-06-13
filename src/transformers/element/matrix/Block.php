@@ -18,19 +18,16 @@ use flipbox\transformer\transformers\element\AbstractTransformer;
  */
 class Block extends AbstractTransformer
 {
-
     /**
      * @param ElementInterface|MatrixBlockElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array
     {
-
         return array_merge(
             parent::transformElement($element),
             $this->transformBlock($element)
         );
-
     }
 
     /**
@@ -39,11 +36,8 @@ class Block extends AbstractTransformer
      */
     protected function transformBlock(MatrixBlockElement $matrix): array
     {
-
         return [
             'name' => $matrix->getType()->name
         ];
-
     }
-
 }

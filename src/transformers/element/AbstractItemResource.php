@@ -9,6 +9,7 @@
 namespace flipbox\transformer\transformers\element;
 
 use craft\base\Element;
+use craft\base\ElementInterface;
 use craft\elements\db\ElementQuery;
 use flipbox\spark\helpers\QueryHelper;
 use Flipbox\Transform\Scope;
@@ -22,21 +23,19 @@ use flipbox\transformer\transformers\AbstractItemResource as BaseAbstractItemRes
  */
 abstract class AbstractItemResource extends BaseAbstractItemResource
 {
-
     /**
-     * @return Element
+     * @return ElementInterface
      */
-    protected abstract function element(): Element;
+    protected abstract function element(): ElementInterface;
 
     /**
      * @inheritdoc
      */
     protected function getData(Scope $scope)
     {
-
         /**
- * @var ElementQuery $query 
-*/
+        * @var ElementQuery $query
+        */
         $query = $this->data;
 
         if ($queryParams = $this->getQueryParams($scope)) {
@@ -47,7 +46,6 @@ abstract class AbstractItemResource extends BaseAbstractItemResource
         }
 
         return $query;
-
     }
 
     /**
@@ -56,23 +54,16 @@ abstract class AbstractItemResource extends BaseAbstractItemResource
      */
     protected function getQueryParams(Scope $scope): array
     {
-
         $params = [];
-
         $paramBag = $scope->getParams();
 
         foreach ($this->queryParams() as $param) {
-
             if ($value = $paramBag->get($param)) {
-
                 $params[$param] = $value;
-
             }
-
         }
 
         return $params;
-
     }
 
     /**
@@ -88,20 +79,15 @@ abstract class AbstractItemResource extends BaseAbstractItemResource
      */
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
-
-        $transformer = TransformerPlugin::getInstance()->getTransformer()->find(
+        $transformer = TransformerPlugin::getInstance()->transformer()->find(
             $handle,
             $this->element()
         );
 
         if (null === $transformer) {
-
             return parent::resolveTransformerByHandle($handle);
-
         }
 
         return $transformer;
-
     }
-
 }

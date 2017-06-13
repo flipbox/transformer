@@ -36,47 +36,35 @@ trait ElementTransformer
      */
     protected function firstPartyElements(string $element)
     {
-
         $transformers = [];
-
         switch ($element) {
-
-        case AssetElement::class:
-            $transformers['default'] = new AssetTransformer();
-            break;
-
-        case CategoryElement::class:
-            $transformers['default'] = new CategoryTransformer();
-            break;
-
-        case EntryElement::class:
-            $transformers['default'] = new EntryTransformer();
-            break;
-
-        case MatrixBlockElement::class:
-            $transformers['default'] = new MatrixBlockTransformer();
-            break;
-
-        case TagElement::class:
-            $transformers['default'] = new TagTransformer();
-            break;
-
-        case UserElement::class:
-            $transformers['default'] = new UserTransformer();
-            break;
-
-        default:
-            TransformerPlugin::warning(
-                sprintf(
-                    "First party transformer not found for element '%s'",
-                    get_class($element)
-                )
-            );
-
+            case AssetElement::class:
+                $transformers['default'] = new AssetTransformer();
+                break;
+            case CategoryElement::class:
+                $transformers['default'] = new CategoryTransformer();
+                break;
+            case EntryElement::class:
+                $transformers['default'] = new EntryTransformer();
+                break;
+            case MatrixBlockElement::class:
+                $transformers['default'] = new MatrixBlockTransformer();
+                break;
+            case TagElement::class:
+                $transformers['default'] = new TagTransformer();
+                break;
+            case UserElement::class:
+                $transformers['default'] = new UserTransformer();
+                break;
+            default:
+                TransformerPlugin::warning(
+                    sprintf(
+                        "First party transformer not found for element '%s'",
+                        get_class($element)
+                    )
+                );
         }
 
         return $transformers;
-
     }
-
 }

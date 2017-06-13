@@ -59,5 +59,4 @@ abstract class AbstractTransformer extends BaseAbstractTransformer implements Fi
     {
         return $this->transform($scope, $identifier);
     }
-
 }

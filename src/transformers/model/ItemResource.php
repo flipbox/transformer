@@ -21,7 +21,6 @@ use yii\base\Model;
  */
 class ItemResource extends AbstractItemResource
 {
-
     /**
      * @param Model $data
      * @param array $config
@@ -37,20 +36,15 @@ class ItemResource extends AbstractItemResource
      */
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
-
-        $transformer = TransformerPlugin::getInstance()->getTransformer()->find(
+        $transformer = TransformerPlugin::getInstance()->transformer()->find(
             $handle,
             $this->data
         );
 
         if (null === $transformer) {
-
             return parent::resolveTransformerByHandle($handle);
-
         }
 
         return $transformer;
-
     }
-
 }

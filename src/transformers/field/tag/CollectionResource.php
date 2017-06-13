@@ -52,5 +52,4 @@ class CollectionResource extends TagCollectionResource implements FieldTransform
     {
         return $this->fieldData($data);
     }
-
 }

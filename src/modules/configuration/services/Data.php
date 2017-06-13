@@ -27,7 +27,6 @@ use yii\base\Model;
  */
 class Data extends Component
 {
-
     /**
      * @var string[]
      */
@@ -40,16 +39,14 @@ class Data extends Component
      */
     public function findAll(Component $component, string $scope = 'global')
     {
-
         if (null === $this->_cacheAll) {
-
             $event = new RegisterData(
                 [
                 'data' => $this->_firstParty($component)
                 ]
             );
 
-            $configuration = Transformer::getInstance()->getConfiguration();
+            $configuration = Transformer::getInstance()->configuration();
 
             $configuration->trigger(
                 $configuration::EVENT_REGISTER_DATA . ':' . get_class($component) . ':' . $scope,
@@ -57,11 +54,9 @@ class Data extends Component
             );
 
             $this->_cacheAll = $event->data;
-
         }
 
         return $this->_cacheAll;
-
     }
 
     /**
@@ -70,7 +65,6 @@ class Data extends Component
      */
     private function _firstParty(Component $component)
     {
-
         if ($component instanceof ElementInterface) {
             return $this->_firstPartyElements($component);
         }
@@ -84,7 +78,6 @@ class Data extends Component
         }
 
         return [];
-
     }
 
     /**
@@ -98,7 +91,6 @@ class Data extends Component
         }
 
         return [];
-
     }
 
     /**
@@ -138,5 +130,4 @@ class Data extends Component
 
         return $transformers;
     }
-
 }

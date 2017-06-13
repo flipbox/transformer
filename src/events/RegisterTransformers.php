@@ -34,27 +34,20 @@ class RegisterTransformers extends Event
      */
     public function addTransformer(string $identifier, $transformer)
     {
-
         if (is_callable($transformer) || $transformer instanceof TransformerInterface) {
-
             $this->transformers[$identifier] = $transformer;
-
             return $this;
-
         }
 
         if (is_string($transformer) && is_subclass_of($transformer, TransformerInterface::class)) {
-
             $transformer = [
                 'class' => $transformer
             ];
-
         }
 
         $this->transformers[$identifier] = $this->createTransformer($transformer);
 
         return $this;
-
     }
 
     /**
@@ -63,7 +56,6 @@ class RegisterTransformers extends Event
      */
     public function setTransformers($transformers = [])
     {
-
         $this->transformers = [];
 
         if (empty($transformers)) {
@@ -82,7 +74,6 @@ class RegisterTransformers extends Event
         }
 
         return $this;
-
     }
 
     /**
@@ -99,11 +90,7 @@ class RegisterTransformers extends Event
      */
     protected function createTransformer(array $config)
     {
-
         $class = ObjectHelper::checkConfig($config);
-
         return new $class($config);
-
     }
-
 }

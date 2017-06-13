@@ -12,7 +12,6 @@ use Flipbox\Transform\Transformers\TransformerInterface;
 
 class Transformer
 {
-
     /**
      * @param $transformer
      * @return bool
@@ -30,5 +29,4 @@ class Transformer
     {
         return is_string($transformer) && is_subclass_of($transformer, TransformerInterface::class);
     }
-
 }

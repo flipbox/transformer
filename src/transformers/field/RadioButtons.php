@@ -23,7 +23,6 @@ use Flipbox\Transform\Scope;
  */
 class RadioButtons extends AbstractTransformer
 {
-
     /**
      * @param RadioButtonsField $field
      * @param array             $config
@@ -38,7 +37,6 @@ class RadioButtons extends AbstractTransformer
      */
     public function transform(Scope $scope, string $identifier = null)
     {
-
         $resource = new Item(
             $scope->childScope($identifier)
         );
@@ -52,7 +50,5 @@ class RadioButtons extends AbstractTransformer
             },
             $this->data
         );
-
     }
-
 }

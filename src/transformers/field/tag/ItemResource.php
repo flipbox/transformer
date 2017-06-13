@@ -18,7 +18,6 @@ use Flipbox\Transform\Scope;
  */
 class ItemResource extends CollectionResource
 {
-
     /**
      * @inheritdoc
      */
@@ -35,5 +34,4 @@ class ItemResource extends CollectionResource
     {
         return new Item($scope);
     }
-
 }

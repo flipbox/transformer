@@ -21,7 +21,6 @@ use yii\base\Component;
  */
 class Source extends Component
 {
-
     /**
      * @var string[]
      */
@@ -32,16 +31,14 @@ class Source extends Component
      */
     public function findAll()
     {
-
         if (null === $this->_cacheAll) {
-
             $event = new RegisterSources(
                 [
                 'sources' => $this->_firstParty()
                 ]
             );
 
-            $configuration = Transformer::getInstance()->getConfiguration();
+            $configuration = Transformer::getInstance()->configuration();
 
             $configuration->trigger(
                 $configuration::EVENT_REGISTER_SOURCES,
@@ -49,11 +46,9 @@ class Source extends Component
             );
 
             $this->_cacheAll = $event->sources;
-
         }
 
         return $this->_cacheAll;
-
     }
 
     /**
@@ -94,5 +89,4 @@ class Source extends Component
             EntryType::class
         ];
     }
-
 }

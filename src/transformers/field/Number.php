@@ -19,7 +19,6 @@ use craft\fields\Number as NumberField;
  */
 class Number extends AbstractTransformer
 {
-
     /**
      * @param NumberField $field
      * @param array       $config
@@ -36,5 +35,4 @@ class Number extends AbstractTransformer
     {
         return (string)$this->data;
     }
-
 }

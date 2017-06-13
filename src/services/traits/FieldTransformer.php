@@ -67,127 +67,127 @@ trait FieldTransformer
 
         case AssetsField::class:
             /**
- * @var AssetsField $field * 
-*/
+             * @var AssetsField $field
+             */
             $transformers['default'] = new AssetCollectionResource($field);
             break;
 
         case CategoriesField::class:
             /**
- * @var CategoriesField $field * 
-*/
+            * @var CategoriesField $field *
+            */
             $transformers['default'] = new CategoryCollectionResource($field);
             break;
 
         case CheckboxesField::class:
             /**
- * @var CheckboxesField $field * 
-*/
+            * @var CheckboxesField $field *
+            */
             $transformers['default'] = new CheckboxesTransformer($field);
             break;
 
         case ColorField::class:
             /**
- * @var ColorField $field * 
-*/
+            * @var ColorField $field *
+            */
             $transformers['default'] = new ColorTransformer($field);
             break;
 
         case DateField::class:
             /**
- * @var DateField $field * 
-*/
+            * @var DateField $field *
+            */
             $transformers['default'] = new DateTransformer($field);
             break;
 
         case DropdownField::class:
             /**
- * @var DropdownField $field * 
-*/
+            * @var DropdownField $field *
+            */
             $transformers['default'] = new DropdownTransformer($field);
             break;
 
         case EntriesField::class:
             /**
- * @var EntriesField $field * 
-*/
+            * @var EntriesField $field *
+            */
             $transformers['default'] = new EntryCollectionResource($field);
             break;
 
         case LightswitchField::class:
             /**
- * @var LightswitchField $field * 
-*/
+            * @var LightswitchField $field *
+            */
             $transformers['default'] = new LightswitchTransformer($field);
             break;
 
         case MatrixField::class:
             /**
- * @var MatrixField $field * 
-*/
+            * @var MatrixField $field *
+            */
             $transformers['default'] = new MatrixCollectionResource($field);
             break;
 
         case MultiSelectField::class:
             /**
- * @var MultiSelectField $field * 
-*/
+            * @var MultiSelectField $field *
+            */
             $transformers['default'] = new MultiSelectTransformer($field);
             break;
 
         case NumberField::class:
             /**
- * @var NumberField $field * 
-*/
+            * @var NumberField $field *
+            */
             $transformers['default'] = new NumberTransformer($field);
             break;
 
         case PlainTextField::class:
             /**
- * @var PlainTextField $field * 
-*/
+            * @var PlainTextField $field *
+            */
             $transformers['default'] = new PlainTextTransformer($field);
             break;
 
         case PositionSelectField::class:
             /**
- * @var PositionSelectField $field * 
-*/
+            * @var PositionSelectField $field *
+            */
             $transformers['default'] = new PositionSelectTransformer($field);
             break;
 
         case RadioButtonsField::class:
             /**
- * @var RadioButtonsField $field * 
-*/
+            * @var RadioButtonsField $field *
+            */
             $transformers['default'] = new RadioButtonsTransformer($field);
             break;
 
         case RichTextField::class:
             /**
- * @var RichTextField $field * 
-*/
+            * @var RichTextField $field *
+            */
             $transformers['default'] = new RichTextTransformer($field);
             break;
 
         case TableField::class:
             /**
- * @var TableField $field * 
-*/
+            * @var TableField $field *
+            */
             $transformers['default'] = new TableTransformer($field);
             break;
 
         case TagsField::class:
             /**
- * @var TagsField $field * 
-*/
+            * @var TagsField $field *
+            */
             $transformers['default'] = new TagCollectionResource($field);
             break;
 
         case UsersField::class:
             /**
- * @var UsersField $field * 
-*/
+            * @var UsersField $field *
+            */
             $transformers['default'] = new UserCollectionResource($field);
             break;
 
@@ -202,7 +202,5 @@ trait FieldTransformer
         }
 
         return $transformers;
-
     }
-
 }

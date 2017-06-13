@@ -9,7 +9,7 @@
 namespace flipbox\transformer\transformers\model\entry;
 
 use craft\models\Section as EntrySection;
-use Flipbox\Transform\Transformers\AbstractTransformer;
+use flipbox\transformer\transformers\model\AbstractTransformer;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -19,7 +19,6 @@ use Flipbox\Transform\Transformers\AbstractTransformer;
  */
 class Section extends AbstractTransformer
 {
-
     /**
      * @param EntrySection $model
      * @return array
@@ -32,5 +31,4 @@ class Section extends AbstractTransformer
             'handle' => $model->handle
         ];
     }
-
 }

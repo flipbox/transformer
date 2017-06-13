@@ -16,10 +16,8 @@ use yii\base\Event;
  */
 class RegisterData extends Event
 {
-
     /**
      * @var array
      */
     public $data = [];
-
 }

@@ -27,7 +27,6 @@ use yii\db\ActiveQueryInterface;
  */
 class Transformer extends RecordWithHandle
 {
-
     /**
      * The table name
      */
@@ -71,5 +70,4 @@ class Transformer extends RecordWithHandle
     {
         return $this->hasOne(Site::class, ['id' => 'siteId']);
     }
-
 }

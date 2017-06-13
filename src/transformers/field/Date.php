@@ -36,7 +36,6 @@ class Date extends AbstractTransformer
      */
     public function transform(Scope $scope, string $identifier = null)
     {
-
         if (null === $this->data) {
             return null;
         }
@@ -44,7 +43,6 @@ class Date extends AbstractTransformer
         return (string)$this->data->format(
             $this->getFormat($scope, $identifier)
         );
-
     }
 
     /**
@@ -54,7 +52,6 @@ class Date extends AbstractTransformer
      */
     private function getFormat(Scope $scope, string $identifier)
     {
-
         $format = $scope->getParams($identifier)->get('format');
 
         if ($format) {
@@ -62,7 +59,5 @@ class Date extends AbstractTransformer
         }
 
         return $format ?: self::DEFAULT_FORMAT;
-
     }
-
 }

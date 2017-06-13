@@ -16,10 +16,8 @@ use yii\base\Event;
  */
 class RegisterSources extends Event
 {
-
     /**
      * @var string[]
      */
     public $sources = [];
-
 }

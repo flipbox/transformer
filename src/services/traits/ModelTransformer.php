@@ -21,38 +21,29 @@ use flipbox\transformer\transformers\model\entry\Type as EntryTypeTransformer;
  */
 trait ModelTransformer
 {
-
     /**
      * @param string $model
      * @return TransformerInterface[]|callable[]
      */
     protected function firstPartyModel(string $model)
     {
-
         $transformers = [];
-
         switch ($model) {
+            case SectionModel::class:
+                $transformers['default'] = new EntrySectionTransformer();
+                break;
+            case EntryTypeModel::class:
+                $transformers['default'] = new EntryTypeTransformer();
+                break;
+            default:
+                TransformerPlugin::warning(
+                    sprintf(
+                        "First party transformer not found for model '%s'",
+                        get_class($model)
+                    )
+                );
 
-        case SectionModel::class:
-            $transformers['default'] = new EntrySectionTransformer();
-            break;
-
-        case EntryTypeModel::class:
-            $transformers['default'] = new EntryTypeTransformer();
-            break;
-
-        default:
-            TransformerPlugin::warning(
-                sprintf(
-                    "First party transformer not found for model '%s'",
-                    get_class($model)
-                )
-            );
-
-        }
-
+            }
         return $transformers;
-
     }
-
 }

@@ -18,7 +18,6 @@ use flipbox\transformer\Transformer;
  */
 class Module extends \yii\base\Module
 {
-
     /**
      * The register scopes event name
      */
@@ -62,5 +61,4 @@ class Module extends \yii\base\Module
     {
         return $this->get('source');
     }
-
 }

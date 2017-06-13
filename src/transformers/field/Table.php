@@ -22,7 +22,6 @@ use Flipbox\Transform\Scope;
  */
 class Table extends AbstractTransformer
 {
-
     /**
      * @param TableField $field
      * @param array      $config
@@ -37,14 +36,13 @@ class Table extends AbstractTransformer
      */
     public function transform(Scope $scope, string $identifier = null)
     {
-
         $resource = new Collection(
             $scope->childScope($identifier)
         );
 
         /**
- * @var TableField $field 
-*/
+        * @var TableField $field
+        */
         $columns = $this->field->columns;
 
         return $resource->transform(
@@ -66,7 +64,5 @@ class Table extends AbstractTransformer
             },
             $this->data
         );
-
     }
-
 }

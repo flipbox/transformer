@@ -19,19 +19,16 @@ use flipbox\transformer\transformers\model\ItemResource;
  */
 class Entry extends AbstractTransformer
 {
-
     /**
      * @param ElementInterface|EntryElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array
     {
-
         return array_merge(
             parent::transformElement($element),
             $this->transformEntry($element)
         );
-
     }
 
     /**
@@ -46,5 +43,4 @@ class Entry extends AbstractTransformer
             'type' => new ItemResource($entry->getType(), ['transformer' => 'default'])
         ];
     }
-
 }

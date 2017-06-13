@@ -52,5 +52,4 @@ class CollectionResource extends MatrixCollectionResource implements FieldTransf
     {
         return $this->fieldData($data);
     }
-
 }

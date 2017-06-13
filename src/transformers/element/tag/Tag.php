@@ -18,19 +18,16 @@ use flipbox\transformer\transformers\element\AbstractTransformer;
  */
 class Tag extends AbstractTransformer
 {
-
     /**
      * @param ElementInterface|TagElement $element
      * @return array
      */
     protected function transformElement(ElementInterface $element): array
     {
-
         return array_merge(
             parent::transformElement($element),
             $this->transformTag($element)
         );
-
     }
 
     /**
@@ -39,11 +36,8 @@ class Tag extends AbstractTransformer
      */
     protected function transformTag(TagElement $tag): array
     {
-
         return [
             'name' => $tag->title
         ];
-
     }
-
 }

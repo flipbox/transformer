@@ -60,20 +60,15 @@ class ItemResource extends AbstractItemResource
      */
     protected function resolveTransformerByHandle(string $handle): TransformerInterface
     {
-
-        $transformer = TransformerPlugin::getInstance()->getTransformer()->find(
+        $transformer = TransformerPlugin::getInstance()->transformer()->find(
             $handle,
             $this->field
         );
 
         if (null === $transformer) {
-
             return parent::resolveTransformerByHandle($handle);
-
         }
 
         return $transformer;
-
     }
-
 }

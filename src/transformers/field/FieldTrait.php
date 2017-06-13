@@ -18,7 +18,6 @@ use craft\base\FieldInterface;
  */
 trait FieldTrait
 {
-
     /**
      * @var FieldInterface|Field
      */
@@ -29,17 +28,11 @@ trait FieldTrait
      */
     public function fieldData($data)
     {
-
         if ($data instanceof ElementInterface) {
-
             $data = $data->getFieldValue(
                 $this->field->handle
             );
-
         }
-
         return $data;
-
     }
-
 }

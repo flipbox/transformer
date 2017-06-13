@@ -16,12 +16,9 @@ use Flipbox\Transform\Transformers\TransformerInterface;
  */
 interface FieldTransformerInterface extends TransformerInterface
 {
-
     /**
      * @param $data
      * @return static
      */
     public function setData($data);
-
-
 }

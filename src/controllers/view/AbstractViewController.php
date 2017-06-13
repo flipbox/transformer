@@ -8,10 +8,6 @@ use craft\web\Controller;
 use flipbox\transformer\Transformer;
 
 /**
- * Class AbstractViewController
- *
- * @package flipbox\transformer\controllers\view
- *
  * @property Transformer $module
  */
 abstract class AbstractViewController extends Controller
@@ -48,9 +44,6 @@ abstract class AbstractViewController extends Controller
     protected function baseVariables(array &$variables = [])
     {
 
-        /**
- * @var Transformer $module 
-*/
         $module = Transformer::getInstance();
 
         // Guardian settings
@@ -78,5 +71,4 @@ abstract class AbstractViewController extends Controller
         ];
 
     }
-
 }

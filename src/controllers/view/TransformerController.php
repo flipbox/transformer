@@ -9,9 +9,6 @@ use flipbox\transformer\web\assets\tree\Tree;
 class TransformerController extends AbstractViewController
 {
 
-    /**
- * The template base path 
-*/
     const TEMPLATE_BASE = AbstractViewController::TEMPLATE_BASE . DIRECTORY_SEPARATOR . 'transformer';
 
     /**
@@ -29,7 +26,6 @@ class TransformerController extends AbstractViewController
      */
     public function actionIndex()
     {
-
         // Empty variables for template
         $variables = [];
 
@@ -42,7 +38,6 @@ class TransformerController extends AbstractViewController
             static::TEMPLATE_INDEX,
             $variables
         );
-
     }
 
     /**
@@ -51,7 +46,6 @@ class TransformerController extends AbstractViewController
      */
     public function actionView($handle)
     {
-
         // Empty variables for template
         $variables = [];
 
@@ -69,14 +63,14 @@ class TransformerController extends AbstractViewController
         $scope = Craft::$app->getRequest()->getParam('scope', 'global');
 
         // Transformer
-        $transformer = $this->module->getTransformer()->get(
+        $transformer = $this->module->transformer()->get(
             $handle,
             $component,
             $scope
         );
 
         // Data (to transform)
-        $data = $this->module->getConfiguration()->getData()->findAll($component, $scope);
+        $data = $this->module->configuration()->getData()->findAll($component, $scope);
 
         $variables['transformer'] = $transformer;
         $variables['component'] = $component;
@@ -88,7 +82,6 @@ class TransformerController extends AbstractViewController
             static::TEMPLATE_VIEW,
             $variables
         );
-
     }
 
     /**
@@ -96,19 +89,15 @@ class TransformerController extends AbstractViewController
      */
     private function findAll(): array
     {
-
         $elementsByScope = [];
 
         $elementsByScope['global'] = $this->findAllByScope();
 
-        foreach ($this->module->getConfiguration()->getScope()->findAll() as $scope) {
-
+        foreach ($this->module->configuration()->getScope()->findAll() as $scope) {
             $elementsByScope[$scope] = $this->findAllByScope($scope);
-
         }
 
         return $elementsByScope;
-
     }
 
     /**
@@ -117,20 +106,16 @@ class TransformerController extends AbstractViewController
      */
     private function findAllByScope(string $scope = 'global'): array
     {
-
         $elements = [];
 
         foreach (Craft::$app->getElements()->getAllElementTypes() as $type) {
-
-            $elements[$type] = $this->module->getTransformer()->findAll(
+            $elements[$type] = $this->module->transformer()->findAll(
                 new $type,
                 $scope
             );
-
         }
 
         return $elements;
-
     }
 
     /**
@@ -140,7 +125,6 @@ class TransformerController extends AbstractViewController
      */
     protected function baseVariables(array &$variables = [])
     {
-
         // Get base variables
         parent::baseVariables($variables);
 
@@ -149,7 +133,5 @@ class TransformerController extends AbstractViewController
             'label' => $variables['title'],
             'url' => UrlHelper::url($variables['baseCpPath'])
         ];
-
     }
-
 }

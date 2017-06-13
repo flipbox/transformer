@@ -18,7 +18,6 @@ use craft\fields\Color as ColorField;
  */
 class Color extends AbstractTransformer
 {
-
     /**
      * @param ColorField $field
      * @param array      $config
@@ -33,13 +32,10 @@ class Color extends AbstractTransformer
      */
     public function transform()
     {
-
         if (null === $this->data) {
             return null;
         }
 
         return (string)$this->data;
-
     }
-
 }

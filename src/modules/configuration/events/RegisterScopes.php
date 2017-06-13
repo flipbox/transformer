@@ -16,10 +16,8 @@ use yii\base\Event;
  */
 class RegisterScopes extends Event
 {
-
     /**
      * @var string[]
      */
     public $scopes = [];
-
 }

@@ -18,7 +18,6 @@ use flipbox\transformer\transformers\element\AbstractItemResource as BaseItemRes
  */
 class ItemResource extends BaseItemResource
 {
-
     /**
      * @return ElementInterface
      */
@@ -26,5 +25,4 @@ class ItemResource extends BaseItemResource
     {
         return new Entry();
     }
-
 }

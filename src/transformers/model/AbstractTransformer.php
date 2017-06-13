@@ -8,22 +8,24 @@
 
 namespace flipbox\transformer\transformers\model;
 
-use Flipbox\Transform\Resources\Collection;
-use Flipbox\Transform\Resources\ResourceInterface;
+use craft\base\FieldInterface;
 use Flipbox\Transform\Scope;
+use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransformer;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
+ *
+ * @property FieldInterface $field
+ * @property string $data
  */
-class CollectionResource extends ItemResource
+abstract class AbstractTransformer extends BaseAbstractTransformer
 {
     /**
-     * @param Scope $scope
-     * @return ResourceInterface
+     * @inheritdoc
      */
-    protected function createResource(Scope $scope): ResourceInterface
+    public function __invoke($data, Scope $scope, string $identifier = null)
     {
-        return new Collection($scope);
+        return $this->transform($scope, $identifier);
     }
 }

@@ -52,5 +52,4 @@ class CollectionResource extends AssetCollectionResource implements FieldTransfo
     {
         return $this->fieldData($data);
     }
-
 }

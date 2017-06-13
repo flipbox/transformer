@@ -18,7 +18,6 @@ use Flipbox\Transform\Scope;
  */
 abstract class AbstractCollectionResource extends AbstractItemResource
 {
-
     /**
      * @param Scope $scope
      * @return ResourceInterface
@@ -27,5 +26,4 @@ abstract class AbstractCollectionResource extends AbstractItemResource
     {
         return new Collection($scope);
     }
-
 }

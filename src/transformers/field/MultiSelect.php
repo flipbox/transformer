@@ -38,7 +38,6 @@ class MultiSelect extends AbstractTransformer
      */
     public function transform(Scope $scope, string $identifier = null)
     {
-
         $resource = new Collection(
             $scope->childScope($identifier)
         );
@@ -52,7 +51,5 @@ class MultiSelect extends AbstractTransformer
             },
             $this->data
         );
-
     }
-
 }

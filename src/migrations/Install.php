@@ -34,12 +34,10 @@ class Install extends Migration
      */
     public function safeDown()
     {
-
         // Delete tables
         $this->dropTableIfExists(TransformerRecord::tableName());
 
         return true;
-
     }
 
     /**
@@ -49,7 +47,6 @@ class Install extends Migration
      */
     protected function createTables()
     {
-
         $this->createTable(
             TransformerRecord::tableName(), [
             'id' => $this->primaryKey(),
@@ -65,7 +62,6 @@ class Install extends Migration
             'uid' => $this->uid()
             ]
         );
-
     }
 
     /**
@@ -75,7 +71,6 @@ class Install extends Migration
      */
     protected function createIndexes()
     {
-
         $this->createIndex(
             $this->db->getIndexName(TransformerRecord::tableName(), 'handle', false, true),
             TransformerRecord::tableName(), 'handle', false
@@ -92,7 +87,6 @@ class Install extends Migration
             $this->db->getIndexName(TransformerRecord::tableName(), 'siteId', false, true),
             TransformerRecord::tableName(), 'siteId', false
         );
-
     }
 
     /**
@@ -102,12 +96,9 @@ class Install extends Migration
      */
     protected function addForeignKeys()
     {
-
         $this->addForeignKey(
             $this->db->getForeignKeyName(TransformerRecord::tableName(), 'siteId'),
             TransformerRecord::tableName(), 'siteId', SiteRecord::tableName(), 'id', 'CASCADE', 'CASCADE'
         );
-
     }
-
 }

@@ -19,7 +19,6 @@ use craft\fields\Lightswitch as LightswitchField;
  */
 class Lightswitch extends AbstractTransformer
 {
-
     /**
      * @param LightswitchField $field
      * @param array            $config
@@ -36,5 +35,4 @@ class Lightswitch extends AbstractTransformer
     {
         return (bool)$this->data;
     }
-
 }
