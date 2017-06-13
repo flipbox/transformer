@@ -69,10 +69,7 @@ abstract class AbstractItemResource extends BaseItemResource
             return $this->resolveTransformerByHandle($transformer);
         }
 
-        TransformerPlugin::warning([
-            "Unknown transformer:",
-            $transformer
-        ]);
+        TransformerPlugin::warning(["Unknown transformer:", $transformer]);
 
         return null;
     }

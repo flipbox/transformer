@@ -97,10 +97,7 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
         /**
         * @var ResourceInterface|TransformerInterface|callable $resource
         */
-        if (!$transform = TransformerPlugin::getInstance()->transformer()->find(
-            'default',
-            $field
-        )) {
+        if (!$transform = TransformerPlugin::getInstance()->transformer()->find('default', $field)) {
             TransformerPlugin::warning(
                 sprintf(
                     "Transform not found for field: '%s'",

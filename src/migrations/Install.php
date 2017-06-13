@@ -89,8 +89,8 @@ class Install extends Migration
                 false
             ),
             TransformerRecord::tableName(),
-                'handle',
-                false
+            'handle',
+            false
         );
         $this->createIndex(
             $this->db->getIndexName(
