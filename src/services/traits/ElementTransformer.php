@@ -60,7 +60,7 @@ trait ElementTransformer
                 TransformerPlugin::warning(
                     sprintf(
                         "First party transformer not found for element '%s'",
-                        get_class($element)
+                        $element
                     )
                 );
         }
