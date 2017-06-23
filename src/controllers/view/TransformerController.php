@@ -110,7 +110,7 @@ class TransformerController extends AbstractController
 
         foreach (Craft::$app->getElements()->getAllElementTypes() as $type) {
             $elements[$type] = $this->module->transformer()->findAll(
-                new $type,
+                $type,
                 $scope
             );
         }
