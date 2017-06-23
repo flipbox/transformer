@@ -23,9 +23,9 @@ class Element
      * @param string           $scope
      * @return array|null
      */
-    public function item(ElementInterface $element, $transformer, string $scope = 'global', array $config = [])
+    public function item(ElementInterface $element, $transformer, string $scope = 'global', string $context= Transformer::CONTEXT_ARRAY, array $config = [])
     {
-        return Transformer::getInstance()->item($element, $transformer, $scope, $config);
+        return Transformer::getInstance()->item($element, $transformer, $scope, $context, $config);
     }
 
     /**

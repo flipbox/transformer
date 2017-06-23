@@ -65,7 +65,7 @@ class TransformerController extends AbstractController
         // Transformer
         $transformer = $this->module->transformer()->get(
             $handle,
-            $component,
+            $componentClass,
             $scope
         );
 
