@@ -194,7 +194,7 @@ class Transformer extends Plugin
         string $context = self::CONTEXT_ARRAY,
         array $config = []
     ) {
-        if (!$transformer = $this->resolveTransformer($transformer, $data, $scope, $context)) {
+        if (!$transformer = $this->resolveTransformer($transformer, ArrayHelper::firstValue($data), $scope, $context)) {
             return [];
         }
 
@@ -285,14 +285,14 @@ class Transformer extends Plugin
 
     /**
      * @param $transformer
-     * @param string      $component
+     * @param string      $class
      * @param string      $scope
      * @param string      $context
      * @return TransformerInterface|callable|null
      */
     public function resolveTransformer(
         $transformer,
-        string $component,
+        string $class,
         string $scope = 'global',
         string $context = self::CONTEXT_ARRAY
     ) {
@@ -305,7 +305,7 @@ class Transformer extends Plugin
         }
 
         if (is_string($transformer)) {
-            return $this->findTransformer($transformer, $component, $scope, $context);
+            return $this->findTransformer($transformer, $class, $scope, $context);
         }
 
         return null;
