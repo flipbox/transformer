@@ -39,7 +39,7 @@ trait ModelTransformer
                 TransformerPlugin::warning(
                     sprintf(
                         "First party transformer not found for model '%s'",
-                        get_class($model)
+                        $model
                     )
                 );
         }

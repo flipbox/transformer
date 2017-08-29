@@ -175,7 +175,7 @@ trait FieldTransformer
                 TransformerPlugin::warning(
                     sprintf(
                         "First party transformer not found for field '%s'",
-                        get_class($field)
+                        $field
                     )
                 );
         }
