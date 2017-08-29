@@ -20,7 +20,7 @@ use flipbox\transformer\Transformer as TransformerPlugin;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
-use yii\db\Exception;
+use yii\base\Exception;
 use flipbox\transformer\helpers\Transformer as TransformerHelper;
 
 /**
@@ -82,7 +82,7 @@ class Transformer extends Component
      * @param string   $context
      * @param int|null $siteId
      * @return \callable[]|TransformerInterface[]
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function findAll(
         string $class,
@@ -91,7 +91,7 @@ class Transformer extends Component
         int $siteId = null
     ) {
         if (!is_subclass_of($class, Component::class)) {
-            throw new \yii\base\Exception("Invalid component");
+            throw new Exception("Invalid component");
         }
 
         $transformers = array_merge(
