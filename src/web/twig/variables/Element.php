@@ -10,6 +10,7 @@ namespace flipbox\transformer\web\twig\variables;
 
 use craft\base\ElementInterface;
 use flipbox\transformer\Transformer;
+use Flipbox\Transform\Transformers\TransformerInterface;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -19,24 +20,26 @@ class Element
 {
     /**
      * @param ElementInterface $element
-     * @param $transformer
-     * @param string           $scope
+     * @param callable|TransformerInterface|string $transformer
+     * @param string $scope
+     * @param string $context
      * @return array|null
      */
-    public function item(ElementInterface $element, $transformer, string $scope = 'global', string $context= Transformer::CONTEXT_ARRAY, array $config = [])
+    public function item(ElementInterface $element, $transformer, string $scope = 'global', string $context = Transformer::CONTEXT_ARRAY, array $config = [])
     {
         return Transformer::getInstance()->item($element, $transformer, $scope, $context, $config);
     }
 
     /**
      * @param ElementInterface $element
-     * @param $transformer
-     * @param string           $scope
-     * @param array            $config
+     * @param callable|TransformerInterface|string $transformer
+     * @param string $scope
+     * @param string $context
+     * @param array $config
      * @return array|null
      */
-    public function collection(ElementInterface $element, $transformer, string $scope = 'global', array $config = [])
+    public function collection(ElementInterface $element, $transformer, string $scope = 'global', string $context = Transformer::CONTEXT_ARRAY, array $config = [])
     {
-        return Transformer::getInstance()->collection($element, $transformer, $scope, $config);
+        return Transformer::getInstance()->collection($element, $transformer, $scope, $context, $config);
     }
 }
