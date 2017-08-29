@@ -135,7 +135,7 @@ class Transformer extends Component
         TransformerPlugin::warning(
             sprintf(
                 "First party transformer not found for '%s'",
-                get_class($class)
+                $class
             )
         );
 
