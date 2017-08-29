@@ -1,5 +1,21 @@
 Changelog
 =========
+## [1.0.0-beta.4] - 2017-08-29
+### Changed
+- Transformer::resolveTransformer is now a public method.
+
+### Fixed
+- Issue where FieldTransformer trait was trying to get a class of a non-object
+- Issue where ModelTransformer trait was trying to get a class of a non-object
+- Incorrect exceptions being thrown when getting transformers
+
+## Added
+- Twig collection function now supports 'context' property
+- A transform behavior which applies an afterEvent to controllers
+
+## [1.0.0-beta.3] - 2017-06-21
+### Fixed
+- Issue where ElementTransformer trait was trying to get a class of a non-object
 
 ## [1.0.0-beta.2] - 2017-06-12
 ### Changed
