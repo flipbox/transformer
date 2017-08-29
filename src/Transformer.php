@@ -290,7 +290,7 @@ class Transformer extends Plugin
      * @param string      $context
      * @return TransformerInterface|callable|null
      */
-    private function resolveTransformer(
+    public function resolveTransformer(
         $transformer,
         string $component,
         string $scope = 'global',
