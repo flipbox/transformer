@@ -23,10 +23,16 @@ class Element
      * @param callable|TransformerInterface|string $transformer
      * @param string $scope
      * @param string $context
+     * @param array $config
      * @return array|null
      */
-    public function item(ElementInterface $element, $transformer, string $scope = 'global', string $context = Transformer::CONTEXT_ARRAY, array $config = [])
-    {
+    public function item(
+        ElementInterface $element,
+        $transformer,
+        string $scope = 'global',
+        string $context = Transformer::CONTEXT_ARRAY,
+        array $config = []
+    ) {
         return Transformer::getInstance()->item($element, $transformer, $scope, $context, $config);
     }
 
@@ -38,8 +44,13 @@ class Element
      * @param array $config
      * @return array|null
      */
-    public function collection(ElementInterface $element, $transformer, string $scope = 'global', string $context = Transformer::CONTEXT_ARRAY, array $config = [])
-    {
+    public function collection(
+        ElementInterface $element,
+        $transformer,
+        string $scope = 'global',
+        string $context = Transformer::CONTEXT_ARRAY,
+        array $config = []
+    ) {
         return Transformer::getInstance()->collection($element, $transformer, $scope, $context, $config);
     }
 }
