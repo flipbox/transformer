@@ -10,7 +10,6 @@ namespace flipbox\transformer\behaviors;
 
 use Craft;
 use craft\base\ElementInterface;
-use flipbox\restful\Restful;
 use Flipbox\Transform\Factory;
 use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer;
@@ -29,6 +28,15 @@ use yii\web\Link;
  */
 class Transform extends Behavior
 {
+    /**
+     * The pagination transformer identifier
+     */
+    const PAGINATION_IDENTIFIER = 'pagination';
+
+    /**
+     * The error transformer identifier
+     */
+    const ERROR_IDENTIFIER = 'error';
 
     /**
      * @var array this property defines the transformers for each action.
@@ -58,19 +66,19 @@ class Transform extends Behavior
     /**
      * @var string|callable|TransformerInterface
      */
-    public $error = 'error';
+    public $error = self::ERROR_IDENTIFIER;
 
     /**
      * @var string|callable|TransformerInterface
      */
-    public $pagination = 'pagination';
+    public $pagination = self::PAGINATION_IDENTIFIER;
 
     /**
      * The global class that universal transformers may be registered under.
      *
      * @var string
      */
-    public $global = Restful::class;
+    public $global = Transformer::class;
 
     /**
      * The component class that is being transformed
