@@ -17,6 +17,7 @@ use Flipbox\Transform\Scope;
 use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransformer;
 use Flipbox\Transform\Transformers\Collection as BaseCollection;
 use Flipbox\Transform\Transformers\Item as BaseItem;
+use Flipbox\Transform\Transformers\Traits\ObjectToArray;
 use Flipbox\Transform\Transformers\TransformerInterface;
 use flipbox\transformer\Transformer as TransformerPlugin;
 use flipbox\transformer\transformers\field\FieldTransformerInterface;
@@ -28,6 +29,8 @@ use yii\base\Exception;
  */
 abstract class AbstractTransformer extends BaseAbstractTransformer
 {
+
+    use ObjectToArray;
 
     /**
      * @param ElementInterface $element
@@ -139,17 +142,5 @@ abstract class AbstractTransformer extends BaseAbstractTransformer
     protected function collection($data, $transformer): BaseCollection
     {
         throw new Exception("Collection resource is not implemented.");
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function __invoke($data, Scope $scope, string $identifier = null)
-    {
-        if (!$data instanceof ElementInterface) {
-            return null;
-        }
-
-        return parent::__invoke($data, $scope, $identifier);
     }
 }

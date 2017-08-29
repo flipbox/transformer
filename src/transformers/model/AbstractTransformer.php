@@ -9,8 +9,8 @@
 namespace flipbox\transformer\transformers\model;
 
 use craft\base\FieldInterface;
-use Flipbox\Transform\Scope;
 use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransformer;
+use Flipbox\Transform\Transformers\Traits\ObjectToArray;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -21,11 +21,6 @@ use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransforme
  */
 abstract class AbstractTransformer extends BaseAbstractTransformer
 {
-    /**
-     * @inheritdoc
-     */
-    public function __invoke($data, Scope $scope, string $identifier = null)
-    {
-        return $this->transform($scope, $identifier);
-    }
+
+    use ObjectToArray;
 }

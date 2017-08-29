@@ -9,8 +9,8 @@
 namespace flipbox\transformer\transformers\field;
 
 use craft\base\FieldInterface;
-use Flipbox\Transform\Scope;
 use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransformer;
+use Flipbox\Transform\Transformers\Traits\ObjectToArray;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -22,7 +22,7 @@ use Flipbox\Transform\Transformers\AbstractTransformer as BaseAbstractTransforme
 abstract class AbstractTransformer extends BaseAbstractTransformer implements FieldTransformerInterface
 {
 
-    use FieldTrait;
+    use FieldTrait, ObjectToArray;
 
     /**
      * @param FieldInterface $field
@@ -50,13 +50,5 @@ abstract class AbstractTransformer extends BaseAbstractTransformer implements Fi
     protected function prepareData($data)
     {
         return $this->fieldData($data);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function __invoke($data, Scope $scope, string $identifier = null)
-    {
-        return $this->transform($scope, $identifier);
     }
 }
