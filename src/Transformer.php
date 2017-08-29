@@ -82,6 +82,34 @@ class Transformer extends Plugin
     }
 
     /**
+     * @param $transformer
+     * @param string      $class
+     * @param string      $scope
+     * @param string      $context
+     * @return TransformerInterface|callable|null
+     */
+    public function resolveTransformer(
+        $transformer,
+        string $class,
+        string $scope = 'global',
+        string $context = self::CONTEXT_ARRAY
+    ) {
+        if (TransformerHelper::isTransformer($transformer)) {
+            return $transformer;
+        }
+
+        if (TransformerHelper::isTransformerClass($transformer)) {
+            return new $transformer();
+        }
+
+        if (is_string($transformer)) {
+            return $this->findTransformer($transformer, $class, $scope, $context);
+        }
+
+        return null;
+    }
+
+    /**
      * @param string   $identifier
      * @param string   $class
      * @param string   $scope
@@ -281,33 +309,5 @@ class Transformer extends Plugin
     public static function error($message, $category = 'transformer')
     {
         Craft::error($message, $category);
-    }
-
-    /**
-     * @param $transformer
-     * @param string      $class
-     * @param string      $scope
-     * @param string      $context
-     * @return TransformerInterface|callable|null
-     */
-    public function resolveTransformer(
-        $transformer,
-        string $class,
-        string $scope = 'global',
-        string $context = self::CONTEXT_ARRAY
-    ) {
-        if (TransformerHelper::isTransformer($transformer)) {
-            return $transformer;
-        }
-
-        if (TransformerHelper::isTransformerClass($transformer)) {
-            return new $transformer();
-        }
-
-        if (is_string($transformer)) {
-            return $this->findTransformer($transformer, $class, $scope, $context);
-        }
-
-        return null;
     }
 }
