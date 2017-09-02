@@ -1,6 +1,6 @@
 Changelog
 =========
-## Unreleased
+## 1.0.0-beta.5 - 2017-09-02
 ### Changed
 - Moved flipbox\transformer\behaviors\Transform behavior flipbox\transformer\filters\Transform
 
