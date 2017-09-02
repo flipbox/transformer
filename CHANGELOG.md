@@ -1,6 +1,13 @@
 Changelog
 =========
-## [1.0.0-beta.4] - 2017-08-29
+## Unreleased
+### Changed
+- Moved flipbox\transformer\behaviors\Transform behavior flipbox\transformer\filters\Transform
+
+### Added
+- AccessTransform filter for access based data transforming
+
+## 1.0.0-beta.4 - 2017-08-29
 ### Changed
 - Transformer::resolveTransformer is now a public method.
 
@@ -13,15 +20,15 @@ Changelog
 - Twig collection function now supports 'context' property
 - A transform behavior which applies an afterEvent to controllers
 
-## [1.0.0-beta.3] - 2017-06-21
+## 1.0.0-beta.3 - 2017-06-21
 ### Fixed
 - Issue where ElementTransformer trait was trying to get a class of a non-object
 
-## [1.0.0-beta.2] - 2017-06-12
+## 1.0.0-beta.2 - 2017-06-12
 ### Changed
 - Major refactoring
 
-## [1.0.0-beta.1] - 2017-05-22
+## 1.0.0-beta.1 - 2017-05-22
 ### Changed
 - Move all transformers into base transformer service
 
@@ -32,5 +39,5 @@ Changelog
 ### Removed
 - Element/Field/Model sub modules
 
-## [1.0.0-beta] - 2017-04-26
+## 1.0.0-beta - 2017-04-26
 Initial release.
