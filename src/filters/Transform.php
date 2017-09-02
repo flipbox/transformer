@@ -6,7 +6,7 @@
  * @link       https://www.flipboxfactory.com/software/transformer/
  */
 
-namespace flipbox\transformer\behaviors;
+namespace flipbox\transformer\filters;
 
 use Craft;
 use craft\base\ElementInterface;
@@ -59,6 +59,9 @@ class Transform extends Behavior
     public $actions = [];
 
     /**
+     * The default data transformer.  If a transformer cannot be resolved via an action mapping,
+     * this transformer will be used.
+     *
      * @var string|callable|TransformerInterface
      */
     public $data = 'data';
