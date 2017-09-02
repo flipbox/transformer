@@ -94,7 +94,8 @@ class TransformRule extends Transform
      *
      * @param Action $action the action to be performed
      * @param User|false $user the user object or `false` in case of detached User component
-     * @return bool|null `true` if the user is allowed, `false` if the user is denied, `null` if the rule does not apply to the user
+     * @return bool|null `true` if the user is allowed, `false` if the user is denied, `null`
+     * if the rule does not apply to the user
      */
     public function matches(Action $action, $user)
     {
@@ -126,7 +127,9 @@ class TransformRule extends Transform
             return true;
         }
         if ($user === false) {
-            throw new InvalidConfigException('The user application component must be available to specify roles in AccessRule.');
+            throw new InvalidConfigException(
+                'The user application component must be available to specify roles in AccessRule.'
+            );
         }
         foreach ($this->roles as $role) {
             if ($role === '?') {
@@ -139,7 +142,9 @@ class TransformRule extends Transform
                 }
             } else {
                 if (!isset($roleParams)) {
-                    $roleParams = $this->roleParams instanceof Closure ? call_user_func($this->roleParams, $this) : $this->roleParams;
+                    $roleParams = $this->roleParams instanceof Closure ?
+                        call_user_func($this->roleParams, $this) :
+                        $this->roleParams;
                 }
                 if ($user->can($role, $roleParams)) {
                     return true;
