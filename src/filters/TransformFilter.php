@@ -170,17 +170,13 @@ class TransformFilter extends ActionFilter
         $action = Craft::$app->requestedAction->id;
 
         // Default transformer
-        $transformer = null;
+        $transformer = $this->data;
 
         // Look for definitions
-        if (empty($this->actions)) {
-            $transformer = $this->data;
-        } elseif (isset($this->actions[$action])) {
+        if (isset($this->actions[$action])) {
             $transformer = $this->actions[$action];
         } elseif (isset($this->actions['*'])) {
             $transformer = $this->actions['*'];
-        } elseif (array_search('*', $this->actions, true)) {
-            $transformer = $this->data;
         }
 
         return $transformer;
