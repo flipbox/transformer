@@ -61,7 +61,7 @@ class Transformer extends Plugin
      * @param string $context
      * @return string
      */
-    public static function eventName(string $scope, string $context = self::CONTEXT_ARRAY): string
+    public static function eventName(string $scope = 'default', string $context = self::CONTEXT_ARRAY): string
     {
         return self::EVENT_REGISTER_TRANSFORMERS.':'.$scope.':'.$context;
     }

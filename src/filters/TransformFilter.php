@@ -32,7 +32,7 @@ class TransformFilter extends ActionFilter
      *
      * @var string|callable|TransformerInterface
      */
-    public $data;
+    public $transformer;
 
     /**
      * @var array this property defines the transformers for each action.
@@ -117,7 +117,7 @@ class TransformFilter extends ActionFilter
         if (Craft::$app->getRequest()->getIsHead()) {
             return null;
         } else {
-            if (!$transformer = $this->dataTransformer()) {
+            if (!$transformer = $this->transformer()) {
                 return $data;
             }
 
@@ -139,7 +139,7 @@ class TransformFilter extends ActionFilter
         if (Craft::$app->getRequest()->getIsHead()) {
             return null;
         } else {
-            if (!$transformer = $this->dataTransformer()) {
+            if (!$transformer = $this->transformer()) {
                 return $dataProvider;
             }
 
@@ -164,13 +164,13 @@ class TransformFilter extends ActionFilter
      * @return callable|TransformerInterface|null
      * @throws Exception
      */
-    protected function dataTransformer()
+    protected function transformer()
     {
         // The requested action
         $action = Craft::$app->requestedAction->id;
 
         // Default transformer
-        $transformer = $this->data;
+        $transformer = $this->transformer;
 
         // Look for definitions
         if (isset($this->actions[$action])) {
@@ -197,7 +197,11 @@ class TransformFilter extends ActionFilter
             return new $transformer();
         }
 
-        return Craft::createObject($transformer);
+        if (TransformerHelper::isTransformerConfig($transformer)) {
+            return Craft::createObject($transformer);
+        }
+
+        return null;
     }
 
     /**

@@ -3,7 +3,7 @@
   "description": "Manipulate complex data structures",
   "version": "1.0.0-beta.5",
   "type": "craft-plugin",
-  "minimum-stability": "beta",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
     "optimize-autoloader": true
@@ -11,7 +11,7 @@
   "require": {
     "craftcms/cms": "~3.0.0-beta.19",
     "flipboxdigital/transform": "^1.0",
-    "flipboxdigital/spark": "~1.0.0-beta.2"
+    "flipboxdigital/spark": "dev-develop"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.0",
