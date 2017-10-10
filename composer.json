@@ -33,7 +33,6 @@
     "developer": "Flipbox Digital",
     "developerUrl": "https://www.flipboxdigital.com",
     "class": "flipbox\\transformer\\Transformer",
-    "basePath": "@flipbox/transformer",
     "hasCpSection": true,
     "schemaVersion": "1.0.0",
     "components": {
